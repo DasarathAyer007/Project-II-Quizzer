@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="style/home.css" />
+  <style>
+    tr {
+      border-bottom: 1px solid;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="shadow-xl bg-gray-900">
+    <ul class="w-full p-0 h-12 bg-gray-00 list-none border-b border-gray-700 shadow-md flex justify-end items-center">
+      <li class="sm:hidden">
+        <img id="menu-img" src="assets/menu_bar.svg" alt="" />
+      </li>
+      <li class="m-auto sm:m-0 sm:mr-auto">
+        <a class="font-black text-primary text-2xl" href="">Quizzer</a>
+      </li>
+      <li class="nav-button"><a href="">Home</a></li>
+      <li class="nav-button"><a href="">Add Question</a></li>
+      <li class="nav-button"><a href="">Leaderboard</a></li>
+      <li class="nav-button"><a href="">About us</a></li>
+      <li class="nav-button"><a href="">Feedback</a></li>
+      <li
+        class="text-center p-1 mr-1 bg-light font-bold text-black w-18 rounded-md  ">
+        <a href="login.html">Login</a>
+      </li>
+    </ul>
+
+    <ul id="side-nav" class="w-2xs h-screen hidden bg-gray-900 list-none fixed top-0 z-10 left-0">
+      <li class="ml-auto p-3">
+        <img id="cross-snav" src="assets/cross_close.svg" alt="" />
+      </li>
+      <li class="side-nav-btn"><a href="">Home</a></li>
+      <li class="side-nav-btn"><a href="">Add Question</a></li>
+      <li class="side-nav-btn"><a href="">Leaderboard</a></li>
+      <li class="side-nav-btn"><a href="">About us</a></li>
+      <li class="side-nav-btn"><a href="">Feedback</a></li>
+      <li class="side-nav-btn"><a href="">Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="h-dvh flex relative flex-wrap sm:flex-nowrap">
+    <!-- side bar to select Mode -->
+    <div id="show-mode-bar"  class="bg-gray-700 ">
+      <img  class="size-8 " src="assets/left_open.svg" alt="" />
+    </div>
+    <aside id="mode-bar" class="w-10/12 sm:w-[60%] absolute top-0 h-lvh bg-gray-800 bg-opacity-90 backdrop-blur-md shadow-lg">
+      <div class="m-auto">
+        <img id="hide-mode-bar" class="ml-auto" src="assets/left_close.svg" alt="" />
+      </div>
+
+      <ul class="bg-gray-800">
+        <li>
+          <div id="non-catg-btn" class="type-opt">
+            <span>Random Battle</span><img id="arrow-img-non" class="inline" src="assets/drop_arrow.svg" alt="" />
+          </div>
+          <ul id="non-catg-opt" class="hidden">
+            <li id="n-catg-clas" class="mode-opt">Classic</li>
+            <li id="n-catg-time" class="mode-opt">Timed</li>
+            <li id="n-catg-surv" class="mode-opt">Survival</li>
+          </ul>
+        </li>
+
+        <li>
+          <div id="catg-btn" class="type-opt">
+            <span>Catogery Battle</span><img id="arrow-img" class="inline" src="assets/drop_arrow.svg" alt="" />
+          </div>
+          <ul id="catg-opt" class="hidden">
+            <li id="catg-clas" class="mode-opt">Classic</li>
+            <li id="catg-time" class="mode-opt">Timed</li>
+            <li id="catg-surv" class="mode-opt">Survival</li>
+          </ul>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- main ground to play quiz -->
+
+    <main id="main" class="w-full  bg-gray-700 text-gray-100 h-lvh relative hidden">
+
+
+      <div id="mode-info" class="w-10/12 flex text-light flex-col m-auto gap-3.5 items-center">
+
+        <div class=" flex gap-2.5 mt-2.5">
+          <div class="quiz-type">Catogery</div>
+          <div class="quiz-mode">Mode</div>
+        </div>
+
+        <div>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate rerum rem fugit, maxime consequuntur quis nobis sed consectetur itaque debitis, laboriosam quo iste est mollitia deleniti, error modi provident sunt.
+        </div>
+
+         <div id="select-div" class="w-fit px-4 ">
+              <select name="" id="catg-select" class=" app rounded   shadow py-2">
+                <option value="">Select a catogery</option>
+                <option value="Sport">Sport</option>
+                <option value="Film">Film</option>
+                 <option value="Mythology">Mythology</option>
+              </select>
+            </div>
+
+        <button id="start" class="opt-btn">Start</button>
+
+      </div>
+
+      
+      <div id="quiz-start-timer" class="w-full h-lvh bg-gray-600 opacity-95 absolute z-10 hidden justify-center items-center">
+            <div id="quiz-start-countdown" class=" text-center text-9xl opacity-100  font-extrabold ">3</div>
+       </div>
+      
+
+      <div id="quiz-feild" class="hidden flex-col max-w-4xl m-auto items-center gap-6 ">
+        <div class="flex gap-2.5 mt-3.5">
+          <div class="quiz-type">Catogery</div>
+          <div class="quiz-mode">Mode</div>
+        </div>
+
+        <div class="border border-black px-6 py-2 text-xl font-medium rounded shadow">
+          Score counter
+        </div>
+        <div class="p-2 w-full">
+          <div class="w-full flex flex-col">
+           
+            <div id="show-question" class="border bg-gray-800 text-white border-black rounded shadow p-4 text-lg">
+              Question Here
+            </div>
+          </div>
+
+
+
+          <div id="options" class="w-full flex mt-8 mx-auto justify-center gap-5 items-center ">
+            <!-- Left Column (Options A & B) -->
+            <div  class="w-[40%] grid grid-cols-4 grid-rows-2">
+              <button id="option-1" class="opt-btn col-start-2 col-span-3">Option A</button>
+              <button id="option-2" class="opt-btn col-start-2 col-span-3">Option B</button>
+            </div>
+
+            <!-- Center Column (Timer) -->
+            <div id="timer" class="w-[20%] flex items-center justify-center">
+              <div id="countdown" class="p-5 bg-gray-200 border border-gray-500 text-center text-2xl font-extrabold text-white rounded-full shadow">5</div>
+            </div>
+
+            <!-- Right Column (Options C & D) -->
+            <div class="grid grid-cols-4 grid-rows-2 w-[40%]">
+              <button id="option-3" class="opt-btn col-start-1 col-span-3">Option C</button>
+              <button id="option-4" class="opt-btn col-span-3">Option D</button>
+            </div>
+          </div>
+        </div>
+        <button id="next" class="opt-btn hidden">Next</button>
+      </div>
+    </main>
+
+    <!-- Leaderboard -->
+    <div class="bg-gray-700">
+      <img id="show-leader" class="hidden size-8" src="assets/left_close.svg" alt="" />
+    </div>
+
+    <div id="select-msg" class="absolute right-0 z-0 w-1/6 h-lvh mt-7 font-extrabold  sm:w-[40%]">
+             Please select a mode
+      </div>
+
+    <aside id="Leaderboard" class="bg-gray-700 text-gray-100 w-full shadow-xl sm:w-1/3 sm:h-dvh sm:overflow-scroll hidden">
+      <div class="sticky top-0 bg-gray-800 ">
+        <div class="m-auto">
+          <img id="hide-leader" class="mr-auto" src="assets/left_open.svg" alt="" />
+        </div>
+
+        <div class="text-center font-bold">Leaderboard</div>
+        <div class="flex justify-around p-1">
+          <span class="quiz-type">type</span>
+          <span class="quiz-mode">Mode</span>
+        </div>
+      </div>
+
+      <table class="table-fixed w-full">
+        <thead class="">
+          <tr>
+            <th class="w-[14%] p-2"></th>
+            <th class="w-[15%] p-2"></th>
+            <th class="w-[50%] p-2 text-left">Username</th>
+            <th class="w-[21%] p-2">Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+
+          <tr>
+            <td class="p-2">001</td>
+            <td class="p-2">
+              <img src="assets/cross_close.svg" class="inline-block w-4 h-4" alt="" />
+            </td>
+            <td class="p-2 truncate">User Name</td>
+            <td class="p-2 text-right">0000</td>
+          </tr>
+        </tbody>
+      </table>
+    </aside>
+  </div>
+
+  <script src="script/home.js"></script>
+</body>
+
+</html>
