@@ -212,6 +212,9 @@
   .relative {
     position: relative;
   }
+  .static {
+    position: static;
+  }
   .sticky {
     position: sticky;
   }
@@ -323,9 +326,6 @@
   }
   .h-lvh {
     height: 100lvh;
-  }
-  .h-screen {
-    height: 100vh;
   }
   .min-h-screen {
     min-height: 100vh;
@@ -493,9 +493,6 @@
   }
   .bg-light {
     background-color: var(--color-light);
-  }
-  .bg-teal-600 {
-    background-color: var(--color-teal-600);
   }
   .p-0 {
     padding: calc(var(--spacing) * 0);

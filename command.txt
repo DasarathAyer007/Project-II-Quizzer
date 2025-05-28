@@ -1,0 +1,39 @@
+Tailwind Guide
+
+To install tailwindcss dependiency listed in package.json
+    npm install
+
+To run tailwindcss(compile tailwindcss to css file)
+    #npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch
+
+    npx @tailwindcss/cli -i ./static/style/input.css -o ./static/style/<fileName>.css --watch 
+
+
+Flask Guide
+
+Install Virtual Environment(don't need to install this if using venv)
+    pip install virtualenv
+    
+
+
+Create Virtual Environment
+    python -m venv .env (virtualenv name)
+        or
+    virtualenv .env
+
+Activate Virtaul Environment
+    mac/linux :- source .env/bin/activate
+    Windows:-  .env\Scripts\activate
+
+Deactivate Virtaul Environment
+    deactivate
+
+Alway Activate Virtual env
+
+
+If new package is installed
+    pip freeze > requirements.txt
+    
+
+if already install package is not installed(Get error like package,module not found)
+    pip install -r requirements.txt

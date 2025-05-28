@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='style/login.css')}}">
     <title>Login Page - Dark Theme</title>
   </head>
   <body class="bg-gray-900 text-white">
@@ -62,7 +62,7 @@
             type="button"
             class="w-full border border-gray-600 text-md p-2 rounded-lg hover:bg-gray-700 transition-colors"
           >
-            <img src="google.svg" alt="Google icon" class="w-6 h-6 inline mr-2" />
+            <img src="{{url_for('static', filename='assets/google.svg')}}" alt="Google icon" class="w-6 h-6 inline mr-2" />
             Sign in with Google
           </button>
         </form>
@@ -74,6 +74,6 @@
       </div>
     </div>
 
-    <script src="script/login.js"></script>
+    <script src="{{url_for('static', filename='script/login.js')}}"></script>
   </body>
 </html>
