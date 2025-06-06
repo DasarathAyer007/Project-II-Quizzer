@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{%block title%} {%endblock%}</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='style/style.css')}}" />
+
+</head>
+
+<body class="box-border">
+  <nav class=" shadow-xl bg-nav ">
+    <ul class="w-full p-0 h-12 list-none flex justify-end items-center">
+      <li class="sm:hidden">
+        <img id="menu-img" src="{{url_for('static' , filename='assets/menu_bar.svg')}}" alt="" />
+      </li>
+      <li class="mr-auto">
+        <a class="ml-2 font-extrabold text-gray-100 text-2xl" href="/home">Quizzer</a>
+      </li>
+      <li class="nav-button"><a href="/home">Home</a></li>
+      <li class="nav-button"><a href="">About us</a></li>
+      <li class="nav-button"><a href="">Feedback</a></li>
+      <li
+        class="text-center p-1 mr-1 bg-accent font-bold text-accent-t w-18 rounded-md  ">
+        <a href="/login">Login</a>
+      </li>
+    </ul>
+
+    <ul id="side-nav" class="w-2xs h-lvh hidden bg-gray-900 list-none fixed top-0 z-10 left-0">
+      <li class="ml-auto p-3">
+        <img id="cross-snav" src="{{url_for('static', filename='assets/cross_close.svg')}}" alt="" />
+      </li>
+      <li class="side-nav-btn"><a href="">Home</a></li>
+      <li class="side-nav-btn"><a href="">Add Question</a></li>
+      <li class="side-nav-btn"><a href="">Leaderboard</a></li>
+      <li class="side-nav-btn"><a href="">About us</a></li>
+      <li class="side-nav-btn"><a href="">Feedback</a></li>
+      <li class="side-nav-btn"><a href="">Login</a></li>
+    </ul>
+  </nav>
+
+
+
+
+  {%block content%}
+
+
+
+  {%endblock%}
+
+
+  
+
+
+  <script src="{{url_for('static',filename='script/script.js')}}"></script>
+{% block scripts %}
+  <!-- Child templates can insert their own scripts here -->
+{% endblock %}
+
+  </body>
+  </html>

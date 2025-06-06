@@ -1,0 +1,81 @@
+ <div class="h-dvh flex relative flex-wrap sm:flex-nowrap">
+   
+    <main id="main" class="w-full  bg-gray-700 text-gray-100 h-lvh relative hidden">
+
+
+      <div id="mode-info" class="w-10/12 flex text-light flex-col m-auto gap-3.5 items-center">
+
+        <div class=" flex gap-2.5 mt-2.5">
+          <div class="quiz-type">Catogery</div>
+          <div class="quiz-mode">Mode</div>
+        </div>
+
+        <div>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate rerum rem fugit, maxime consequuntur quis nobis sed consectetur itaque debitis, laboriosam quo iste est mollitia deleniti, error modi provident sunt.
+        </div>
+
+         <div id="select-div" class="w-fit px-4 ">
+              <select name="" id="catg-select" class=" app rounded   shadow py-2">
+                <option value="">Select a catogery</option>
+                <option value="Sport">Sport</option>
+                <option value="Film">Film</option>
+                 <option value="Mythology">Mythology</option>
+              </select>
+            </div>
+
+        <button id="start" class="opt-btn">Start</button>
+
+      </div>
+
+      
+      <div id="quiz-start-timer" class="w-full h-lvh bg-gray-600 opacity-95 absolute z-10 hidden justify-center items-center">
+            <div id="quiz-start-countdown" class=" text-center text-9xl opacity-100  font-extrabold ">3</div>
+       </div>
+      
+
+      <div id="quiz-feild" class="hidden flex-col max-w-4xl m-auto items-center gap-6 ">
+        <div class="flex gap-2.5 mt-3.5">
+          <div class="quiz-type">Catogery</div>
+          <div class="quiz-mode">Mode</div>
+        </div>
+
+        <div class="border border-black px-6 py-2 text-xl font-medium rounded shadow">
+          Score counter
+        </div>
+        <div class="p-2 w-full">
+          <div class="w-full flex flex-col">
+           
+            <div id="show-question" class="border bg-gray-800 text-white border-black rounded shadow p-4 text-lg">
+              Question Here
+            </div>
+          </div>
+
+
+
+          <div id="options" class="w-full flex mt-8 mx-auto justify-center gap-5 items-center ">
+            <!-- Left Column (Options A & B) -->
+            <div  class="w-[40%] grid grid-cols-4 grid-rows-2">
+              <button id="option-1" class="opt-btn col-start-2 col-span-3">Option A</button>
+              <button id="option-2" class="opt-btn col-start-2 col-span-3">Option B</button>
+            </div>
+
+            <!-- Center Column (Timer) -->
+            <div id="timer" class="w-[20%] flex items-center justify-center">
+              <div id="countdown" class="p-5 bg-gray-200 border border-gray-500 text-center text-2xl font-extrabold text-white rounded-full shadow">5</div>
+            </div>
+
+            <!-- Right Column (Options C & D) -->
+            <div class="grid grid-cols-4 grid-rows-2 w-[40%]">
+              <button id="option-3" class="opt-btn col-start-1 col-span-3">Option C</button>
+              <button id="option-4" class="opt-btn col-span-3">Option D</button>
+            </div>
+          </div>
+        </div>
+        <button id="next" class="opt-btn hidden">Next</button>
+      </div>
+    </main>
+
+    
+
+    
+  </div>

@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{{url_for('static', filename='style/login.css')}}">
-    <title>Login Page - Dark Theme</title>
-  </head>
-  <body class="bg-gray-900 text-white">
+{%extends 'base.html'%}
+{%block content%}
     <div class="flex items-center justify-center min-h-screen">
       <div class="flex flex-col m-6 bg-gray-800 shadow-2xl rounded-2xl p-8 md:p-14 w-full max-w-md">
         <h1 class="mb-3 text-4xl font-bold text-blue-500">Welcome back</h1>
@@ -75,5 +67,4 @@
     </div>
 
     <script src="{{url_for('static', filename='script/login.js')}}"></script>
-  </body>
-</html>
+{%endblock%}

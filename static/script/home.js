@@ -21,42 +21,43 @@ document.querySelector('#non-catg-btn').addEventListener('click', () => {
 });
 
 
-const modeBar = document.querySelector('#mode-bar');
-const showModeBar = document.querySelector('#show-mode-bar');
-const hideModeBar = document.querySelector('#hide-mode-bar');
+// const modeBar = document.querySelector('#mode-bar');
+// const showModeBar = document.querySelector('#show-mode-bar');
+// const hideModeBar = document.querySelector('#hide-mode-bar');
 
 
-document.querySelectorAll('.mode-opt').forEach(el => {
-  el.addEventListener('click', () => {
-    modeBar.classList.remove('sm:w-[60%]');
-    modeBar.classList.add('sm:w-[27%]');
-    modeBar.classList.add('max-sm:hidden');
-    modeBar.classList.remove('absolute');
-    modeBar.classList.add('max-sm:absolute')
-    showModeBar.classList.add("sm:hidden");
-    document.querySelector('#select-msg').classList.add('hidden');
-    document.querySelector('#main').classList.remove("hidden")
-    leaderboard.classList.remove('hidden');
+// document.querySelectorAll('.mode-opt').forEach(el => {
+//   el.addEventListener('click', () => {
+//     modeBar.classList.remove('sm:w-[60%]');
+//     modeBar.classList.add('sm:w-[27%]');
+//     modeBar.classList.add('max-sm:hidden');
+//     modeBar.classList.remove('absolute');
+//     modeBar.classList.add('max-sm:absolute')
+//     showModeBar.classList.add("sm:hidden");
+//     document.querySelector('#select-msg').classList.add('hidden');
+//     document.querySelector('#main').classList.remove("hidden")
+//     leaderboard.classList.remove('hidden');
 
-  });
-});
-
-
+//   });
+// });
 
 
 
-hideModeBar.addEventListener('click', () => {
-  modeBar.classList.add('hidden',)
-  showModeBar.classList.remove("hidden", 'sm:hidden')
+
+
+// hideModeBar.addEventListener('click', () => {
+//   modeBar.classList.add('hidden',)
+//   showModeBar.classList.remove("hidden", 'sm:hidden')
   
 
-});
+// });
 
-showModeBar.addEventListener('click', () => {
-  showModeBar.classList.add('hidden', 'sm:hidden');
-  modeBar.classList.remove('hidden', 'max-sm:hidden');
+// showModeBar.addEventListener('click', () => {
+//   showModeBar.classList.add('hidden', 'sm:hidden');
+//   modeBar.classList.remove('hidden', 'max-sm:hidden');
   
-});
+// });
+
 
 
 const leaderboard = document.querySelector('#Leaderboard');

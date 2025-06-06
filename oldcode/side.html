@@ -1,0 +1,33 @@
+   <!-- side bar to select Mode -->
+    <div id="show-mode-bar"  class="bg-gray-800 shadow-2xl">
+      <img  class="size-8 " src="{{url_for('static', filename='assets/left_open.svg')}}" alt="" />
+    </div>
+    <aside id="mode-bar" class="w-10/12 sm:w-[60%] absolute top-0 h-lvh bg-gray-800 bg-opacity-90 backdrop-blur-md shadow-lg">
+      <div class="m-auto">
+        <img id="hide-mode-bar" class="ml-auto" src="{{url_for('static', filename='assets/left_close.svg')}}" alt="" />
+      </div>
+
+      <ul class="bg-gray-800">
+        <li>
+          <div id="non-catg-btn" class="type-opt">
+            <span>Random Battle</span><img id="arrow-img-non" class="inline" src="{{url_for('static', filename='assets/drop_arrow.svg')}}" alt="" />
+          </div>
+          <ul id="non-catg-opt" class="hidden">
+            <li id="n-catg-clas" class="mode-opt">Classic</li>
+            <li id="n-catg-time" class="mode-opt">Timed</li>
+            <li id="n-catg-surv" class="mode-opt">Survival</li>
+          </ul>
+        </li>
+
+        <li>
+          <div id="catg-btn" class="type-opt">
+            <span>Catogery Battle</span><img id="arrow-img" class="inline" src="{{url_for('static', filename='assets/drop_arrow.svg')}}" alt="" />
+          </div>
+          <ul id="catg-opt" class="hidden">
+            <li id="catg-clas" class="mode-opt">Classic</li>
+            <li id="catg-time" class="mode-opt">Timed</li>
+            <li id="catg-surv" class="mode-opt">Survival</li>
+          </ul>
+        </li>
+      </ul>
+    </aside>

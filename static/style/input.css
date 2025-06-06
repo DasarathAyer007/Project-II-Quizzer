@@ -1,36 +1,59 @@
 @import "tailwindcss";
 
 @theme{
-  --color-dark: #212121;
-  --color-gray: #121212;
-  --color-light:hsl(0,0%,93%);
+  --color-nav: hsl(204, 18%, 17%);
+   --color-nav-text:rgba(255,255,255,.8);
+
+  --color-primary-b:#ecf9f8;
+  --color-primary-t:rgb(85, 85, 85);
+   
+  --color-secondary-b:rgba(255, 255, 255, 0.7);
+  --color-secondary-t: rgb(51, 51, 51);
+
+  --color-accent:rgba(68,153,234,.9);
+  --color-accent-t:rgb(225, 225, 225);
+  --color-accent-h:rgba(58, 135, 210, 1);
+  
+  --color-shadowx:rgba(0, 0, 0, 0.37);
+ 
+
+  --color-NPtext:rgba(255,255,255,.96);
+ 
+
 }
 
 
 @layer components{
     .nav-button{
-        @apply hidden sm:w-28 font-bold text-center m-0 text-gray-100 sm:block py-3
-         hover:bg-black hover:text-light;
+        @apply hidden sm:w-28 font-bold text-center m-0 text-nav-text sm:block py-3
+       hover:text-white;
     }
 
     
     .side-nav-btn{
       @apply w-full p-3 font-bold text-gray-100 text-center hover:text-white
-        active:bg-gray-500 active:text-light 
+        active:bg-gray-500 active:text-white 
          hover:bg-gray-500 ; 
     }
 
-    .type-opt{
-      @apply flex justify-between  font-bold cursor-pointer p-3 bg-gray-600 text-white rounded px-4 py-2  transition-colors duration-30 hover:bg-gray-700;
-    }
-    .mode-opt{
-      @apply  ml-2  bg-gray-500 text-white  px-4 py-2 cursor-pointer transition-colors duration-300  hover:bg-gray-600; 
+  
+
+    .sidebar-btn{
+      @apply rounded-md font-bold p-2 flex items-center flex-nowrap gap-3 w-full text-left  hover:bg-accent hover:text-accent-t;
     }
 
+    
     .opt-btn{
-    @apply bg-gray-900 border border-gray-400 rounded shadow mb-4 px-6 py-3
+    @apply bg-nav border border-gray-400 text-accent-t rounded shadow  px-6 py-3
      hover:bg-gray-500 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400;
 
     }
 }
  
+
+@layer base{
+  svg{
+    @apply fill-primary-t shrink-0 group-hover:fill-accent-t transition-all ease-in-out duration-300;
+  }
+  
+}

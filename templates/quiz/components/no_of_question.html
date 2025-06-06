@@ -1,0 +1,47 @@
+<div class="relative w-64 " id="question-dropdown-wrapper">
+
+  <div id="question-dropdown-toggle"
+    class="bg-white border border-gray-300 rounded px-4 py-2 shadow cursor-pointer flex justify-between items-center">
+    <span id="question-dropdown-selected">Select number</span>
+    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <div id="question-dropdown-options"
+    class="absolute left-0 right-0 bg-white border border-t-0 border-gray-300 rounded-b shadow mt-1 hidden z-10">
+    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="5">5</div>
+    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="10">10</div>
+    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="15">15</div>
+    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="20">20</div>
+  </div>
+</div>
+
+
+<script>
+  const qToggle = document.getElementById("question-dropdown-toggle");
+  const qOptions = document.getElementById("question-dropdown-options");
+  const qSelected = document.getElementById("question-dropdown-selected");
+
+  qToggle.addEventListener("click", () => {
+    qOptions.classList.toggle("hidden");
+  });
+
+  qOptions.querySelectorAll("div").forEach(option => {
+    option.addEventListener("click", () => {
+      qSelected.textContent = option.textContent;
+      qOptions.classList.add("hidden");
+      console.log("Number of questions selected:", option.dataset.value);
+
+      // Optional: Store value in hidden input for form submission
+      // document.getElementById('hidden-question-count').value = option.dataset.value;
+    });
+  });
+
+  // Optional: close dropdown when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!document.getElementById("question-dropdown-wrapper").contains(e.target)) {
+      qOptions.classList.add("hidden");
+    }
+  });
+</script>
