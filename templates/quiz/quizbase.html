@@ -1,177 +1,89 @@
-{%extends 'base.html'%}
-
-{%block title%}{%endblock%}
-
-
-{%block content%}
-<div class="h-dvh  flex bg-base-b ">
-
+{%extends 'base.html'%} {%block title%}{%endblock%} {%block content%}
+<div class="h-dvh flex bg-base-b">
     {%include 'sidebar.html'%}
 
-
     <main class="m-1.5 w-full">
-
-        <div id="quiz-info" class="py-10 px-24 flex  text-base-t flex-col m-auto gap-10 items-center">
-
-            <div class=" flex mt-2.5 text-2xl gap-1 font-extrabold">
-                <div>{%block quiz_type%}{%endblock%} : </div>
-                <div>{%block quiz_mode%}{%endblock%}</div>
+        <div id="quiz-feild" class="flex flex-col w-full m-auto p-6 items-center">
+            <div class="self-start flex p-1.5 border-l-2 gap-1 text-xl font-bold">
+                <span class="">{%block quiz_type_feild%}{%endblock%} :</span><span>{%block
+                    quiz_mode_feild%}{%endblock%}</span>
             </div>
 
-            <div class="text-base-t">
-                {%block quiz_info%} {%endblock%}
-            </div>
-
-            <div class="flex gap-2 ">
-                
-                {%block no_of_Question%}{%endblock%}
-                {%block catogery_select%}{%endblock%}
-
-                
-                
-            </div>
-
-            
-         
-
-            <button id="start-btn" class="bg-accent text-accent-t mt-3.5 rounded-md shadow-md px-6 py-3
-                hover:bg-accent-h cursor-pointer focus:outline focus:outline-gray-900">Start</button>
-
-        </div>
-
-        <!-- <div id="start-timer" class="w-full h-lvh   opacity-95  hidden justify-center items-center">
-            <div id="start-countdown" class=" text-center text-9xl opacity-100  font-extrabold ">3</div>
-    </div> -->
-
-
-
-
-        <div id="quiz-feild" class="hidden flex-col w-full m-auto p-6  items-center  ">
-            
-             <div class="self-start flex p-1.5 border-l-2 gap-1 text-xl font-bold ">
-                <span class="">{%block quiz_type_feild%}{%endblock%} :</span><span>{%block quiz_mode_feild%}{%endblock%}</span>
-                
-            </div>
-
-           <div class="flex items-center gap-4 self-end">
-
-             <div class="border h-fit  border-black p-2 mr-1 rounded-md shadow">
+            <div class="flex items-center gap-4 self-end">
+                <div class="border h-fit border-black p-2 mr-1 rounded-md shadow">
                     9999
                 </div>
 
-              
-
-              <div id="countdown" class="border    border-black p-2.5 size-20  rounded-full shadow">
+                <div id="countdown" class="border border-black p-2.5 size-20 rounded-full shadow">
                     0000
                 </div>
-                </div>
+            </div>
 
-           
-            
             <div class="flex flex-col w-full px-16">
-                <div class="h-10 mb-1" >
-                    
-                    {%block quiz_feild_catogery%}{%endblock%}
+                <div class="h-10 mb-1">{%block quiz_feild_catogery%}{%endblock%}</div>
 
-                </div>
-                
-               
-                 
-            
                 <div class="w-full flex flex-col">
-
-                    <div id="show-question"
-                        class="border bg-nav text-white border-black rounded shadow p-4 text-lg">
+                    <div id="show-question" class="border bg-nav text-white border-black rounded shadow p-4 text-lg">
                         Question Here
                     </div>
                 </div>
-               <div id="options" class="w-4/6 mt-8 grid grid-cols-2 grid-rows-2 gap-y-7 gap-x-24 self-center">
-                 
-                        <!-- Row 1 -->
-                        <button id="option-1" class="opt-btn ">Option A</button>
-                        <button id="option-3" class="opt-btn ">Option C</button>
-
-                        <!-- Row 2 -->
-                        <button id="option-2" class="opt-btn ">Option B</button>
-                        <button id="option-4" class="opt-btn ">Option D</button>
+                <div id="options" class="w-4/6 mt-8 grid grid-cols-2 grid-rows-2 gap-y-7 gap-x-24 self-center">
                   
-                </div>
-            
+                    <button id="option-1" class="opt-btn">Option A</button>
+                    <button id="option-3" class="opt-btn">Option C</button>
 
+                  
+                    <button id="option-2" class="opt-btn">Option B</button>
+                    <button id="option-4" class="opt-btn">Option D</button>
+                </div>
             </div>
             <button id="next" class="opt-btn hidden">Next</button>
         </div>
-
-
-
     </main>
-
-
-
 </div>
 
+
 <script>
-    const quizInfo = document.querySelector('#quiz-info')
-    // const startTimer=document.querySelector('#start-timer')
-    const quizFeild = document.querySelector('#quiz-feild')
+    const showQuestion=document.getElementById('show-question')
+    const option1=document.getElementById('option-1')
+    const option2=document.getElementById('option-2')
+    const option3=document.getElementById('option-3')
+    const option4=document.getElementById('option-4')
+
+    async function getQuestion(){
+        let url='/api/get_question/'
+
+        let response=await fetch(url)
+        let question=await response.json()
+
+        showQuestion.innerText=question.question_text
+        option1.innerText=question.options[0]
+        option2.innerText=question.options[1]
+        option3.innerText=question.options[3]
+        option4.innerText=question.options[4]
+
+        console.log(question)
+
+      
+
+    
+    
+    }
+
+    [option1,option2,option3,option4].forEach(element => {
+            element.addEventListener('click', ()=>{
+                checkAnswer(element)
+            })
+    });
 
 
-
-    document.querySelector('#start-btn').addEventListener('click', () => {
-        quizInfo.classList.toggle('hidden')
-        // startTimer.classList.toggle('hidden')
-        //  startTimer.classList.toggle('flex')
-        // startTimerClock(3)
-        quizFeild.classList.toggle('hidden')
-        quizFeild.classList.toggle('flex')
-
-    })
-
-
-
-
-
-    // function startTimerClock(remaining) {
-    //   const startCountdown = document.querySelector('#start-countdown');
-    //   let interval;
-
-    //   // Helper to safely stop the timer and hide the overlay
-    //   function stopCountdown() {
-    //     clearInterval(interval);
-    //     startTimer.classList.remove('flex');
-    //     startTimer.classList.add('hidden');
-    //   }
-
-    //   // Set initial countdown
-    //   startCountdown.textContent = remaining;
-
-    //   // Start countdown interval
-    //   interval = setInterval(() => {
-    //     remaining--;
-    //     startCountdown.textContent = remaining;
-
-    //     if (remaining <= 0) {
-    //       stopCountdown();
-    //     }
-    //   }, 700);
-
-    //   // Add the click handler only once (and remove if clicked early)
-    //   const onClick = () => {
-    //     stopCountdown();
-    //     startTimer.removeEventListener('click', onClick);
-    //   };
-
-    //   startTimer.addEventListener('click', onClick);
-    // }
-
-
+    async function submitAnswer(option) {
+        
+    }
+    getQuestion()
 
 </script>
 
-{%block quizbase%} 
-
-
-{%endblock%}
-
-
-{%endblock%}
+{%block quizbase%}
+ {%endblock%}
+ {%endblock%}

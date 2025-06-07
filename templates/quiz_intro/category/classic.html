@@ -1,0 +1,19 @@
+
+{%extends 'quiz_intro/category/categorybase.html'%}
+{%set quiz_mode='Classic'%}
+
+{%block title%}Category {{quiz_mode}}{%endblock%}
+
+
+<!--mode name in start-->
+{%block quiz_mode%}{{quiz_mode}}{%endblock%}
+
+<!--quiz info-->
+{%block quiz_info%}
+In this version of Classic Mode, the user selects a specific category—such as Science, History, or Sports—and receives a fixed number of questions from only that topic. This allows for focused learning and practice in a single domain. A time limit per question may be included, helping users sharpen their understanding of a particular subject. 
+{%endblock%}
+
+<!-- only in classic to select the no of question -->
+{%block no_of_Question%}{%include '/components/no_of_question.html'%}{%endblock%}
+
+

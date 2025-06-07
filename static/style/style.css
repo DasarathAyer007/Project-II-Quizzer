@@ -316,9 +316,6 @@
   .mb-8 {
     margin-bottom: calc(var(--spacing) * 8);
   }
-  .ml-2 {
-    margin-left: calc(var(--spacing) * 2);
-  }
   .ml-10 {
     margin-left: calc(var(--spacing) * 10);
   }
@@ -390,6 +387,9 @@
   .w-1\/6 {
     width: calc(1/6 * 100%);
   }
+  .w-2 {
+    width: calc(var(--spacing) * 2);
+  }
   .w-2xs {
     width: var(--container-2xs);
   }
@@ -411,11 +411,11 @@
   .w-18 {
     width: calc(var(--spacing) * 18);
   }
+  .w-24 {
+    width: calc(var(--spacing) * 24);
+  }
   .w-60 {
     width: calc(var(--spacing) * 60);
-  }
-  .w-64 {
-    width: calc(var(--spacing) * 64);
   }
   .w-\[14\%\] {
     width: 14%;

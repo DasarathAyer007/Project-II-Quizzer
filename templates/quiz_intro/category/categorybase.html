@@ -1,0 +1,58 @@
+{%extends 'quiz_intro/quiz_intro_base.html'%}
+
+{%set quiz_type='Category'%}
+
+{%block quiz_type%}{{quiz_type}}{%endblock%}
+
+{%block catogery_select%}
+
+<div class=" relative " id="dropdown-wrapper">
+  <div id="dropdown-toggle" class="bg-secondary-b border border-gray-300 rounded shadow cursor-pointer flex justify-between items-center">
+        <input type="text" name="category-name" id="dropdown-selected" size="14" class="outline-transparent h-8 pl-2" placeholder="Select a category">
+
+  </div>
+
+  <div id="dropdown-options" class="absolute left-0 right-0 bg-white border border-t-0 border-gray-300 rounded-b shadow mt-1 hidden z-10">
+    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="Sport">Sport</div>
+    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="Film">Film</div>
+    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="Mythology">Mythology</div>
+  </div>
+</div>
+
+
+
+
+<script>
+  const toggle = document.getElementById("dropdown-toggle");
+  const options = document.getElementById("dropdown-options");
+  const selected = document.getElementById("dropdown-selected");
+
+  toggle.addEventListener("click", () => {
+    options.classList.toggle("hidden");
+  });
+
+  options.querySelectorAll("div").forEach(option => {
+    option.addEventListener("click", () => {
+      selected.value = option.textContent;
+      options.classList.add("hidden");
+
+      
+      console.log("Selected category:", option.dataset.value);
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!document.getElementById("dropdown-wrapper").contains(e.target)) {
+      options.classList.add("hidden");
+    }
+  });
+
+
+</script>
+
+
+{%endblock%}
+
+ 
+
+

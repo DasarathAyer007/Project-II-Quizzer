@@ -19,3 +19,65 @@ h1{
     
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+{%block quiz_feild_catogery%}
+  <div class="  w-fit p-2 border border-black  rounded shadow">
+                    Catogery
+        </div>
+                
+{%endblock%}
+
+
+
+    async function getQuestion(){
+        let url='/api/get_question/{{quiz_type|lower}}/{{quiz_mode|lower}}'
+
+        let params = new URLSearchParams(document.location.search);
+
+        let no_of_question  = params.get("no-of-question");
+        let category = params.get("category-name"); 
+
+        if(no_of_question!=null || category!=null){
+            url=url.concat(`?`)
+
+            if(no_of_question!=null){
+               url=url.concat(`no-of-question=${no_of_question}`)
+
+               if(category!=null){
+                url=url.concat(`&`)
+               }
+            } 
+
+
+            if(category!=null){
+                url=url.concat(`category-name=${category}`)
+            }
+
+        }
+
+        let question=await fetch(url)
+        let questionJson=await question.json()
+        console.log(questionJson)
+
+        
+
+       
+        
+        
+
+        
+
+    
+    
+    }

@@ -1,0 +1,19 @@
+{%extends 'quiz_intro/random/randombase.html'%}
+
+{%set quiz_mode='Classic'%}
+
+
+{%block title%}Random {{quiz_mode}}{%endblock%}
+
+<!--mode name in start-->
+{%block quiz_mode%}{{quiz_mode}}{%endblock%}
+
+<!--quiz info-->
+{%block quiz_info%}
+In this mode, users are presented with a fixed number of questions selected randomly from all available categories. Each quiz offers a balanced mix of topics, providing a general knowledge challenge. A time limit per question may be applied to encourage quick thinking. This mode is ideal for users who want to test themselves across various subjects. 
+{%endblock%}
+
+
+<!--only in classic to select the no of question-->
+{%block no_of_Question%}{%include 'components/no_of_question.html'%}{%endblock%}
+

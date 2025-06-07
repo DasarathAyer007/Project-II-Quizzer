@@ -12,9 +12,9 @@
           </button>
 
           <ul class="hidden pl-4 " >
-            <li><a class="sidebar-btn" href="quiz/random/classic">Classic</a></li>
-            <li><a class="sidebar-btn" href="/random/Timed">Timed</a></li>
-            <li><a class="sidebar-btn" href="">Survival</a></li>
+            <li><a class="sidebar-btn" href="{{url_for('quiz_intro', type='random', mode='classic')}}">Classic</a></li>
+            <li><a class="sidebar-btn" href="{{url_for('quiz_intro', type='random', mode='timed')}}">Timed</a></li>
+            <li><a class="sidebar-btn" href="{{url_for('quiz_intro', type='random', mode='survival')}}">Survival</a></li>
           </ul>
         </li>
         
@@ -26,9 +26,9 @@
           </button>
 
           <ul class="hidden pl-4" >
-            <li><a class="sidebar-btn" href="/category/classic">Classic</a></li>
-            <li><a class="sidebar-btn" href="/category/timed">Timed</a></li>
-            <li><a class="sidebar-btn" href="/category/survival">Survival</a></li>
+            <li><a class="sidebar-btn" href="{{url_for('quiz_intro', type='category', mode='classic')}}">Classic</a></li>
+            <li><a class="sidebar-btn" href="{{url_for('quiz_intro', type='category', mode='timed')}}">Timed</a></li>
+            <li><a class="sidebar-btn" href="{{url_for('quiz_intro', type='category', mode='survival')}}">Survival</a></li>
           </ul>
         </li>
         <li>

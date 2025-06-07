@@ -1,16 +1,10 @@
 {%extends 'quiz/random/randombase.html'%}
-{%set quiz_mode='Classic'%}
+{%set quiz_mode='Survival'%}
 
 
 {%block title%}Random {{quiz_mode}}{%endblock%}
 
-<!--mode name in start-->
-{%block quiz_mode%}{{quiz_mode}}{%endblock%}
 
-<!--quiz info-->
-{%block quiz_info%}
-Users are given random questions from all categories, one at a time, and the quiz continues until the user answers a question incorrectly. There are no second chances. This high-stakes mode encourages accuracy and focus, testing a user's ability to handle a wide range of topics with precision.
-{%endblock%}
 
 <!--mode name in quiz feild-->
 {%block quiz_mode_feild%}{{quiz_mode}}{%endblock%}
