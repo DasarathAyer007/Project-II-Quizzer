@@ -1,18 +1,17 @@
 {%extends 'quiz/quizbase.html'%}
 
 {%set quiz_type='Category'%}
+
 {%block quiz_type%}{{quiz_type}}{%endblock%}
 {%block quiz_type_feild%}{{quiz_type}}{%endblock%}
 
 
 {%block catogery_select%}
 
-        <div class="relative w-64" id="dropdown-wrapper">
-  <div id="dropdown-toggle" class="bg-white border border-gray-300 rounded px-4 py-2 shadow cursor-pointer flex justify-between items-center">
-    <span id="dropdown-selected">Select a category</span>
-    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+  <div class=" relative " id="dropdown-wrapper">
+  <div id="dropdown-toggle" class="bg-secondary-b border border-gray-300 rounded shadow cursor-pointer flex justify-between items-center">
+        <input type="text" id="dropdown-selected" size="14" class="outline-transparent h-8 pl-2" placeholder="Select a category">
+
   </div>
 
   <div id="dropdown-options" class="absolute left-0 right-0 bg-white border border-t-0 border-gray-300 rounded-b shadow mt-1 hidden z-10">
@@ -25,7 +24,7 @@
 {%endblock%}
 
  {%block quiz_feild_catogery%}
-  <div class=" p-2 h-fit w-fit border border-black  rounded shadow">
+  <div class="  w-fit p-2 border border-black  rounded shadow">
                     Catogery
                 </div>
                 
@@ -44,7 +43,7 @@
 
   options.querySelectorAll("div").forEach(option => {
     option.addEventListener("click", () => {
-      selected.textContent = option.textContent;
+      selected.value = option.textContent;
       options.classList.add("hidden");
 
       // Optionally: store the value in a hidden input

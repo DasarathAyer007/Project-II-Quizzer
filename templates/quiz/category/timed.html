@@ -1,0 +1,17 @@
+{%extends 'quiz/category/categorybase.html'%}
+{%set quiz_mode='Timed'%}
+
+{%block title%}Random {{quiz_mode}}{%endblock%}
+
+
+
+<!--mode name in start-->
+{%block quiz_mode%}{{quiz_mode}}{%endblock%}
+
+<!--quiz info-->
+{%block quiz_info%}
+This mode provides a rapid-fire experience in a single category, where users aim to answer as many questions as possible within a given time. It's ideal for practicing one topic intensively while developing time management and decision-making skills in that domain.{%endblock%}
+
+<!--mode name in quiz feild-->
+{%block quiz_mode_feild%}{{quiz_mode}}{%endblock%}
+

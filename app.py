@@ -12,9 +12,11 @@ def login():
    return render_template('login.html')
 
 
-@app.route('/<type>/<mode>')
+@app.route('/quiz/<type>/<mode>')
 def random_classic(type,mode):
    return render_template(f'quiz/{type}/{mode}.html')
+
+
 
 
 

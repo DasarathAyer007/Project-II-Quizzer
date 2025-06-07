@@ -4,21 +4,21 @@
 
 
 {%block content%}
-<div class="h-dvh  flex bg-primary-b ">
+<div class="h-dvh  flex bg-base-b ">
 
     {%include 'sidebar.html'%}
 
 
     <main class="m-1.5 w-full">
 
-        <div id="quiz-info" class="py-10 px-24 flex  text-primary-t flex-col m-auto gap-10 items-center">
+        <div id="quiz-info" class="py-10 px-24 flex  text-base-t flex-col m-auto gap-10 items-center">
 
             <div class=" flex mt-2.5 text-2xl gap-1 font-extrabold">
                 <div>{%block quiz_type%}{%endblock%} : </div>
                 <div>{%block quiz_mode%}{%endblock%}</div>
             </div>
 
-            <div class="text-secondary-t">
+            <div class="text-base-t">
                 {%block quiz_info%} {%endblock%}
             </div>
 
@@ -48,8 +48,8 @@
 
         <div id="quiz-feild" class="hidden flex-col w-full m-auto p-6  items-center  ">
             
-             <div class="self-start flex p-1.5 border-l-2 gap-1 text-xl font-bold">
-                <span>{%block quiz_type_feild%}{%endblock%} :</span><span>{%block quiz_mode_feild%}{%endblock%}</span>
+             <div class="self-start flex p-1.5 border-l-2 gap-1 text-xl font-bold ">
+                <span class="">{%block quiz_type_feild%}{%endblock%} :</span><span>{%block quiz_mode_feild%}{%endblock%}</span>
                 
             </div>
 
@@ -67,11 +67,17 @@
                 </div>
 
            
-
+            
             <div class="flex flex-col w-full px-16">
-                {%block quiz_feild_catogery%}{%endblock%}
+                <div class="h-10 mb-1" >
+                    
+                    {%block quiz_feild_catogery%}{%endblock%}
+
+                </div>
+                
                
                  
+            
                 <div class="w-full flex flex-col">
 
                     <div id="show-question"
@@ -79,9 +85,7 @@
                         Question Here
                     </div>
                 </div>
-
-
-               <div id="options" class="w-4/6 mt-8 grid grid-cols-2 grid-rows-2 gap-7 self-center">
+               <div id="options" class="w-4/6 mt-8 grid grid-cols-2 grid-rows-2 gap-y-7 gap-x-24 self-center">
                  
                         <!-- Row 1 -->
                         <button id="option-1" class="opt-btn ">Option A</button>
@@ -92,6 +96,7 @@
                         <button id="option-4" class="opt-btn ">Option D</button>
                   
                 </div>
+            
 
             </div>
             <button id="next" class="opt-btn hidden">Next</button>
@@ -163,7 +168,10 @@
 
 </script>
 
-{%block quizbase%} {%endblock%}
+{%block quizbase%} 
+
+
+{%endblock%}
 
 
 {%endblock%}

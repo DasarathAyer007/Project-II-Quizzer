@@ -1,19 +1,26 @@
-<div class="relative w-64 " id="question-dropdown-wrapper">
+<div class="relative w-fit " id="question-dropdown-wrapper">
 
   <div id="question-dropdown-toggle"
-    class="bg-white border border-gray-300 rounded px-4 py-2 shadow cursor-pointer flex justify-between items-center">
-    <span id="question-dropdown-selected">Select number</span>
-    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+    class="bg-secondary-b text-secondary-t border border-gray-300 rounded shadow-md pointer flex">
+    <input type="text" id="question-dropdown-selected" size="14" class="outline-transparent h-8 pl-2" placeholder="Select Number">
+
+  
   </div>
 
   <div id="question-dropdown-options"
-    class="absolute left-0 right-0 bg-white border border-t-0 border-gray-300 rounded-b shadow mt-1 hidden z-10">
+    class="absolute h-56 overflow-scroll left-0 right-0 bg-secondary-b text-secondary-t border border-t-0 border-gray-300 rounded-b shadow-md mt-1 hidden z-10">
     <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="5">5</div>
     <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="10">10</div>
     <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="15">15</div>
     <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="20">20</div>
+    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="5">25</div>
+    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="10">30</div>
+    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="15">35</div>
+    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="20">40</div>
+    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="5">45</div>
+    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="10">50</div>
+    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="15">55</div>
+    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer" data-value="20">60</div>
   </div>
 </div>
 
@@ -29,7 +36,7 @@
 
   qOptions.querySelectorAll("div").forEach(option => {
     option.addEventListener("click", () => {
-      qSelected.textContent = option.textContent;
+      qSelected.value = option.textContent;
       qOptions.classList.add("hidden");
       console.log("Number of questions selected:", option.dataset.value);
 
