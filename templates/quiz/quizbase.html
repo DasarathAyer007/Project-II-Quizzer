@@ -2,88 +2,118 @@
 <div class="h-dvh flex bg-base-b">
     {%include 'sidebar.html'%}
 
-    <main class="m-1.5 w-full">
-        <div id="quiz-feild" class="flex flex-col w-full m-auto p-6 items-center">
-            <div class="self-start flex p-1.5 border-l-2 gap-1 text-xl font-bold">
-                <span class="">{%block quiz_type_feild%}{%endblock%} :</span><span>{%block
+    <main id="quiz-feild" class="flex flex-col w-full m-1.5 p-6 items-center">
+        <div class="w-full flex justify-between">
+            <div class="self-start p-1.5 border-l-2 text-xl font-bold">
+                <span class="">{%block quiz_type_feild%}{%endblock%} : </span><span>{%block
                     quiz_mode_feild%}{%endblock%}</span>
             </div>
 
-            <div class="flex items-center gap-4 self-end">
-                <div class="border h-fit border-black p-2 mr-1 rounded-md shadow">
-                    9999
+            <div class="flex items-center mt-5 mr-4 gap-4 self-end">
+                <div  class=" p-2 mr-1 rounded-md shadow">
+                    <span>Score:   </span>
+                   <span id="score" >  0000  </span>
                 </div>
 
-                <div id="countdown" class="border border-black p-2.5 size-20 rounded-full shadow">
-                    0000
-                </div>
-            </div>
-
-            <div class="flex flex-col w-full px-16">
-                <div class="h-10 mb-1">{%block quiz_feild_catogery%}{%endblock%}</div>
-
-                <div class="w-full flex flex-col">
-                    <div id="show-question" class="border bg-nav text-white border-black rounded shadow p-4 text-lg">
-                        Question Here
-                    </div>
-                </div>
-                <div id="options" class="w-4/6 mt-8 grid grid-cols-2 grid-rows-2 gap-y-7 gap-x-24 self-center">
-                  
-                    <button id="option-1" class="opt-btn">Option A</button>
-                    <button id="option-3" class="opt-btn">Option C</button>
-
-                  
-                    <button id="option-2" class="opt-btn">Option B</button>
-                    <button id="option-4" class="opt-btn">Option D</button>
+                <div id="countdown" class=" p-2.5 text-3xl  rounded-md shadow">
+                    
+                   <div >000</div>
                 </div>
             </div>
-            <button id="next" class="opt-btn hidden">Next</button>
         </div>
+
+        <div class="flex flex-col w-full sm:px-16">
+            <div class="h-10 mb-1">{%block quiz_feild_catogery%}{%endblock%}</div>
+
+            <div class="w-full flex flex-col">
+                <div id="show-question"
+                    class="flex items-center bg-secondary-b text-secondary-t rounded p-4 shadow min-h-20 text-lg border border-black/25">
+                    Question Here
+                </div>
+            </div>
+            <div id="options" class="w-full p-8 grid grid-cols-1 sm:grid-cols-2 gap-y-7 gap-x-24 self-center">
+                <button id="option-1" class="opt-btn">Option A</button>
+                <button id="option-2" class="opt-btn">Option B</button>
+
+                <button id="option-3" class="opt-btn">Option C</button>
+                <button id="option-4" class="opt-btn">Option D</button>
+            </div>
+        </div>
+        <button id="next" class="opt-btn hidden">Next</button>
     </main>
 </div>
 
-
 <script>
-    const showQuestion=document.getElementById('show-question')
-    const option1=document.getElementById('option-1')
-    const option2=document.getElementById('option-2')
-    const option3=document.getElementById('option-3')
-    const option4=document.getElementById('option-4')
+    const showQuestion = document.getElementById("show-question");
+    const option1 = document.getElementById("option-1");
+    const option2 = document.getElementById("option-2");
+    const option3 = document.getElementById("option-3");
+    const option4 = document.getElementById("option-4");
+    const score = document.getElementById("score");
 
-    async function getQuestion(){
-        let url='/api/get_question/'
+    async function getQuestion() {
+        let url = "/api/get_question/";
 
-        let response=await fetch(url)
-        let question=await response.json()
+        let response = await fetch(url);
+        let question = await response.json();
 
-        showQuestion.innerText=question.question_text
-        option1.innerText=question.options[0]
-        option2.innerText=question.options[1]
-        option3.innerText=question.options[3]
-        option4.innerText=question.options[4]
+        showQuestion.innerHTML = question.question_text;
+        option1.innerText = question.options[0];
+        option2.innerText = question.options[1];
+        option3.innerText = question.options[2];
+        option4.innerText = question.options[3];
 
-        console.log(question)
-
-      
-
-    
-    
+        console.log(question);
     }
+    getQuestion();
 
-    [option1,option2,option3,option4].forEach(element => {
-            element.addEventListener('click', ()=>{
-                checkAnswer(element)
-            })
+    document.addEventListener("DOMContentLoaded", () => {
+        [option1, option2, option3, option4].forEach((element) => {
+            element.addEventListener("click", () => {
+                submitAnswer(element);
+            });
+        });
     });
 
-
     async function submitAnswer(option) {
-        
-    }
-    getQuestion()
+        const url = "/api/check_question";
+        choosenAnswer = option.innerText;
+        response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                choosen_answer: choosenAnswer,
+                question_text: showQuestion.innerText,
+            }),
+        });
 
+        answerinfo = await response.json();
+
+        done = await setRightWrong(answerinfo, option);
+
+        console.log(answerinfo);
+
+        getQuestion();
+    }
+
+    function setRightWrong(answerinfo, option) {
+        return new Promise((resolve, reject) => {
+            originBackgrounnd = option.style.backgroundColor;
+            if (answerinfo.correct) {
+                option.style.backgroundColor = "green";
+                score.innerText =  String(answerinfo.current_score).padStart(4,'0');
+            } else {
+                option.style.backgroundColor = "red";
+                score.innerText = String(answerinfo.current_score).padStart(4,'0');
+            }
+            setTimeout(() => {
+                option.style.backgroundColor = originBackgrounnd;
+                resolve("done");
+            }, 1000);
+        });
+    }
 </script>
 
-{%block quizbase%}
- {%endblock%}
- {%endblock%}
+{%block quizbase%} {%endblock%} {%endblock%}
