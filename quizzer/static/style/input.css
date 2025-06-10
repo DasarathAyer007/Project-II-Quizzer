@@ -11,15 +11,18 @@
    --color-base-b:rgb(236, 249, 248);
   --color-base-t:rgb(85, 85, 85);
    
-  --color-secondary-b:rgba(255, 255, 255,0.7);
-  --color-secondary-t:(117, 117, 117);
+  --color-secondary-b:rgba(255, 255, 255);
+  --color-secondary-t:rgb(55, 55, 55);
 
 
-  --color-accent:rgba(68,153,234,.9);
+  --color-accent:rgba(68,153,234,0.9);
   --color-accent-t:rgb(225, 225, 225);
   --color-accent-h:rgba(58, 135, 210, 1);
   
   --color-shadowx:rgba(0, 0, 0, 0.37);
+
+  --color-error:rgba(230, 46, 46, 0.9);
+  --color-sucess: rgba(36, 170, 100, 0.9);
  
 
   --color-NPtext:rgba(255,255,255,.96);
@@ -54,6 +57,18 @@
     .opt-btn{
     @apply bg-secondary-b text-secondary-t border border-gray-400  rounded shadow  px-6 py-3
      hover:shadow-lg cursor-pointer ;
+
+    }
+
+    .opt-btn-correct{
+       @apply bg-sucess text-accent-t border border-gray-400  rounded shadow  px-6 py-3
+     hover:shadow-lg cursor-pointer ;
+
+    }
+    .opt-btn-wrong{
+        @apply bg-error text-accent-t border border-gray-400  rounded shadow  px-6 py-3
+     hover:shadow-lg cursor-pointer ;
+
 
     }
 }

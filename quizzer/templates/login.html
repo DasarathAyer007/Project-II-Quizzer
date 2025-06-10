@@ -1,6 +1,17 @@
-{%extends 'base.html'%}
-{%block content%}
-    <div class="flex items-center justify-center min-h-screen">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>login</title>
+   <link rel="stylesheet" href="{{url_for('static', filename='style/style.css')}}" />
+</head>
+<body class="bg-nav">
+    <div>
+      <span> <a class=" font-black text-gray-100 text-3xl ml-10 font-revalia" href="/home">Quizzer</a></span>
+
+    </div>
+     <div class="flex items-center justify-center ">
       <div class="flex flex-col m-6 bg-gray-800 shadow-2xl rounded-2xl p-8 md:p-14 w-full max-w-md">
         <h1 class="mb-3 text-4xl font-bold text-blue-500">Welcome back</h1>
         <p class="font-light text-gray-400 mb-8">
@@ -67,4 +78,5 @@
     </div>
 
     <script src="{{url_for('static', filename='script/login.js')}}"></script>
-{%endblock%}
+</body>
+</html>

@@ -10,7 +10,7 @@
             </div>
 
             <div class="text-base-t">{%block quiz_info%} {%endblock%}</div>
-            <form action="{{ url_for('quiz_start',type=quiz_type|lower, mode=quiz_mode|lower ) }} " class="flex flex-col" onsubmit="return validateBeforeStart();" >
+            <form action="{{ url_for('quiz.quiz_start',type=quiz_type|lower, mode=quiz_mode|lower ) }} " class="flex flex-col" onsubmit="return validateBeforeStart();" >
                 <div class="flex gap-2">
                     {%block no_of_Question%}{%endblock%} 
                     {%block catogery_select%}{%endblock%}

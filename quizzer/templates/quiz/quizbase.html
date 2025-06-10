@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div class="flex flex-col w-full sm:px-16">
+        <div class="flex flex-col w-full sm:px-16 font-bold">
             <div class="h-10 mb-1">{%block quiz_feild_catogery%}{%endblock%}</div>
 
             <div class="w-full flex flex-col">
@@ -40,6 +40,11 @@
             </div>
         </div>
         <button id="next" class="opt-btn hidden">Next</button>
+
+        <button onclick="stopQuiz();">Stop the quiz</button>
+        <div id="show-result">
+
+        </div>
     </main>
 </div>
 
@@ -52,12 +57,12 @@
     const score = document.getElementById("score");
 
     async function getQuestion() {
-        let url = "/api/get_question/";
+        let url = "/question/get_question/";
 
         let response = await fetch(url);
         let question = await response.json();
 
-        showQuestion.innerHTML = question.question_text;
+        showQuestion.innerText = question.question_text;
         option1.innerText = question.options[0];
         option2.innerText = question.options[1];
         option3.innerText = question.options[2];
@@ -76,7 +81,7 @@
     });
 
     async function submitAnswer(option) {
-        const url = "/api/check_question";
+        const url = "/question/check_answer";
         choosenAnswer = option.innerText;
         response = await fetch(url, {
             method: "POST",
@@ -99,20 +104,39 @@
     }
 
     function setRightWrong(answerinfo, option) {
+        let correct
         return new Promise((resolve, reject) => {
             originBackgrounnd = option.style.backgroundColor;
             if (answerinfo.correct) {
-                option.style.backgroundColor = "green";
+                // option.style.backgroundColor = "green";
+                option.classList.add('opt-btn-correct')
                 score.innerText =  String(answerinfo.current_score).padStart(4,'0');
             } else {
-                option.style.backgroundColor = "red";
+                // option.style.backgroundColor = "red";
+                option.classList.add('opt-btn-wrong')
                 score.innerText = String(answerinfo.current_score).padStart(4,'0');
+                 [option1, option2, option3, option4].forEach((element) => {
+                       if (element.innerText===answerinfo.right_option){
+                        element.classList.add('opt-btn-correct');
+                        correct=element
+                       }
+                  });
             }
             setTimeout(() => {
-                option.style.backgroundColor = originBackgrounnd;
+               option.classList.remove('opt-btn-correct')
+               option.classList.remove('opt-btn-wrong')
+               if(correct!=undefined){
+                     correct.classList.remove('opt-btn-correct')
+               }
+
                 resolve("done");
             }, 1000);
         });
+    }
+
+    function stopQuiz(){
+        fetch('/quiz/stop').then((data)=>{return data.json() })
+                            .then(data=>{console.log(data)})
     }
 </script>
 

@@ -1,7 +1,7 @@
 from flask import Flask ,render_template,request,redirect,url_for,jsonify,session
 import requests
 from random import shuffle
-import html
+
 
 app=Flask(__name__)
 
@@ -77,7 +77,7 @@ def fetch_questions(category):
 
    formatted_questions = []
    for q in questions:
-        question_text = html.escape(q["question"])
+        question_text = (q["question"])
         correct = q["correct_answer"]
         incorrect = q["incorrect_answers"]
         options = incorrect + [correct]

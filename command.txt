@@ -6,7 +6,7 @@ To install tailwindcss dependiency listed in package.json
 To run tailwindcss(compile tailwindcss to css file)
     #npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch
 
-    npx @tailwindcss/cli -i ./static/style/input.css -o ./static/style/style.css --watch 
+    npx @tailwindcss/cli -i ./quizzer/static/style/input.css -o ./quizzer/static/style/style.css --watch 
 
 
 Flask Guide
