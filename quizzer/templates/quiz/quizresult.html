@@ -1,0 +1,40 @@
+{%extends 'base.html'%}
+{%block title%}{%endblock%}
+
+{%block content%}
+
+<main class="border border-gray-300">
+  <div class="bg-secondary-b">
+
+    <table class="border-2">
+      <tr>
+        <th class="p-2">SN</th>
+        <th class="p-2">Question</th>
+        <th class="p-2">Your Answer</th>
+        <th class="p-2">correct Answer</th>
+
+      </tr>
+
+      {%for question in questions%}
+      <tr>
+        <!-- <td  class="p-2">{{i}}</td>
+          <td  class="p-2">this is question  text</td>
+          <td  class="p-2">Your choosen answer</td>
+          <td class="p-2">Correct answer</td> -->
+        <td class="p-2">{{loop.index}}</td>
+        <td class="p-2">{{question['question_text']}}</td>
+        <td class="p-2">{{question['chosen_option']}}</td>
+        <td class="p-2">{{question['correct_option']}}</td>
+
+      </tr>
+      {%endfor%}
+    </table>
+
+  </div>
+
+
+</main>
+
+
+
+{%endblock%}

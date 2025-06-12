@@ -1,7 +1,7 @@
 from flask import render_template,request,redirect,url_for,jsonify,session,Blueprint
 
 
-quiz=Blueprint('quiz',__name__,static_folder="static",template_folder="templates")
+quiz=Blueprint('quiz',__name__,static_folder=",static",template_folder="templates")
 
 @quiz.route('/intro/<type>/<mode>')
 def quiz_intro(type,mode):
@@ -14,8 +14,9 @@ def quiz_start(type,mode):
     session['type']=type
     session['mode']=mode
     session['score']=0
-    session['question_list']=[]
-    session['question_index'] = 0
+   
+    session['asked_question']=[]
+
 
     number_of_questions=0
     category=''
@@ -25,7 +26,7 @@ def quiz_start(type,mode):
   
        return render_template(f'quiz/{type}/{mode}.html', category=category)
        
-    
+       
     if type.lower()=='classic':
       number_of_questions = request.args.get('no-of-question', type=int) 
       session['no_of_question']=number_of_questions
@@ -41,13 +42,22 @@ def quiz_start(type,mode):
 @quiz.route('/stop')
 def quiz_stop():
 
-
-   return redirect(url_for(quiz_result))
+   return redirect(url_for("quiz.quiz_result", type=session.get('type'), mode=session.get('mode')))
   
 
-@quiz.route('/result')
-def quiz_result():
-    type,mode,score=session['type'],session['mode'],session['score']
-    questions=session['question_list']
+@quiz.route('/result/<type>/<mode>')
+def quiz_result(type, mode):
+
+   if not session:
+      return redirect(url_for("quiz.quiz_intro",type=type,mode=mode))
+
+   print(session)
+   score=session.get('score')
+   questions=session.get('asked_question')
+   print(questions)
+
+   session.clear()
+
+   return render_template('quiz/quizresult.html' , type=type,mode=mode,questions=questions)
    
-    return jsonify({'type':type,'mode':mode,'score':score,'question_asked':questions})
+   #  return jsonify({'type':type,'mode':mode,'score':score,'question_asked':questions})

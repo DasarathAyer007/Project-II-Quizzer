@@ -51,3 +51,17 @@ function toggleSubMenu(button) {
 
 
 
+//sidenav for mobile
+
+const openSidenav=document.querySelector('#open-sidenav')
+const closeSidenav=document.querySelector('#close-sidenav')
+const sideNav=document.querySelector('#side-nav')
+
+openSidenav.addEventListener('click',()=>{
+  sideNav.classList.toggle('hidden')
+})
+
+
+closeSidenav.addEventListener('click',()=>{
+  sideNav.classList.toggle('hidden')
+})

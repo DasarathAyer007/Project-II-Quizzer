@@ -1,49 +1,49 @@
-{%extends 'base.html'%} {%block title%}{%endblock%} {%block content%}
-<div class="h-dvh flex bg-base-b">
-    {%include 'sidebar.html'%}
+{%extends 'base.html'%}
+{%block title%}{%endblock%} 
+{%block content%}
+<main class="m-1.5 w-full">
+    <div id="quiz-info" class="py-10 px-24 flex text-base-t flex-col m-auto gap-10 items-center">
+        <div class="flex mt-2.5 text-2xl gap-1 font-extrabold">
+            <div>{%block quiz_type%}{%endblock%} :</div>
+            <div>{%block quiz_mode%}{%endblock%}</div>
+        </div>
 
-    <main class="m-1.5 w-full">
-        <div id="quiz-info" class="py-10 px-24 flex text-base-t flex-col m-auto gap-10 items-center">
-            <div class="flex mt-2.5 text-2xl gap-1 font-extrabold">
-                <div>{%block quiz_type%}{%endblock%} :</div>
-                <div>{%block quiz_mode%}{%endblock%}</div>
+        <div class="text-base-t">{%block quiz_info%} {%endblock%}</div>
+        <form action="{{ url_for('quiz.quiz_start',type=quiz_type|lower, mode=quiz_mode|lower ) }} "
+            class="flex flex-col" onsubmit="return validateBeforeStart();">
+            <div class="flex gap-2">
+                {%block no_of_Question%}{%endblock%}
+                {%block catogery_select%}{%endblock%}
             </div>
 
-            <div class="text-base-t">{%block quiz_info%} {%endblock%}</div>
-            <form action="{{ url_for('quiz.quiz_start',type=quiz_type|lower, mode=quiz_mode|lower ) }} " class="flex flex-col" onsubmit="return validateBeforeStart();" >
-                <div class="flex gap-2">
-                    {%block no_of_Question%}{%endblock%} 
-                    {%block catogery_select%}{%endblock%}
-                </div>
+            <button type="submit" id="start-btn"
+                class="bg-accent text-accent-t mt-3.5 mx-auto rounded-md shadow-md px-6 py-3 hover:bg-accent-h cursor-pointer focus:outline focus:outline-gray-900">
+                Start
+            </button>
+        </form>
+    </div>
+</main>
 
-                <button type="submit" id="start-btn"
-                    class="bg-accent text-accent-t mt-3.5 mx-auto rounded-md shadow-md px-6 py-3 hover:bg-accent-h cursor-pointer focus:outline focus:outline-gray-900">
-                    Start
-                </button>
-            </form>
-        </div>
-    </main>
-</div>
 
 <script>
-  function validateBeforeStart() {
-    if ('{{quiz_type|lower}}' === 'category') {
-        const selectedValue = document.getElementById("dropdown-selected").value.trim();
-        if (!selectedValue) {
-            alert("Please select a category before starting the quiz.");
-            return false; 
+    function validateBeforeStart() {
+        if ('{{quiz_type|lower}}' === 'category') {
+            const selectedValue = document.getElementById("dropdown-selected").value.trim();
+            if (!selectedValue) {
+                alert("Please select a category before starting the quiz.");
+                return false;
+            }
         }
-    }
-    if ('{{quiz_mode|lower}}' === 'classic') {
-        const selectedValue = document.getElementById("question-dropdown-selected").value.trim();
-        console.log(selectedValue)
-        if (selectedValue=='' || isNaN(selectedValue) ) {
-            alert("Please select a No of question before starting the quiz.");
-            return false; 
+        if ('{{quiz_mode|lower}}' === 'classic') {
+            const selectedValue = document.getElementById("question-dropdown-selected").value.trim();
+            console.log(selectedValue)
+            if (selectedValue == '' || isNaN(selectedValue)) {
+                alert("Please select a No of question before starting the quiz.");
+                return false;
+            }
         }
+        return true;
     }
-    return true; 
-}
 </script>
 
 {%endblock%}

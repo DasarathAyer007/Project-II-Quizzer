@@ -1,52 +1,52 @@
-{%extends 'base.html'%} {%block title%}{%endblock%} {%block content%}
-<div class="h-dvh flex bg-base-b">
-    {%include 'sidebar.html'%}
+{%extends 'base.html'%}
+{%block title%}{%endblock%} 
+{%block content%}
 
-    <main id="quiz-feild" class="flex flex-col w-full m-1.5 p-6 items-center">
-        <div class="w-full flex justify-between">
-            <div class="self-start p-1.5 border-l-2 text-xl font-bold">
-                <span class="">{%block quiz_type_feild%}{%endblock%} : </span><span>{%block
-                    quiz_mode_feild%}{%endblock%}</span>
-            </div>
 
-            <div class="flex items-center mt-5 mr-4 gap-4 self-end">
-                <div  class=" p-2 mr-1 rounded-md shadow">
-                    <span>Score:   </span>
-                   <span id="score" >  0000  </span>
-                </div>
-
-                <div id="countdown" class=" p-2.5 text-3xl  rounded-md shadow">
-                    
-                   <div >000</div>
-                </div>
-            </div>
+<main id="quiz-feild" class="flex flex-col w-full m-1.5 p-6 items-center">
+    <div class="w-full flex justify-between">
+        <div class="self-start p-1.5 border-l-2 text-xl font-bold">
+            <span class="">{%block quiz_type_feild%}{%endblock%} : </span><span>{%block
+                quiz_mode_feild%}{%endblock%}</span>
         </div>
 
-        <div class="flex flex-col w-full sm:px-16 font-bold">
-            <div class="h-10 mb-1">{%block quiz_feild_catogery%}{%endblock%}</div>
-
-            <div class="w-full flex flex-col">
-                <div id="show-question"
-                    class="flex items-center bg-secondary-b text-secondary-t rounded p-4 shadow min-h-20 text-lg border border-black/25">
-                    Question Here
-                </div>
+        <div class="flex items-center mt-5 mr-4 gap-4 self-end">
+            <div class=" p-2 mr-1 rounded-md shadow">
+                <span>Score: </span>
+                <span id="score"> 0000 </span>
             </div>
-            <div id="options" class="w-full p-8 grid grid-cols-1 sm:grid-cols-2 gap-y-7 gap-x-24 self-center">
-                <button id="option-1" class="opt-btn">Option A</button>
-                <button id="option-2" class="opt-btn">Option B</button>
 
-                <button id="option-3" class="opt-btn">Option C</button>
-                <button id="option-4" class="opt-btn">Option D</button>
+            <div id="countdown" class=" p-2.5 text-3xl  rounded-md shadow">
+
+                <div>000</div>
             </div>
         </div>
-        <button id="next" class="opt-btn hidden">Next</button>
+    </div>
 
-        <button onclick="stopQuiz();">Stop the quiz</button>
-        <div id="show-result">
+    <div class="flex flex-col w-full sm:px-16 font-bold">
+        <div class="h-10 mb-1">{%block quiz_feild_catogery%}{%endblock%}</div>
 
+        <div class="w-full flex flex-col">
+            <div id="show-question"
+                class="flex items-center bg-secondary-b text-secondary-t rounded p-4 shadow min-h-20 text-lg border border-black/25">
+                Question Here
+            </div>
         </div>
-    </main>
-</div>
+        <div id="options" class="w-full p-8 grid grid-cols-1 sm:grid-cols-2 gap-y-7 gap-x-24 self-center">
+            <button id="option-1" class="opt-btn">Option A</button>
+            <button id="option-2" class="opt-btn">Option B</button>
+
+            <button id="option-3" class="opt-btn">Option C</button>
+            <button id="option-4" class="opt-btn">Option D</button>
+        </div>
+    </div>
+    <button id="next" class="opt-btn hidden">Next</button>
+
+    <button><a href="{{url_for('quiz.quiz_stop')}}"> Stop the quiz</a></button>
+    <div id="show-result">
+
+    </div>
+</main>
 
 <script>
     const showQuestion = document.getElementById("show-question");
@@ -61,6 +61,9 @@
 
         let response = await fetch(url);
         let question = await response.json();
+        if (question.redirect) {
+            window.location.href = question.redirect;  // Redirecting to quiz_stop
+        }
 
         showQuestion.innerText = question.question_text;
         option1.innerText = question.options[0];
@@ -95,10 +98,9 @@
         });
 
         answerinfo = await response.json();
-
         done = await setRightWrong(answerinfo, option);
-
         console.log(answerinfo);
+
 
         getQuestion();
     }
@@ -107,37 +109,37 @@
         let correct
         return new Promise((resolve, reject) => {
             originBackgrounnd = option.style.backgroundColor;
-            if (answerinfo.correct) {
+            if (answerinfo.is_correct) {
                 // option.style.backgroundColor = "green";
                 option.classList.add('opt-btn-correct')
-                score.innerText =  String(answerinfo.current_score).padStart(4,'0');
+                score.innerText = String(answerinfo.current_score).padStart(4, '0');
             } else {
                 // option.style.backgroundColor = "red";
                 option.classList.add('opt-btn-wrong')
-                score.innerText = String(answerinfo.current_score).padStart(4,'0');
-                 [option1, option2, option3, option4].forEach((element) => {
-                       if (element.innerText===answerinfo.right_option){
+                score.innerText = String(answerinfo.current_score).padStart(4, '0');
+                [option1, option2, option3, option4].forEach((element) => {
+                    if (element.innerText === answerinfo.correct_option) {
                         element.classList.add('opt-btn-correct');
-                        correct=element
-                       }
-                  });
+                        correct = element
+                    }
+                });
             }
             setTimeout(() => {
-               option.classList.remove('opt-btn-correct')
-               option.classList.remove('opt-btn-wrong')
-               if(correct!=undefined){
-                     correct.classList.remove('opt-btn-correct')
-               }
+                option.classList.remove('opt-btn-correct')
+                option.classList.remove('opt-btn-wrong')
+                if (correct != undefined) {
+                    correct.classList.remove('opt-btn-correct')
+                }
 
                 resolve("done");
             }, 1000);
         });
     }
 
-    function stopQuiz(){
-        fetch('/quiz/stop').then((data)=>{return data.json() })
-                            .then(data=>{console.log(data)})
-    }
 </script>
 
-{%block quizbase%} {%endblock%} {%endblock%}
+{%block quizbase%}
+
+    <!-- Add here -->
+{%endblock%} 
+{%endblock%}
