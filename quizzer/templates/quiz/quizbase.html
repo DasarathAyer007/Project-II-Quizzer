@@ -3,32 +3,38 @@
 {%block content%}
 
 
-<main id="quiz-feild" class="flex flex-col w-full m-1.5 p-6 items-center">
-    <div class="w-full flex justify-between">
+<main id="quiz-feild" class="flex flex-col w-full mt-2 p-1 items-center">
+  
         <div class="self-start p-1.5 border-l-2 text-xl font-bold">
-            <span class="">{%block quiz_type_feild%}{%endblock%} : </span><span>{%block
-                quiz_mode_feild%}{%endblock%}</span>
+            <span class=""> {%block quiz_type_feild%}{%endblock%} : </span>
+            <span>{%block quiz_mode_feild%}{%endblock%}</span>
         </div>
 
-        <div class="flex items-center mt-5 mr-4 gap-4 self-end">
+        <div class="flex items-center  mr-4 gap-4 self-end">
             <div class=" p-2 mr-1 rounded-md shadow">
                 <span>Score: </span>
                 <span id="score"> 0000 </span>
             </div>
 
-            <div id="countdown" class=" p-2.5 text-3xl  rounded-md shadow">
+            <div  class=" p-2.5 text-3xl  rounded-md shadow">
 
-                <div>000</div>
+                <div id="countdown">15
+                </div>
+     
+            
             </div>
         </div>
-    </div>
+    
 
     <div class="flex flex-col w-full sm:px-16 font-bold">
         <div class="h-10 mb-1">{%block quiz_feild_catogery%}{%endblock%}</div>
 
-        <div class="w-full flex flex-col">
+        <div class="w-full flex items-center bg-secondary-b rounded  shadow min-h-20 text-lg border border-black/25">
+            <div class=" px-2 ">
+             
+            </div>
             <div id="show-question"
-                class="flex items-center bg-secondary-b text-secondary-t rounded p-4 shadow min-h-20 text-lg border border-black/25">
+                class=" bg-secondary-b text-secondary-t ">
                 Question Here
             </div>
         </div>
@@ -55,6 +61,8 @@
     const option3 = document.getElementById("option-3");
     const option4 = document.getElementById("option-4");
     const score = document.getElementById("score");
+   
+
 
     async function getQuestion() {
         let url = "/question/get_question/";
@@ -64,7 +72,6 @@
         if (question.redirect) {
             window.location.href = question.redirect;  // Redirecting to quiz_stop
         }
-
         showQuestion.innerText = question.question_text;
         option1.innerText = question.options[0];
         option2.innerText = question.options[1];
@@ -72,7 +79,10 @@
         option4.innerText = question.options[3];
 
         console.log(question);
+
+        // quizCountDown();
     }
+
     getQuestion();
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -84,6 +94,7 @@
     });
 
     async function submitAnswer(option) {
+        
         const url = "/question/check_answer";
         choosenAnswer = option.innerText;
         response = await fetch(url, {
@@ -100,6 +111,7 @@
         answerinfo = await response.json();
         done = await setRightWrong(answerinfo, option);
         console.log(answerinfo);
+
 
 
         getQuestion();
@@ -134,7 +146,39 @@
                 resolve("done");
             }, 1000);
         });
+          
     }
+
+
+// const countDown=document.getElementById('countdown')
+// const quizTimerValue=countDown.innerText
+// console.log(quizTimerValue)
+
+
+// let interval
+
+// function quizCountDown(){
+
+//     clearInterval(interval)
+
+//     let timer=quizTimerValue
+    
+//     interval=setInterval(()=>{
+//         if (timer <= 1){
+//             clearInterval(interval)
+//             countDown.innerText=15
+//             getQuestion()
+//         }
+
+//     timer-=1
+//     countDown.innerText=timer   
+//     },1000)
+
+
+
+// }
+
+
 
 </script>
 

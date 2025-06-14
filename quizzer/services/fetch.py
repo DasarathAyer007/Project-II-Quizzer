@@ -31,15 +31,11 @@ def fetch_questions(category):
         formatted_questions.append({
             'question_text': question_text,
             'correct_answer': correct,
-            'options': options
+            'options': options 
         })
 
 
    return formatted_questions
-
-#    session['question_list'] = formatted_questions
-#    session['question_index'] = 0
-#    session['available_no_of_question']=5
 
 
    

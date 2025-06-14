@@ -5,8 +5,6 @@ def check_answer(question, answer):
  
    question_current=session.get('current_question',[])
    
-   print(question_current)
-   score=int(session['score'])
 
    if question==question_current.get('question_text'):
       if answer == question_current.get('correct_answer'):

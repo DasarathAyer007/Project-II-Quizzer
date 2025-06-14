@@ -1,12 +1,10 @@
 from flask import session,redirect,url_for
 from .store_question import store_question
 from .check_answer import check_answer
+from datetime import datetime, timedelta
 
 def question_for_quiz():
     # previous_question=session.get('current_question',[])
-
-
-
 
     category=None
     if 'category' in session:
@@ -19,6 +17,7 @@ def question_for_quiz():
 
 
 def check_answer_question(question, answer):
+
     result=check_answer(question,answer)
     quiz_engine(result.get('is_correct'))
     result["current_score"]=session['score']
@@ -53,9 +52,11 @@ def classic(result):
 def timed(result):
     if result:
         session['score']+=10
-        score=session['score']
-   
+        
 
+    else:
+        pass
+     
 def surival(result):
     if result:
         session['score']+=10

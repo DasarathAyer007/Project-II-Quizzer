@@ -1,4 +1,5 @@
 from flask import render_template,request,redirect,url_for,jsonify,session,Blueprint
+from datetime import datetime, timedelta
 
 
 quiz=Blueprint('quiz',__name__,static_folder=",static",template_folder="templates")
@@ -14,9 +15,9 @@ def quiz_start(type,mode):
     session['type']=type
     session['mode']=mode
     session['score']=0
-   
+    session['quiz_start_time'] = datetime.utcnow().isoformat()
     session['asked_question']=[]
-
+  
 
     number_of_questions=0
     category=''
@@ -49,9 +50,9 @@ def quiz_stop():
 def quiz_result(type, mode):
 
    if not session:
+      print('no sesion')
       return redirect(url_for("quiz.quiz_intro",type=type,mode=mode))
 
-   print(session)
    score=session.get('score')
    questions=session.get('asked_question')
    print(questions)
@@ -60,4 +61,3 @@ def quiz_result(type, mode):
 
    return render_template('quiz/quizresult.html' , type=type,mode=mode,questions=questions)
    
-   #  return jsonify({'type':type,'mode':mode,'score':score,'question_asked':questions})

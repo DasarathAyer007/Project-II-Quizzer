@@ -10,14 +10,6 @@ def index():
   return render_template('home.html')
   # return render_template('quiz/quizresult.html')
 
-@view.route('/login')
-def login():
-   return render_template('login.html')
-
-
-@view.route('/signup')
-def signup():
-   return render_template ("signup.html")
 
 
 

@@ -1,14 +1,14 @@
 {%extends 'base.html'%}
 {%block title%}{%endblock%} 
 {%block content%}
-<main class="m-1.5 w-full">
-    <div id="quiz-info" class="py-10 px-24 flex text-base-t flex-col m-auto gap-10 items-center">
+<main class=" w-full ">
+    <div id="quiz-info" class="w-full flex text-base-t flex-col mt-4 p-4 md:px-10 lg:px-20 gap-10 items-center">
         <div class="flex mt-2.5 text-2xl gap-1 font-extrabold">
             <div>{%block quiz_type%}{%endblock%} :</div>
             <div>{%block quiz_mode%}{%endblock%}</div>
         </div>
 
-        <div class="text-base-t">{%block quiz_info%} {%endblock%}</div>
+        <div class="text-base-t text-justify">{%block quiz_info%} {%endblock%}</div>
         <form action="{{ url_for('quiz.quiz_start',type=quiz_type|lower, mode=quiz_mode|lower ) }} "
             class="flex flex-col" onsubmit="return validateBeforeStart();">
             <div class="flex gap-2">
