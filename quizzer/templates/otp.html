@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup Verification</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}" />
+</head>
+
+<body class="bg-base-b flex items-center justify-center min-h-screen">
+    <main></main>
+
+    <div class="bg-secondary-b text-secondary-t shadow-2xl rounded-2xl p-8 md:p-12 w-full max-w-md space-y-8">
+        <header class="text-center space-y-2">
+            <h1 class="text-3xl font-bold text-base-t">Verification</h1>
+            <p class="text-gray-400 text-sm">
+                Enter the 5-digit code we just sent to your email
+            </p>
+        </header>
+
+        <form action="{{url_for('auth.otp')}}" method="post" id="codeForm" class="space-y-6"
+            onsubmit="return otpvalidate();">
+            <div class="flex justify-center">
+                {% for i in range(5) %}
+                <input type="text" maxlength="1" inputmode="numeric" name="opt-code"
+                    class="code-input w-12 h-12 mx-1 sm:mx-2 text-center text-2xl font-semibold rounded-lg bg-base-b border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                {% endfor %}
+            </div>
+            <p id="otpError" class="text-error text-sm hidden">
+                Invlaid OPT
+            </p>
+
+            <button type="submit"
+                class="w-full bg-accent hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+                Verify
+            </button>
+
+            <p class="text-center text-sm text-gray-500">
+                Didn’t receive it?
+                <a href="#" class="text-accent hover:underline">Resend code</a>
+            </p>
+        </form>
+    </div>
+
+    <script>
+        document.querySelectorAll(".code-input").forEach((element, index, array) => {
+            element.addEventListener("input", () => {
+                if (element.value.length && index < array.length - 1) {
+                    array[index + 1].focus();
+                }
+            });
+            element.addEventListener("keydown", (e) => {
+                if (e.key === "Backspace" && !element.value && index > 0) {
+                    array[index - 1].focus();
+                }
+            });
+        });
+
+        function otpvalidate() {
+            const inputs = document.querySelectorAll(".code-input");
+            const error = document.getElementById("otpError");
+
+            let valid = true;
+
+            for (const box of inputs) {
+                if (!/^[0-9]$/.test(box.value)) {
+                    valid = false;
+                    break;
+                }
+            }
+
+            if (!valid) {
+                error.classList.remove("hidden");
+            }
+            return valid;
+        }
+    </script>
+</body>
+
+</html>

@@ -11,32 +11,39 @@ def quiz_intro(type,mode):
 
 @quiz.route('/start/<type>/<mode>')
 def quiz_start(type,mode):
-    session.clear()
+    keys_to_remove = [
+        'type', 'mode', 'score', 'quiz_start_time',
+        'asked_question', 'quiz_ended', 'no_of_question_to_asked', 'category'
+    ]
+    for key in keys_to_remove:
+        session.pop(key, None) 
+    
     session['type']=type
     session['mode']=mode
     session['score']=0
     session['quiz_start_time'] = datetime.utcnow().isoformat()
     session['asked_question']=[]
-  
-
+    
+    print(session['mode'])
+    
     number_of_questions=0
     category=''
     if type.lower()=='category':
        category = request.args.get('category-name') 
        session['category']=category
-  
        return render_template(f'quiz/{type}/{mode}.html', category=category)
        
        
-    if type.lower()=='classic':
+    if mode.lower()=='classic':
       number_of_questions = request.args.get('no-of-question', type=int) 
-      session['no_of_question']=number_of_questions
+      session['no_of_question_to_asked']=number_of_questions
       return render_template(f'quiz/{type}/{mode}.html',number_of_questions=number_of_questions)
     
-    if type.lower()=='category' and type.lower()=='classic':
+    if type.lower()=='category' and mode.lower()=='classic':
        session['category']=category
-       session['no_of_question']=number_of_questions
+       session['no_of_question_to_asked']=number_of_questions
        return render_template(f'quiz/{type}/{mode}.html', category=category, number_of_questions=number_of_questions)
+    
     return render_template(f'quiz/{type}/{mode}.html')
 
 
@@ -57,7 +64,12 @@ def quiz_result(type, mode):
    questions=session.get('asked_question')
    print(questions)
 
-   session.clear()
+   keys_to_remove = [
+        'type', 'mode', 'score', 'quiz_start_time',
+        'asked_question', 'quiz_ended', 'no_of_question_to_asked', 'category'
+    ]
+   for key in keys_to_remove:
+        session.pop(key, None) 
 
    return render_template('quiz/quizresult.html' , type=type,mode=mode,questions=questions)
    

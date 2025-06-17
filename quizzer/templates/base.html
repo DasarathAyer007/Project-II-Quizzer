@@ -2,95 +2,144 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{%block title%} {%endblock%}</title>
-  <link rel="stylesheet" href="{{url_for('static', filename='style/style.css')}}" />
-    
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{%block title%} {%endblock%}</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style/style.css')}}" />
 </head>
 
-<body class="box-border h-dvh  w-full">
-  <nav class=" shadow-xl bg-nav ">
-    <ul class="w-full p-0 h-12 list-none flex justify-end items-center">
-      <li class="sm:hidden">
-        <img id="open-sidenav" src="{{url_for('static' , filename='assets/menu_bar.svg')}}" alt="" />
-      </li>
-      <li class="mr-auto">
-        <a class="font-black text-gray-100 text-3xl ml-10 font-revalia" href="/home">Quizzer</a>
-      </li>
-      <li class="nav-button"><a href="/home">Home</a></li>
-      <li class="nav-button"><a href="">About us</a></li>
-      <li class="nav-button"><a href="">Feedback</a></li>
-      <li
-        class="text-center p-1 mr-1 bg-accent font-bold text-accent-t rounded-md  ">
-        <a href="auth/login">Login</a>
-      </li>
-    </ul>
+<body class="box-border h-dvh w-full">
+    <nav class="shadow-xl bg-nav">
+        <ul class="w-full p-0 h-12 list-none flex justify-end items-center">
+            <li class="sm:hidden">
+                <img id="open-sidenav" src="{{url_for('static' , filename='assets/menu_bar.svg')}}" alt />
+            </li>
+            <li class="mr-auto">
+                <a class="font-black text-gray-100 text-3xl ml-10 font-revalia" href="/home">
+                    Quizzer
+                </a>
+            </li>
+            <li class="nav-button"><a href="/home">Home</a></li>
+            <li class="nav-button"><a href>About us</a></li>
+            <li class="nav-button"><a href>Feedback</a></li>
+            <li class>
+                {% if current_user.is_authenticated %}
+                <div class="relative px-2">
+                    <button id="profile-pic" class="bg-secondary-b rounded-full size-10 cursor-pointer">
+                        <img src="{{current_user.profile_pic}}" alt="Pp" class="size-full" />
+                    </button>
 
-    <ul id="side-nav" class=" h-lvh min-w-4/5 hidden bg-nav fixed top-0 z-10 left-0 ">
-      <li class="flex gap-2.5">
-        <img id="close-sidenav" src="{{url_for('static', filename='assets/cross_close.svg')}}" alt="" />
-        
-        <a class="font-black text-gray-100 text-3xl  font-revalia" href="/home">Quizzer</a>
-      
-      </li>
-     
-          <li>
-          <button class="" >
-            <svg  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M120-40q-33 0-56.5-23.5T40-120v-720q0-33 23.5-56.5T120-920h720q33 0 56.5 23.5T920-840v720q0 33-23.5 56.5T840-40H120Zm440-120h240v-240h-80v102L594-424l-57 57 127 127H560v80Zm-344 0 504-504v104h80v-240H560v80h104L160-216l56 56Zm151-377 56-56-207-207-56 56 207 207Z"/></svg>
-            <span class="grow">Random</span>
-            <svg  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
-          </button>
+                    <div id="profile-dropdown" class="absolute hidden right-0 bg-nav text-nav-text">
+                        <ul>
+                            <li class="p-3 px-10"><a href>Profile</a></li>
+                            <li class="p-3 px-10"><a href>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
 
-          <ul class="hidden pl-4 " >
-            <li><a  href="{{url_for('quiz.quiz_intro', type='random', mode='classic')}}">Classic</a></li>
-            <li><a  href="{{url_for('quiz.quiz_intro', type='random', mode='timed')}}">Timed</a></li>
-            <li><a  href="{{url_for('quiz.quiz_intro', type='random', mode='survival')}}">Survival</a></li>
-          </ul>
-        </li>
-        
-        <li>
-          <button  > 
-            <svg  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg>  
-             <span class="grow">Category</span>
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
-          </button>
+                {%else%}
 
-          <ul class="hidden pl-4" >
-            <li><a  href="{{url_for('quiz.quiz_intro', type='category', mode='classic')}}">Classic</a></li>
-            <li><a  href="{{url_for('quiz.quiz_intro', type='category', mode='timed')}}">Timed</a></li>
-            <li><a  href="{{url_for('quiz.quiz_intro', type='category', mode='survival')}}">Survival</a></li>
-          </ul>
-        </li>
-      <li class="side-nav-btn"><a href="">About us</a></li>
-      <li class="side-nav-btn"><a href="">Feedback</a></li>
+                <div class="text-center p-1 mr-2 px-2 bg-accent font-bold text-accent-t rounded-md">
+                    <a href="{{(url_for('auth.login'))}}">Login</a>
+                </div>
 
-    </ul>
-  </nav>
+                {% endif %}
+            </li>
+        </ul>
 
- <div class="h-full w-full flex bg-base-b "> 
-   {%block sidebar%}
+        <ul id="side-nav" class="h-lvh min-w-4/5 hidden bg-nav fixed top-0 z-10 left-0">
+            <li class="flex gap-2.5">
+                <img id="close-sidenav" src="{{url_for('static', filename='assets/cross_close.svg')}}" alt />
 
-          {%include 'sidebar.html'%}
+                <a class="font-black text-gray-100 text-3xl font-revalia" href="/home">
+                    Quizzer
+                </a>
+            </li>
+
+            <li>
+                <button class>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        fill="#e3e3e3">
+                        <path
+                            d="M120-40q-33 0-56.5-23.5T40-120v-720q0-33 23.5-56.5T120-920h720q33 0 56.5 23.5T920-840v720q0 33-23.5 56.5T840-40H120Zm440-120h240v-240h-80v102L594-424l-57 57 127 127H560v80Zm-344 0 504-504v104h80v-240H560v80h104L160-216l56 56Zm151-377 56-56-207-207-56 56 207 207Z" />
+                    </svg>
+                    <span class="grow">Random</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        fill="#e3e3e3">
+                        <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
+                    </svg>
+                </button>
+
+                <ul class="hidden pl-4">
+                    <li>
+                        <a href="{{url_for('quiz.quiz_intro', type='random', mode='classic')}}">
+                            Classic
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('quiz.quiz_intro', type='random', mode='timed')}}">
+                            Timed
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('quiz.quiz_intro', type='random', mode='survival')}}">
+                            Survival
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        fill="#e3e3e3">
+                        <path
+                            d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z" />
+                    </svg>
+                    <span class="grow">Category</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        fill="#e3e3e3">
+                        <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
+                    </svg>
+                </button>
+
+                <ul class="hidden pl-4">
+                    <li>
+                        <a href="{{url_for('quiz.quiz_intro', type='category', mode='classic')}}">
+                            Classic
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('quiz.quiz_intro', type='category', mode='timed')}}">
+                            Timed
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('quiz.quiz_intro', type='category', mode='survival')}}">
+                            Survival
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="side-nav-btn"><a href>About us</a></li>
+            <li class="side-nav-btn"><a href>Feedback</a></li>
+        </ul>
+    </nav>
+
+    <div class="h-full w-full flex bg-base-b">
+        {%block sidebar%}
+        <!-- sidbar -->
+
+        {%include 'sidebar.html'%} {%endblock%} {%block content%}
+        <!-- Add Your content -->
+
         {%endblock%}
+    </div>
 
-  {%block content%}
+    <script src="{{url_for('static',filename='script/script.js')}}"></script>
+    {% block scripts %}
+    <!-- Child templates can insert their own scripts here -->
+    {% endblock %}
+</body>
 
-
-
-
-  {%endblock%}
-  </div>
-
-
-  
-
-
-<script src="{{url_for('static',filename='script/script.js')}}"></script>
-{% block scripts %}
-  <!-- Child templates can insert their own scripts here -->
-{% endblock %}
-
-  </body>
-  </html>
+</html>

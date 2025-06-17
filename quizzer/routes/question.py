@@ -1,6 +1,6 @@
 from flask import Blueprint,jsonify,session,request,render_template,url_for,redirect
-from services import store_question,check_answer 
-from services import question_for_quiz,check_answer_question 
+# from services import store_question,check_answer 
+from ..services import question_for_quiz,check_answer_question 
 from datetime import datetime, timedelta
 import html
 
@@ -19,7 +19,7 @@ def report_question():
 def api_question():
 
    if 'quiz_ended' in session:
-         if session.get('quiz ended'):
+         if session.get('quiz_ended'):
             return jsonify({"status": "quiz has ended", "redirect": url_for("quiz.quiz_stop")})
    
    elif not session.get('quiz_ended'):

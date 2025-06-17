@@ -7,12 +7,12 @@
   --color-nav: hsl(204, 18%, 17%);
    --color-nav-text:rgba(255,255,255,.8);
 
-  /* --color-base-b:#ecf9f8; */
-   --color-base-b:rgb(236, 249, 248);
-  --color-base-t:rgb(85, 85, 85);
+  
+  --color-base-b:rgb(236, 249, 248);
+  --color-base-t:rgb(55, 55, 55);
    
   --color-secondary-b:rgba(255, 255, 255);
-  --color-secondary-t:rgb(55, 55, 55);
+  --color-secondary-t:rgb(85, 85, 85);
 
 
   --color-accent:rgba(68,153,234,0.9);

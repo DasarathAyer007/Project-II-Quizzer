@@ -1,64 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}" />
 </head>
+
 <body class="bg-base-b flex items-center justify-center min-h-screen">
+    <form id="loginForm" method="POST" action="{{ url_for('auth.login') }}"
+        class="bg-secondary-b p-8 text-secondary-t rounded-2xl shadow-lg w-full max-w-sm space-y-6">
+        {{ form.hidden_tag() }}
 
-  <form method="POST" action="{{ url_for('auth.login') }}" class="bg-secondary-b p-8 to-secondary-t rounded-2xl shadow-lg w-full max-w-sm space-y-6">
-    <h2 class="text-2xl font-bold text-base-t text-center">Login</h2>
+        <h2 class="text-2xl font-bold text-base-t text-center">Login</h2>
 
-    <div>
-      <label for="email" class="block font-medium mb-1">Email</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="Enter your email"
-        required
-        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-      />
-    </div>
+        <div>
+            {{ form.username_email.label(class="block font-medium mb-1") }} {{
+            form.username_email(id="email", class="w-full px-4 py-2 border rounded-lg
+            focus:outline-none focus:ring-2 focus:ring-blue-400") }}
+            <p id="emailError" class="text-red-500 text-sm hidden">
+                Invalid email address or username.
+            </p>
+            {% for error in form. username_email.errors %}
+            <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+            {% endfor %}
+        </div>
 
-    <div>
-      <label for="password" class="block font-medium mb-1">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Enter your password"
-        required
-        minlength="6"
-        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-      />
-    </div>
+        <div>
+            {{ form.password.label(class="block font-medium mb-1") }} {{
+            form.password(id="password", class="w-full px-4 py-2 border rounded-lg
+            focus:outline-none focus:ring-2 focus:ring-blue-400") }}
+            <p id="passwordError" class="text-red-500 text-sm hidden">
+                Password must be at least 6 characters.
+            </p>
+            {% for error in form.password.errors %}
+            <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+            {% endfor %}
+        </div>
 
-    <div class="flex justify-between items-center text-sm">
-      <div class="flex items-center">
-        <input type="checkbox" id="remember" name="remember" class="mr-2">
-        <label for="remember" class="text-gray-300">Remember me</label>
-      </div>
-      <a href="#" class="text-accent hover:underline">Forgot password?</a>
-    </div>
+        <div class="flex justify-between items-center text-sm">
+            <div class="flex items-center">
+                {{ form.remember(class="mr-2") }} {{ form.remember.label }}
+            </div>
+            <a href="#" class="text-accent hover:underline">Forgot password?</a>
+        </div>
 
-    <button
-      type="submit"
-      class="w-full bg-accent hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
-    >
-      Sign In
-    </button>
+        <input type="submit" value="Login"
+            class="w-full bg-accent hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
+            onclick="return validate();" />
 
-    
+        <p class="text-center text-gray-600 text-sm">
+            Don’t have an account?
+            <a href="{{ url_for('auth.signup') }}" class="text-accent hover:underline">
+                Sign up for free
+            </a>
+        </p>
+    </form>
 
-    <p class="text-center text-gray-600 text-sm">
-      Don’t have an account?
-      <a href="{{ url_for('auth.signup') }}" class="text-accent hover:underline">Sign up for free</a>
-    </p>
-  </form>
+    <script>
+        function validate() {
+            const form = document.getElementById("loginForm");
+            const email = document.getElementById("email");
+            const password = document.getElementById("password");
+            const emailError = document.getElementById("emailError");
+            const passwordError = document.getElementById("passwordError");
 
-  <script src="{{ url_for('static', filename='script/login.js') }}"></script>
+            let isValid = true;
+            emailError.classList.add("hidden");
+            passwordError.classList.add("hidden");
+
+            if (!isValidUsernameOrEmail(email.value)) {
+                emailError.classList.remove("hidden");
+                isValid = false;
+            }
+
+            if (!password.value || password.value.length < 6) {
+                passwordError.classList.remove("hidden");
+                return false;
+            }
+
+            if (!isValid) {
+                return false;
+            }
+            return true;
+        }
+
+        function isValidUsernameOrEmail(value) {
+            const emailPattern = /^\S+@\S+\.\S+$/;
+            const usernamePattern = /^[a-zA-Z][a-zA-Z0-9_]{5,15}$/;
+            return emailPattern.test(value) || usernamePattern.test(value);
+        }
+    </script>
 </body>
+
 </html>

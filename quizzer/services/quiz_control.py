@@ -14,10 +14,7 @@ def question_for_quiz():
 
 
 
-
-
-def check_answer_question(question, answer):
-
+def check_answer_question(question, answer): 
     result=check_answer(question,answer)
     quiz_engine(result.get('is_correct'))
     result["current_score"]=session['score']
@@ -40,8 +37,14 @@ def random():
 
 
 def classic(result):
+    if 'no_of_question_to_asked' in session:
+        session['no_of_question_to_asked']-=1
+        print("here")
+        print(session['no_of_question_to_asked'])
+        if session['no_of_question_to_asked']<=0:
+            session['quiz_ended']=True 
+        
     if result:
-     
         session['score']+=10
 
     else:

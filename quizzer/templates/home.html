@@ -1,84 +1,92 @@
-{%extends 'base.html'%}
+{%extends 'base.html'%} {%block title%}home{%endblock%} {%block content%}
 
-{%block title%}home{%endblock%}
-
-
-
-
-  {%block content%}
-
-
-
-  <main class="w-full flex flex-col items-center  mt-5 ">
+<main class="w-full flex flex-col items-center mt-5">
     <h1 class="font-bold text-2xl">Select a Quiz Mode</h1>
 
-    <div class=" w-full mt-11">
-      <ul class="flex  justify-center gap-5 flex-col sm:flex-row">
-    
-        <li>
+    <div class="w-full mt-11">
+        <ul class="flex justify-center gap-5 flex-col sm:flex-row">
+            <li>
+                <div class="flex select-dropdown bg-secondary-b min-w-52 p-3 rounded-sm cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        fill="#e3e3e3">
+                        <path
+                            d="M120-40q-33 0-56.5-23.5T40-120v-720q0-33 23.5-56.5T120-920h720q33 0 56.5 23.5T920-840v720q0 33-23.5 56.5T840-40H120Zm440-120h240v-240h-80v102L594-424l-57 57 127 127H560v80Zm-344 0 504-504v104h80v-240H560v80h104L160-216l56 56Zm151-377 56-56-207-207-56 56 207 207Z" />
+                    </svg>
+                    <span class="grow">Random Battle</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        fill="#e3e3e3">
+                        <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
+                    </svg>
+                </div>
 
-            <div class="flex select-dropdown bg-secondary-b min-w-52 p-3 rounded-sm cursor-pointer"  >
-            <svg  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M120-40q-33 0-56.5-23.5T40-120v-720q0-33 23.5-56.5T120-920h720q33 0 56.5 23.5T920-840v720q0 33-23.5 56.5T840-40H120Zm440-120h240v-240h-80v102L594-424l-57 57 127 127H560v80Zm-344 0 504-504v104h80v-240H560v80h104L160-216l56 56Zm151-377 56-56-207-207-56 56 207 207Z"/></svg>
-            <span class="grow">Random Battle</span>
-            <svg  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
-            </div>
+                <ul class="hidden pl-4">
+                    <li>
+                        <a class="sidebar-btn" href="{{url_for('quiz.quiz_intro', type='random', mode='classic')}}">
+                            Classic
+                        </a>
+                    </li>
+                    <li>
+                        <a class="sidebar-btn" href="{{url_for('quiz.quiz_intro', type='random', mode='timed')}}">
+                            Timed
+                        </a>
+                    </li>
+                    <li>
+                        <a class="sidebar-btn" href="{{url_for('quiz.quiz_intro', type='random', mode='survival')}}">
+                            Survival
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
-          <ul class="hidden pl-4 " >
-            <li><a class=" sidebar-btn " href="{{url_for('quiz.quiz_intro', type='random', mode='classic')}}">Classic</a></li>
-            <li><a class=" sidebar-btn " href="{{url_for('quiz.quiz_intro', type='random', mode='timed')}}">Timed</a></li>
-            <li><a class=" sidebar-btn "  href="{{url_for('quiz.quiz_intro', type='random', mode='survival')}}">Survival</a></li>
-          </ul>
-        </li>
+            <li>
+                <div class="flex select-dropdown bg-secondary-b min-w-52 p-3 rounded-sm cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        fill="#e3e3e3">
+                        <path
+                            d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z" />
+                    </svg>
+                    <span class="grow">Category Battle</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        fill="#e3e3e3">
+                        <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
+                    </svg>
+                </div>
 
-
-        <li>
-          <div class="flex select-dropdown bg-secondary-b min-w-52 p-3 rounded-sm cursor-pointer" > 
-            <svg  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg>  
-             <span class="grow">Category Battle</span>
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
-          </div>
-
-          <ul class="hidden pl-4" >
-            <li><a class=" sidebar-btn " href="{{url_for('quiz.quiz_intro', type='category', mode='classic')}}">Classic</a></li>
-            <li><a class=" sidebar-btn " href="{{url_for('quiz.quiz_intro', type='category', mode='timed')}}">Timed</a></li>
-            <li><a class=" sidebar-btn " href="{{url_for('quiz.quiz_intro', type='category', mode='survival')}}">Survival</a></li>
-          </ul>
-        </li>
-
-    </ul>
+                <ul class="hidden pl-4">
+                    <li>
+                        <a class="sidebar-btn" href="{{url_for('quiz.quiz_intro', type='category', mode='classic')}}">
+                            Classic
+                        </a>
+                    </li>
+                    <li>
+                        <a class="sidebar-btn" href="{{url_for('quiz.quiz_intro', type='category', mode='timed')}}">
+                            Timed
+                        </a>
+                    </li>
+                    <li>
+                        <a class="sidebar-btn" href="{{url_for('quiz.quiz_intro', type='category', mode='survival')}}">
+                            Survival
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
-       
-        
-        
-  </main>
+</main>
 <script>
-const selectDropdown=document.querySelectorAll('.select-dropdown')
+    const selectDropdown = document.querySelectorAll(".select-dropdown");
 
-selectDropdown.forEach((element) => {
-    element.addEventListener("click", () => {
-      element.nextElementSibling.classList.toggle("hidden")
-  });
-})
-
-
+    selectDropdown.forEach((element) => {
+        element.addEventListener("click", () => {
+            element.nextElementSibling.classList.toggle("hidden");
+        });
+    });
 </script>
 
-  {%endblock%}
+{%endblock%}
 
-
-
-
-
-
-
-
-
-
-  
- 
-   <!-- <script src="{{url_for('static',filename='script/home.js')}}"></script> -->
+<!-- <script src="{{url_for('static',filename='script/home.js')}}"></script> -->
 
 {% block scripts %}
-  <!-- Child templates can insert their own scripts here -->
+<!-- Child templates can insert their own scripts here -->
 {% endblock %}
-
