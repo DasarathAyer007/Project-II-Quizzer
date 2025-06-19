@@ -1,86 +1,90 @@
 {%extends 'base.html'%} {%block title%}home{%endblock%} {%block content%}
+<main class="w-full flex flex-col items-center mt-10 px-4">
+  <div class="w-full max-w-3xl text-center">
 
-<main class="w-full flex flex-col items-center mt-5">
-    <h1 class="font-bold text-2xl">Select a Quiz Mode</h1>
+    <h1 class="font-extrabold text-4xl sm:text-5xl text-gray-800 mb-4">Welcome to QuiZZer!</h1>
+    <p class="text-lg text-gray-600">Sharpen your skills. Choose a mode. Start your quiz journey!</p>
+  </div>
 
-    <div class="w-full mt-11">
-        <ul class="flex justify-center gap-5 flex-col sm:flex-row">
-            <li>
-                <div class="flex select-dropdown bg-secondary-b min-w-52 p-3 rounded-sm cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                        fill="#e3e3e3">
-                        <path
-                            d="M120-40q-33 0-56.5-23.5T40-120v-720q0-33 23.5-56.5T120-920h720q33 0 56.5 23.5T920-840v720q0 33-23.5 56.5T840-40H120Zm440-120h240v-240h-80v102L594-424l-57 57 127 127H560v80Zm-344 0 504-504v104h80v-240H560v80h104L160-216l56 56Zm151-377 56-56-207-207-56 56 207 207Z" />
-                    </svg>
-                    <span class="grow">Random Battle</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                        fill="#e3e3e3">
-                        <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
-                    </svg>
-                </div>
+  
+  <div class="w-full max-w-2xl mt-12">
+    <ul class="flex flex-col gap-6 sm:flex-row sm:justify-center">
+      
+     
+      <li class="group relative">
+        <div onclick="toggleDropdown(this)"
+          class="flex items-center justify-between gap-3 bg-accent text-white px-5 py-4 rounded-xl cursor-pointer shadow-md hover:bg-accent-h transition-all">
+          <div class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#e3e3e3">
+              <path d="M120-40q-33 0-56.5-23.5T40-120v-720q0-33 23.5-56.5T120-920h720q33 0 56.5 23.5T920-840v720q0 33-23.5 56.5T840-40H120Zm440-120h240v-240h-80v102L594-424l-57 57 127 127H560v80Zm-344 0 504-504v104h80v-240H560v80h104L160-216l56 56Zm151-377 56-56-207-207-56 56 207 207Z" />
+            </svg>
+            <span class="text-lg font-semibold">Random Battle</span>
+          </div>
+          <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" height="24"
+            viewBox="0 -960 960 960" width="24" fill="#e3e3e3">
+            <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
+          </svg>
+        </div>
 
-                <ul class="hidden pl-4">
-                    <li>
-                        <a class="sidebar-btn" href="{{url_for('quiz.quiz_intro', type='random', mode='classic')}}">
-                            Classic
-                        </a>
-                    </li>
-                    <li>
-                        <a class="sidebar-btn" href="{{url_for('quiz.quiz_intro', type='random', mode='timed')}}">
-                            Timed
-                        </a>
-                    </li>
-                    <li>
-                        <a class="sidebar-btn" href="{{url_for('quiz.quiz_intro', type='random', mode='survival')}}">
-                            Survival
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li>
-                <div class="flex select-dropdown bg-secondary-b min-w-52 p-3 rounded-sm cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                        fill="#e3e3e3">
-                        <path
-                            d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z" />
-                    </svg>
-                    <span class="grow">Category Battle</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                        fill="#e3e3e3">
-                        <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
-                    </svg>
-                </div>
-
-                <ul class="hidden pl-4">
-                    <li>
-                        <a class="sidebar-btn" href="{{url_for('quiz.quiz_intro', type='category', mode='classic')}}">
-                            Classic
-                        </a>
-                    </li>
-                    <li>
-                        <a class="sidebar-btn" href="{{url_for('quiz.quiz_intro', type='category', mode='timed')}}">
-                            Timed
-                        </a>
-                    </li>
-                    <li>
-                        <a class="sidebar-btn" href="{{url_for('quiz.quiz_intro', type='category', mode='survival')}}">
-                            Survival
-                        </a>
-                    </li>
-                </ul>
-            </li>
+        
+        <ul class="dropdown hidden mt-2 bg-white shadow rounded-md overflow-hidden text-gray-800">
+          <li>
+            <a class="block px-5 py-3 hover:bg-gray-100" href="{{url_for('quiz.quiz_intro', type='random', mode='classic')}}">Classic</a>
+          </li>
+          <li>
+            <a class="block px-5 py-3 hover:bg-gray-100" href="{{url_for('quiz.quiz_intro', type='random', mode='timed')}}">Timed</a>
+          </li>
+          <li>
+            <a class="block px-5 py-3 hover:bg-gray-100" href="{{url_for('quiz.quiz_intro', type='random', mode='survival')}}">Survival</a>
+          </li>
         </ul>
-    </div>
-</main>
-<script>
-    const selectDropdown = document.querySelectorAll(".select-dropdown");
+      </li>
 
-    selectDropdown.forEach((element) => {
-        element.addEventListener("click", () => {
-            element.nextElementSibling.classList.toggle("hidden");
-        });
-    });
+      <li class="group relative">
+        <div onclick="toggleDropdown(this)"
+          class="flex items-center justify-between gap-3 bg-green-600 text-white px-5 py-4 rounded-xl cursor-pointer shadow-md hover:bg-green-700 transition-all">
+          <div class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#e3e3e3">
+              <path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z" />
+            </svg>
+            <span class="text-lg font-semibold">Category Battle</span>
+          </div>
+          <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" height="24"
+            viewBox="0 -960 960 960" width="24" fill="#e3e3e3">
+            <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
+          </svg>
+        </div>
+
+     
+        <ul class="dropdown hidden mt-2 bg-white shadow rounded-md overflow-hidden text-gray-800">
+          <li>
+            <a class="block px-5 py-3 hover:bg-gray-100" href="{{url_for('quiz.quiz_intro', type='category', mode='classic')}}">Classic</a>
+          </li>
+          <li>
+            <a class="block px-5 py-3 hover:bg-gray-100" href="{{url_for('quiz.quiz_intro', type='category', mode='timed')}}">Timed</a>
+          </li>
+          <li>
+            <a class="block px-5 py-3 hover:bg-gray-100" href="{{url_for('quiz.quiz_intro', type='category', mode='survival')}}">Survival</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+
+  <footer class="mt-16 text-sm text-gray-500 text-center">
+    &copy; {{year}} Quizzer
+  </footer>
+</main>
+
+<script>
+  function toggleDropdown(element) {
+    const dropdown = element.nextElementSibling;
+    const arrow = element.querySelector(".dropdown-arrow");
+
+    dropdown.classList.toggle("hidden");
+    arrow.classList.toggle("rotate-180");
+  }
 </script>
 
 {%endblock%}

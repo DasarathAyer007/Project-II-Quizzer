@@ -1,11 +1,96 @@
-{%extends 'base.html'%} {%block title%}Profile{%endblock%} 
+{%extends 'base.html'%} {%block title%}Profile{%endblock%}
 
-{%block sidebar%} 
+{%block sidebar%}
 <!-- sidbar -->
 
 
 {%endblock%}
 {%block content%}
+
+<main class="bg-secondary-b h-fit m-7 w-full p-6 rounded-lg">
+
+    <div class="text-lg font-bold mb-6 border-b border-gray-400 pb-2 ">
+        <span>{{ current_user.username }}'s Profile</span>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-8 justify-between">
+
+        <div class=" rounded-md p-6 shadow-md flex flex-col items-center">
+            <div class="size-44">
+                 <img src="{{ current_user.profile_pic }}" alt="profile pic"
+                class="w-40 h-40 rounded-full object-cover mb-4 border-4 border-gray-300" />
+
+            </div>
+           
+
+            <p class="text-sm text-gray-600">
+                User ID: <span class="font-mono">#{{ "%08d" | format(current_user.id) }}</span>
+            </p>
+        </div>
+
+
+        <div class="rounded-xl p-6 w-full  shadow-md text-NPtex">
+
+            <span>Statistics</span>
+            <hr>
+
+            <div>Random</div>
+            <div class="flex justify-center mb-7">
+
+                <div class="grow">
+                    Classic
+                    <div>No of Play:</div>
+                    <div>High Score:</div>
+
+                </div>
+                <div class="grow">
+                    Timed
+                    <div>No of Play:</div>
+                    <div>High Score:</div>
+
+                </div>
+                <div class="grow">
+                    Survival
+                    <div>No of Play:</div>
+                    <div>High Score:</div>
+
+                </div>
+
+            </div>
+
+            <div>Catogery</div>
+            <div class="flex justify-center">
+
+                <div class="grow">
+                    Classic
+                    <div>No of Play:</div>
+                    <div>High Score:</div>
+
+                </div>
+                <div class="grow">
+                    Timed
+                    <div>No of Play:</div>
+                    <div>High Score:</div>
+
+                </div>
+                <div class="grow">
+                    Survival
+                    <div>No of Play:</div>
+                    <div>High Score:</div>
+
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+</main>
+
 
 
 {%endblock%}

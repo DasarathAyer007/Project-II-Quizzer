@@ -22,7 +22,7 @@ class LoginFormValidate(FlaskForm):
             Length(min=6, message="Password must be at least 6 characters."),
         ],
     )
-    remember = BooleanField("Remember me")
+    stay_login = BooleanField("Stayed Login")
 
     def validate_username_email(self, field):
         username_pattern = r"^[a-zA-Z][a-zA-Z0-9_]{4,14}$"

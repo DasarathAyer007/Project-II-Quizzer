@@ -29,9 +29,17 @@ closeSidenav.addEventListener('click',()=>{
 
 
 //profile Dropdown
-const profilePic=document.querySelector('#profile-pic')
-const profileDropdown=document.querySelector('#profile-dropdown')
+const profilePic = document.querySelector('#profile-pic');
+const profileDropdown = document.querySelector('#profile-dropdown');
 
-profilePic.addEventListener('click',()=>{
-  profileDropdown.classList.toggle('hidden')
-})
+profilePic.addEventListener('click', (event) => {
+  profileDropdown.classList.toggle('hidden');
+  event.stopPropagation();
+});
+
+document.addEventListener('click', (event) => {
+  if (!profileDropdown.contains(event.target) && event.target !== profilePic) {
+    profileDropdown.classList.add('hidden');
+  }
+});
+

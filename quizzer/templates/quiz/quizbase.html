@@ -1,11 +1,13 @@
 {%extends 'base.html'%}
-{%block title%}{%endblock%} 
+{%block title%}{{mode}}:{{type}}{%endblock%} 
 {%block content%}
 <main id="quiz-feild" class="flex flex-col w-full mt-2 p-1 items-center">
   
         <div class="self-start p-1.5 border-l-2 text-xl font-bold">
-            <span class=""> {%block quiz_type_feild%}{%endblock%} : </span>
-            <span>{%block quiz_mode_feild%}{%endblock%}</span>
+            <!-- <span class=""> {%block quiz_type_feild%}{%endblock%} : </span>
+            <span id="quiz-mode">{%block quiz_mode_feild%}{%endblock%}</span> -->
+            <span class=""> {{type}} : </span>
+            <span id="quiz-mode">{{mode}}</span>
         </div>
 
         <div class="flex items-center  mr-4 gap-4 self-end">
@@ -16,13 +18,21 @@
 
             <div  class=" p-2.5 text-3xl  rounded-md shadow">
 
-                <div id="countdown">15</div>
+                <div id="countdown">{{count_down}}</div>
             
             </div>
         </div>   
 
     <div class="flex flex-col w-full sm:px-16 font-bold">
-        <div class="h-10 mb-1">{%block quiz_feild_catogery%}{%endblock%}</div>
+        <!-- <div class="h-10 mb-1">{%block quiz_feild_catogery%}{%endblock%}</div> -->
+                 <div class="h-10 mb-1">
+                    {%if type|lower =='category'%}
+                        <div class="w-24 p-2 border border-black  rounded shadow">
+                                        {{category}}
+                        </div>
+                    {%endif%}
+
+                 </div>
 
         <div class="w-full flex items-center bg-secondary-b rounded  shadow min-h-20 text-lg border border-black/25">
             <div class=" px-2 ">

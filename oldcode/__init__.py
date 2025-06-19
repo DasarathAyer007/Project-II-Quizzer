@@ -33,3 +33,29 @@ def create_app():
     app.register_blueprint(question,url_prefix='/question')
     
     return app
+
+
+
+
+
+
+
+
+#   category=''
+#     if type.lower()=='category':
+#        category = request.args.get('category-name') 
+#        session['category']=category
+#        return render_template(f'quiz/{type}/{mode}.html', category=category,count_down=time)
+       
+       
+#     if mode.lower()=='classic':
+#       number_of_questions = request.args.get('no-of-question', type=int) 
+#       session['no_of_question_to_asked']=number_of_questions
+#       return render_template(f'quiz/{type}/{mode}.html',number_of_questions=number_of_questions,count_down=time)
+    
+#     if type.lower()=='category' and mode.lower()=='classic':
+#        session['category']=category
+#        session['no_of_question_to_asked']=number_of_questions
+#        return render_template(f'quiz/{type}/{mode}.html', category=category, number_of_questions=number_of_questions,count_down=time)
+    
+#     return render_template(f'quiz/{type}/{mode}.html',count_down=time)

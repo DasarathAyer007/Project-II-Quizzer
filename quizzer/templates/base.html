@@ -15,31 +15,46 @@
                 <img id="open-sidenav" src="{{url_for('static' , filename='assets/menu_bar.svg')}}" alt />
             </li>
             <li class="mr-auto">
-                <a class="font-black text-gray-100 text-3xl ml-10 font-revalia" href="/home">
+                <a class="font-black text-gray-100 text-3xl ml-10 font-revalia" href="{{url_for('view.index')}}" >
                     Quizzer
                 </a>
             </li>
             <li class="nav-button"><a href="/home">Home</a></li>
             <li class="nav-button"><a href>About us</a></li>
             <li class="nav-button"><a href>Feedback</a></li>
-            <li class>
+            <li class="">
                 {% if current_user.is_authenticated %}
                 <div class="relative px-2">
-                    <button id="profile-pic" class="bg-secondary-b rounded-full size-10 cursor-pointer">
-                        <img src="{{current_user.profile_pic}}" alt="Pp" class="size-full" />
+                    <!-- Profile button -->
+                    <button id="profile-pic" class="bg-base-b rounded-full size-10 hover:bg-gray-300 cursor-pointer">
+                        <img src="{{ current_user.profile_pic }}" alt="Profile Picture"
+                            class="size-full object-cover rounded-full" />
                     </button>
 
-                    <div id="profile-dropdown" class="absolute hidden right-0 bg-nav text-nav-text">
-                        <ul>
-                            <li class="p-3 px-10"><a href>Profile</a></li>
-                            <li class="p-3 px-10"><a href>Logout</a></li>
+                    <!-- Profile dropdown -->
+                    <div id="profile-dropdown"
+                        class="absolute right-0 hidden mt-0.5 border border-gray-200 w-56 bg-secondary-b rounded-md shadow-lg z-50">
+                        <ul class="divide-y divide-gray-200">
+                            <li class="p-4 hover:bg-gray-100 transition">
+                                <a href="{{url_for('view.profile')}}" class="flex items-center gap-3">
+                                    <img src="{{ current_user.profile_pic }}" alt="Profile Picture"
+                                        class="size-12 rounded-full  border border-gray-300" />
+                                    <div>
+                                        <p class="text-base-t font-medium">View Profile</p>
+                                        <p class="text-sm text-secondary-t">{{ current_user.username }}</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="p-4 flex  gap-3 text-center hover:bg-red-100 transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M202.87-111.87q-37.78 0-64.39-26.61t-26.61-64.39v-554.26q0-37.78 26.61-64.39t64.39-26.61h279.04v91H202.87v554.26h279.04v91H202.87Zm434.02-156.65L574-333.93 674.56-434.5H358.09v-91h316.47L574-626.07l62.89-65.41L848.13-480 636.89-268.52Z"/></svg>
+                                <a href="{{ url_for('auth.logout') }}" class="text-error font-semibold">Logout</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
-
                 {%else%}
 
-                <div class="text-center p-1 mr-2 px-2 bg-accent font-bold text-accent-t rounded-md">
+                <div class="text-center p-1 mr-2 px-2 bg-accent hover:bg-accent-h font-bold text-accent-t rounded-md">
                     <a href="{{(url_for('auth.login'))}}">Login</a>
                 </div>
 

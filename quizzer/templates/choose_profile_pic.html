@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Select Avatar</title>
+ 
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}" />
+</head>
+
+<body class="bg-gray-50">
+
+  <div class="max-w-6xl mx-auto px-4 mt-10">
+    <h2 class="text-2xl font-bold text-center mb-6">Choose Your Avatar</h2>
+
+    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 text-center">
+      <!-- Initial Avatar -->
+      <div onclick="openModal('https://api.dicebear.com/7.x/initials/svg?seed={{ username }}')" 
+           class="border rounded-lg p-2 hover:ring-2 hover:ring-blue-500 transition cursor-pointer">
+        <img src="https://api.dicebear.com/7.x/initials/svg?seed={{ username }}"
+             alt="Initials Avatar" class="w-full aspect-square object-cover rounded">
+      </div>
+
+      <!-- Adventurer Avatars -->
+      {% for seed in seeds %}
+      <div onclick="openModal('https://api.dicebear.com/7.x/adventurer/svg?seed={{ seed }}')"
+           class="border rounded-lg p-2 hover:ring-2 hover:ring-blue-500 transition cursor-pointer">
+        <img src="https://api.dicebear.com/7.x/adventurer/svg?seed={{ seed }}"
+             alt="{{ seed }}" class="w-full aspect-square object-cover rounded">
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="avatar-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center hidden z-50">
+    <div class="bg-white rounded-xl p-6 text-center shadow-xl max-w-sm w-full">
+      <h3 class="text-xl font-semibold mb-4">Confirm Your Avatar</h3>
+      <img id="avatar-preview" src="" alt="Avatar Preview" class="w-32 h-32 mx-auto rounded-full border mb-4">
+    
+      <form action="" method="POST">
+        <input type="hidden" name="avatar_url" id="selected-avatar-input" />
+        <div class="flex justify-center gap-4">
+          <button type="submit"
+                  class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+            OK
+          </button>
+          <button type="button"
+                  onclick="closeModal()"
+                  class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition">
+            Change
+          </button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+   <script defer>
+    function openModal(imgSrc) {
+      const modal = document.getElementById("avatar-modal");
+      const preview = document.getElementById("avatar-preview");
+      const input = document.getElementById("selected-avatar-input");
+
+      preview.src = imgSrc;
+      input.value = imgSrc;
+      modal.classList.remove("hidden");
+    }
+
+    function closeModal() {
+      document.getElementById("avatar-modal").classList.add("hidden");
+    }
+  </script>
+
+</body>
+</html>

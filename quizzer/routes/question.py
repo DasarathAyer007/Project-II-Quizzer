@@ -1,14 +1,15 @@
 from flask import Blueprint,jsonify,session,request,render_template,url_for,redirect
 # from services import store_question,check_answer 
 from ..services import question_for_quiz,check_answer_question 
-from datetime import datetime, timedelta
+from quizzer.extensions import CATEGORIES
+
 import html
 
 question=Blueprint('question',__name__,static_folder="static",template_folder="templates")
 
 @question.route('add_question')
 def add_question():
-   return render_template("add_question.html")
+   return render_template("add_question.html",categories=CATEGORIES)
 
 @question.route('report_question')
 def report_question():
@@ -26,12 +27,13 @@ def api_question():
       question=question_for_quiz()
       
       session["current_question"]=question
+      # print('current_questio')
+      # print(session["current_question"])
 
       if question is not None: 
          question["question_text"]=html.unescape(question["question_text"])
 
-      session['quiestion_asked_time']=datetime.utcnow().isoformat()   
-      
+       
       return jsonify(question)
    else:
        return jsonify({"error":"start the quiz"})
@@ -48,9 +50,8 @@ def api_check_question():
    print(f"response{response}")
    session['asked_question'].append(response)
    session.modified = True
-
-   print(f"Currently in Asked Session {session['asked_question']}")
-   print(len(session['asked_question']))
+   print('current_questio check answer')
+   print(session["current_question"])
 
       
    return jsonify(response)

@@ -10,6 +10,8 @@ def question_for_quiz():
     if 'category' in session:
       # number_of_questions = int(request.args.get('no-of-question', 5))
         category=session.get('category',None)
+        
+    session['quiestion_asked_time']=datetime.utcnow().isoformat()  
     return store_question(category) 
 
 
@@ -21,11 +23,11 @@ def check_answer_question(question, answer):
     return result
 
 def quiz_engine(check):
-    if session['mode']=="classic":
+    if session['mode']=="Classic":
         classic(check)
-    elif session['mode']=='timed':
+    elif session['mode']=='Timed':
         timed(check)
-    elif session['mode']=='survival':
+    elif session['mode']=='Survival':
         surival(check)
 
 def catogery():
@@ -39,17 +41,24 @@ def random():
 def classic(result):
     if 'no_of_question_to_asked' in session:
         session['no_of_question_to_asked']-=1
-        print("here")
         print(session['no_of_question_to_asked'])
         if session['no_of_question_to_asked']<=0:
             session['quiz_ended']=True 
-        
-    if result:
-        session['score']+=10
+            
+    asked_time = datetime.fromisoformat(session['quiestion_asked_time'])  
+    if datetime.utcnow() - asked_time < timedelta(seconds=10):
+              
+        if result:
+            session['score']+=10
 
+        else:
+            score=int(session['score'])
+            session['score']=max(0, score-5)
     else:
         score=int(session['score'])
         session['score']=max(0, score-5)
+        print('in check time')
+
 
 
 def timed(result):

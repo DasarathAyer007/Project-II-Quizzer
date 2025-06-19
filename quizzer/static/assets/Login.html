@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://127.0.0.1:5000/auth/login -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./Login_files/style.css">
+</head>
+
+<body>
+
+    <main class="bg-base-b flex items-center justify-center min-h-screen">
+
+        <a class="absolute top-0 left-0 font-black text-base-t text-3xl ml-10 font-revalia" href="http://127.0.0.1:5000/home">
+            Quizzer
+        </a>
+
+        <form id="loginForm" method="POST" action="http://127.0.0.1:5000/auth/login" class="bg-secondary-b p-8 text-secondary-t rounded-2xl shadow-lg w-full max-w-sm space-y-6">
+            <input id="csrf_token" name="csrf_token" type="hidden" value="ImQyMzVlZWJiYzgxODhlYmVkMGZjNWE2NmZiODYyNjM3YmNhYWFiZWYi.aFPM9A.dUlSsPZrEZRaFsjEtCDbQm8FlzU">
+
+            <h2 class="text-2xl font-bold text-base-t  text-center">Login</h2>
+            
+            
+            
+            <div>
+                <label class="block font-medium mb-1" for="username_email">UserName or Email</label> <input class="w-full px-4 py-2 border rounded-lg
+                focus:outline-none focus:ring-2 focus:ring-blue-400" id="email" name="username_email" required="" type="text" value="">
+                <p id="emailError" class="text-red-500 text-sm hidden">
+                    Invalid email address or username.
+                </p>
+                
+            </div>
+
+            <div>
+                <label class="block font-medium mb-1" for="password">Password</label> <input class="w-full px-4 py-2 border rounded-lg
+                focus:outline-none focus:ring-2 focus:ring-blue-400" id="password" minlength="6" name="password" required="" type="password" value="">
+                <p id="passwordError" class="text-red-500 text-sm hidden">
+                    Password must be at least 6 characters.
+                </p>
+                
+            </div>
+
+            <div class="flex justify-between items-center text-sm">
+                <div class="flex items-center">
+                    <input class="mr-2" id="stay_login" name="stay_login" type="checkbox" value="y"> <label for="stay_login">Stayed Login</label>
+                </div>
+                <a href="http://127.0.0.1:5000/auth/login#" class="text-accent hover:underline">Forgot password?</a>
+            </div>
+
+            <input type="submit" value="Login" class="w-full bg-accent hover:bg-accent-h text-white font-semibold py-2 px-4 rounded-lg transition duration-300" onclick="return validate();">
+
+            <p class="text-center text-gray-600 text-sm">
+                Don’t have an account?
+                <a href="http://127.0.0.1:5000/auth/signup" class="text-accent hover:underline">
+                    Sign up for free
+                </a>
+            </p>
+        </form>
+
+
+    </main>
+
+
+    <script>
+        function validate() {
+            const form = document.getElementById("loginForm");
+            const email = document.getElementById("email");
+            const password = document.getElementById("password");
+            const emailError = document.getElementById("emailError");
+            const passwordError = document.getElementById("passwordError");
+
+            let isValid = true;
+            emailError.classList.add("hidden");
+            passwordError.classList.add("hidden");
+
+            if (!isValidUsernameOrEmail(email.value)) {
+                emailError.classList.remove("hidden");
+                isValid = false;
+            }
+
+            if (!password.value || password.value.length < 6) {
+                passwordError.classList.remove("hidden");
+                return false;
+            }
+
+            if (!isValid) {
+                return false;
+            }
+            return true;
+        }
+
+        function isValidUsernameOrEmail(value) {
+            const emailPattern = /^\S+@\S+\.\S+$/;
+            const usernamePattern = /^[a-zA-Z][a-zA-Z0-9_]{5,15}$/;
+            return emailPattern.test(value) || usernamePattern.test(value);
+        }
+    </script>
+
+
+</body></html>

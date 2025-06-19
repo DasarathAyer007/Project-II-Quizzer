@@ -4,6 +4,8 @@ const option2 = document.getElementById("option-2");
 const option3 = document.getElementById("option-3");
 const option4 = document.getElementById("option-4");
 const score = document.getElementById("score");
+const quizMode=document.getElementById("quiz-mode")
+let interval
 
 
 async function getQuestion() {
@@ -21,13 +23,16 @@ async function getQuestion() {
     option4.innerText = question.options[3];
 
     console.log(question);
-   
 
-    quizCountDown();
 
+    if(quizMode.innerText.toLowerCase()!='timed'){
+        quizCountDown();
+    }
+  
 }
 
 getQuestion();
+
 
 document.addEventListener("DOMContentLoaded", () => {
     [option1, option2, option3, option4].forEach((element) => {
@@ -40,7 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
 async function submitAnswer(option) {
 
     const url = "/question/check_answer";
-    choosenAnswer = option.innerText;
+    if (option ==null){
+        choosenAnswer=null
+    }else{
+     choosenAnswer = option.innerText;
+    }
+
     response = await fetch(url, {
         method: "POST",
         headers: {
@@ -56,21 +66,23 @@ async function submitAnswer(option) {
     done = await setRightWrong(answerinfo, option);
     console.log(answerinfo);
 
-
     getQuestion();
 }
 
 function setRightWrong(answerinfo, option) {
     let correct
     return new Promise((resolve, reject) => {
-        originBackgrounnd = option.style.backgroundColor;
+        originBackgrounnd = option1.style.backgroundColor;
         if (answerinfo.is_correct) {
             // option.style.backgroundColor = "green";
             option.classList.add('opt-btn-correct')
             score.innerText = String(answerinfo.current_score).padStart(4, '0');
         } else {
             // option.style.backgroundColor = "red";
-            option.classList.add('opt-btn-wrong')
+            if(option !=null){
+                option.classList.add('opt-btn-wrong')
+            }
+            
             score.innerText = String(answerinfo.current_score).padStart(4, '0');
             [option1, option2, option3, option4].forEach((element) => {
                 if (element.innerText === answerinfo.correct_option) {
@@ -80,8 +92,12 @@ function setRightWrong(answerinfo, option) {
             });
         }
         setTimeout(() => {
-            option.classList.remove('opt-btn-correct')
-            option.classList.remove('opt-btn-wrong')
+              if(option !=null){
+                
+                option.classList.remove('opt-btn-correct')
+                option.classList.remove('opt-btn-wrong')
+            }
+           
             if (correct != undefined) {
                 correct.classList.remove('opt-btn-correct')
             }
@@ -92,13 +108,11 @@ function setRightWrong(answerinfo, option) {
 
 }
 
-
 const countDown = document.getElementById('countdown')
 const quizTimerValue = countDown.innerText
 console.log(quizTimerValue)
 
-
-let interval
+ quizCountDown();
 
 function quizCountDown() {
 
@@ -109,8 +123,19 @@ function quizCountDown() {
     interval = setInterval(() => {
         if (timer <= 1) {
             clearInterval(interval)
+             if(quizMode.innerText.toLowerCase()=='timed'){
+        
+//   const quizStopUrl = "{{ url_for('quiz.quiz_stop') | tojson }}";
+  // or, shorter (safe when URL has no quotes):
+  // const quizStopUrl = "{{ url_for('quiz.quiz_stop') }}";
+
+  window.location.href = '/quiz/stop';
+
+
+        }
             countDown.innerText = 15
-            getQuestion()
+            submitAnswer(null)
+
         }
 
         timer -= 1
@@ -118,24 +143,4 @@ function quizCountDown() {
     }, 1000)
 
 }
-
-function quizCountDownForTimed() {
-
-    clearInterval(interval)
-
-    let timer = quizTimerValue
-
-    interval = setInterval(() => {
-        if (timer <= 1) {
-            clearInterval(interval)
-            countDown.innerText = 15
-            getQuestion()
-        }
-
-        timer -= 1
-        countDown.innerText = timer
-    }, 1000)
-
-}
-
 

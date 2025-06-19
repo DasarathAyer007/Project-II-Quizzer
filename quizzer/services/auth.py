@@ -12,7 +12,7 @@ import re
 
 
 def create_user(username,email,password):
-    profile_pic="https://avatar.iran.liara.run/public/boy"
+    profile_pic=f"https://api.dicebear.com/9.x/initials/svg?seed={username}"
     role="user"
     user=User(username=username,email=email,password=password ,role=role,profile_pic=profile_pic)
     db.session.add(user)
@@ -41,7 +41,7 @@ def verify_login(identifier, password):
    
     if re.match(username_pattern, identifier):
         user = User.query.filter_by(username=identifier).first()
-        print(user.username)
+        # print(user.username)
 
     elif re.match(email_pattern, identifier):
         user = User.query.filter_by(email=identifier).first()
@@ -57,11 +57,14 @@ def verify_login(identifier, password):
         
 def send_otp(email):
     otp=randint(10000,99999)
+    print(otp,email)
     subject="OTP for Quizzer Signup"
     try:
         message = Message(subject, sender=current_app.config['MAIL_USERNAME'], recipients=[email])
-        message.body = otp
+        message.body = str(otp)
         mail.send(message)
+        return otp
         
     except Exception as e:
-        pass
+        return None
+  

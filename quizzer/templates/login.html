@@ -8,55 +8,77 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}" />
 </head>
 
-<body class="bg-base-b flex items-center justify-center min-h-screen">
-    <form id="loginForm" method="POST" action="{{ url_for('auth.login') }}"
-        class="bg-secondary-b p-8 text-secondary-t rounded-2xl shadow-lg w-full max-w-sm space-y-6">
-        {{ form.hidden_tag() }}
+<body>
 
-        <h2 class="text-2xl font-bold text-base-t text-center">Login</h2>
+    <main class="bg-base-b flex items-center justify-center min-h-screen">
 
-        <div>
-            {{ form.username_email.label(class="block font-medium mb-1") }} {{
-            form.username_email(id="email", class="w-full px-4 py-2 border rounded-lg
-            focus:outline-none focus:ring-2 focus:ring-blue-400") }}
-            <p id="emailError" class="text-red-500 text-sm hidden">
-                Invalid email address or username.
-            </p>
-            {% for error in form. username_email.errors %}
-            <p class="text-red-500 text-sm mt-1">{{ error }}</p>
-            {% endfor %}
-        </div>
+        <a class="absolute top-0 left-0 font-black text-base-t text-3xl ml-10 font-revalia"
+            href="{{url_for('view.index')}}">
+            Quizzer
+        </a>
 
-        <div>
-            {{ form.password.label(class="block font-medium mb-1") }} {{
-            form.password(id="password", class="w-full px-4 py-2 border rounded-lg
-            focus:outline-none focus:ring-2 focus:ring-blue-400") }}
-            <p id="passwordError" class="text-red-500 text-sm hidden">
-                Password must be at least 6 characters.
-            </p>
-            {% for error in form.password.errors %}
-            <p class="text-red-500 text-sm mt-1">{{ error }}</p>
-            {% endfor %}
-        </div>
+        <form id="loginForm" method="POST" action="{{ url_for('auth.login') }}"
+            class="bg-secondary-b p-8 text-secondary-t rounded-2xl shadow-lg w-full max-w-sm space-y-6">
+            {{ form.hidden_tag() }}
 
-        <div class="flex justify-between items-center text-sm">
-            <div class="flex items-center">
-                {{ form.remember(class="mr-2") }} {{ form.remember.label }}
+            <h2 class="text-2xl font-bold text-base-t  text-center">Login</h2>
+            {% with messages = get_flashed_messages()%}
+            {% if messages%}
+            {% for message in messages%}
+
+            <div class="w-full mx-auto my-4">
+                <div class="  text-error border border-error py-3.5 px-4 rounded-md text-center shadow-sm">
+                    {{message}}
+                </div>
             </div>
-            <a href="#" class="text-accent hover:underline">Forgot password?</a>
-        </div>
+            {%endfor%}
+            {%endif%}
+            {%endwith%}
+            <div>
+                {{ form.username_email.label(class="block font-medium mb-1") }} {{
+                form.username_email(id="email", class="w-full px-4 py-2 border rounded-lg
+                focus:outline-none focus:ring-2 focus:ring-blue-400") }}
+                <p id="emailError" class="text-red-500 text-sm hidden">
+                    Invalid email address or username.
+                </p>
+                {% for error in form. username_email.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+                {% endfor %}
+            </div>
 
-        <input type="submit" value="Login"
-            class="w-full bg-accent hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
-            onclick="return validate();" />
+            <div>
+                {{ form.password.label(class="block font-medium mb-1") }} {{
+                form.password(id="password", class="w-full px-4 py-2 border rounded-lg
+                focus:outline-none focus:ring-2 focus:ring-blue-400") }}
+                <p id="passwordError" class="text-red-500 text-sm hidden">
+                    Password must be at least 6 characters.
+                </p>
+                {% for error in form.password.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+                {% endfor %}
+            </div>
 
-        <p class="text-center text-gray-600 text-sm">
-            Don’t have an account?
-            <a href="{{ url_for('auth.signup') }}" class="text-accent hover:underline">
-                Sign up for free
-            </a>
-        </p>
-    </form>
+            <div class="flex justify-between items-center text-sm">
+                <div class="flex items-center">
+                    {{ form.stay_login(class="mr-2") }} {{ form.stay_login.label }}
+                </div>
+                <a href="#" class="text-accent hover:underline">Forgot password?</a>
+            </div>
+
+            <input type="submit" value="Login"
+                class="w-full bg-accent hover:bg-accent-h text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
+                onclick="return validate();" />
+
+            <p class="text-center text-gray-600 text-sm">
+                Don’t have an account?
+                <a href="{{ url_for('auth.signup') }}" class="text-accent hover:underline">
+                    Sign up for free
+                </a>
+            </p>
+        </form>
+
+    </main>
+
 
     <script>
         function validate() {
