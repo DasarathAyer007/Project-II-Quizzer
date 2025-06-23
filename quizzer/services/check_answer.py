@@ -18,5 +18,6 @@ def check_answer(question, answer):
          return ({'question_text':question,'chosen_option':answer,"is_correct":False,'correct_option':question_current.get('correct_answer'),'current_score':session['score']})
    else:
       print(session.get('current_question'))
+      print(question)
       print("question din't match")
       return "question didn't match"

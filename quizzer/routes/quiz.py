@@ -76,5 +76,5 @@ def quiz_result(type, mode):
    for key in keys_to_remove:
         session.pop(key, None) 
 
-   return render_template('quiz/quizresult.html' , type=type.lower(),mode=mode.lower(),questions=questions)
+   return render_template('quiz/quizresult.html' , type=type.lower(),mode=mode.lower(),questions=questions,score=score)
    

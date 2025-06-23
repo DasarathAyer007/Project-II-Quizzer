@@ -14,6 +14,23 @@ In this version of Classic Mode, the user selects a specific category—such as 
 {%endblock%}
 
 <!-- only in classic to select the no of question -->
-{%block no_of_Question%}{%include '/components/no_of_question.html'%}{%endblock%}
+{%block no_of_Question%}
+<select name="no-of-question" id="no-of-question"
+  class="bg-secondary-b text-secondary-t border border-gray-300 rounded shadow-md h-8 pl-2 pr-6 w-fit outline-transparent">
+  <option value="" disabled selected>Select Number</option>
+  <option value="5">5</option>
+  <option value="10">10</option>
+  <option value="15">15</option>
+  <option value="20">20</option>
+  <option value="25">25</option>
+  <option value="30">30</option>
+  <option value="35">35</option>
+  <option value="40">40</option>
+  <option value="45">45</option>
+  <option value="50">50</option>
+  <option value="55">55</option>
+  <option value="60">60</option>
+</select>
+{%endblock%}
 
 

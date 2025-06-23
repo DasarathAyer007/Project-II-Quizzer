@@ -15,13 +15,13 @@
                 <img id="open-sidenav" src="{{url_for('static' , filename='assets/menu_bar.svg')}}" alt />
             </li>
             <li class="mr-auto">
-                <a class="font-black text-gray-100 text-3xl ml-10 font-revalia" href="{{url_for('view.index')}}" >
+                <a class="font-black text-gray-100 text-3xl ml-10 font-revalia" href="{{url_for('view.home')}}" >
                     Quizzer
                 </a>
             </li>
-            <li class="nav-button"><a href="/home">Home</a></li>
-            <li class="nav-button"><a href>About us</a></li>
-            <li class="nav-button"><a href>Feedback</a></li>
+            <li class="nav-button"><a href="{{url_for('view.home')}}">Home</a></li>
+            <li class="nav-button"><a href="{{url_for('view.about_us')}}">About us</a></li>
+            <li class="nav-button"><a href="{{url_for('view.feedback')}}">Feedback</a></li>
             <li class="">
                 {% if current_user.is_authenticated %}
                 <div class="relative px-2">
@@ -62,41 +62,42 @@
             </li>
         </ul>
 
-        <ul id="side-nav" class="h-lvh min-w-4/5 hidden bg-nav fixed top-0 z-10 left-0">
-            <li class="flex gap-2.5">
-                <img id="close-sidenav" src="{{url_for('static', filename='assets/cross_close.svg')}}" alt />
+        <ul id="side-nav" class="h-lvh min-w-4/5 hidden bg-nav fixed top-0 z-10 left-0 ">
 
-                <a class="font-black text-gray-100 text-3xl font-revalia" href="/home">
+            <li class="flex items-center justify-end mb-2.5">
+                <a class="font-black text-gray-100 text-3xl ml-10 mr-auto font-revalia" href="/home">
                     Quizzer
                 </a>
+              <svg id="close-sidenav" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m252.48-171.93-78.78-80.55L400.22-480 173.7-709.04l78.78-80.79 228.28 229.05 226.76-229.05 78.78 80.79L559.78-480 786.3-252.48l-78.78 80.55-226.76-229.05-228.28 229.05Z"/></svg>
+              
             </li>
 
-            <li>
-                <button class>
+            <li class="">
+                <button class="side-nav-btn w-full flex justify-evenly  " onclick="toogelSidenavDropdown(this)">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                         fill="#e3e3e3">
                         <path
                             d="M120-40q-33 0-56.5-23.5T40-120v-720q0-33 23.5-56.5T120-920h720q33 0 56.5 23.5T920-840v720q0 33-23.5 56.5T840-40H120Zm440-120h240v-240h-80v102L594-424l-57 57 127 127H560v80Zm-344 0 504-504v104h80v-240H560v80h104L160-216l56 56Zm151-377 56-56-207-207-56 56 207 207Z" />
                     </svg>
-                    <span class="grow">Random</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                    <span >Random</span>
+                    <svg  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                         fill="#e3e3e3">
                         <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
                     </svg>
                 </button>
 
-                <ul class="hidden pl-4">
-                    <li>
+                <ul class="hidden">
+                    <li class="side-nav-btn ">
                         <a href="{{url_for('quiz.quiz_intro', type='random', mode='classic')}}">
                             Classic
                         </a>
-                    </li>
-                    <li>
+                    </li class="side-nav-btn ">
+                    <li class="side-nav-btn ">
                         <a href="{{url_for('quiz.quiz_intro', type='random', mode='timed')}}">
                             Timed
                         </a>
                     </li>
-                    <li>
+                    <li class="side-nav-btn ">
                         <a href="{{url_for('quiz.quiz_intro', type='random', mode='survival')}}">
                             Survival
                         </a>
@@ -104,42 +105,48 @@
                 </ul>
             </li>
 
-            <li>
-                <button>
+            <li class="">
+                 <button class="side-nav-btn w-full flex justify-evenly" onclick="toogelSidenavDropdown(this)">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                         fill="#e3e3e3">
                         <path
                             d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z" />
                     </svg>
-                    <span class="grow">Category</span>
+                    <span >Category</span>
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                         fill="#e3e3e3">
                         <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
                     </svg>
                 </button>
 
-                <ul class="hidden pl-4">
-                    <li>
+                <ul class="hidden ">
+                    <li class="side-nav-btn ">
                         <a href="{{url_for('quiz.quiz_intro', type='category', mode='classic')}}">
                             Classic
                         </a>
                     </li>
-                    <li>
+                    <li class="side-nav-btn ">
                         <a href="{{url_for('quiz.quiz_intro', type='category', mode='timed')}}">
                             Timed
                         </a>
                     </li>
-                    <li>
+                    <li class="side-nav-btn ">
                         <a href="{{url_for('quiz.quiz_intro', type='category', mode='survival')}}">
                             Survival
                         </a>
                     </li>
                 </ul>
             </li>
-            <li class="side-nav-btn"><a href>About us</a></li>
-            <li class="side-nav-btn"><a href>Feedback</a></li>
+            <li class="side-nav-btn">
+                <a href>About us</a>
+            </li>
+            <li class="side-nav-btn">
+                <a href>Feedback</a></li>
         </ul>
     </nav>
+    <script>
+
+    </script>
 
     <div class="h-full w-full flex bg-base-b">
         {%block sidebar%}
@@ -150,6 +157,8 @@
 
         {%endblock%}
     </div>
+
+   
 
     <script src="{{url_for('static',filename='script/script.js')}}"></script>
     {% block scripts %}

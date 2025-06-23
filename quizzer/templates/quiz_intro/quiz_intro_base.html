@@ -28,14 +28,14 @@
 <script>
     function validateBeforeStart() {
         if ('{{quiz_type|lower}}' === 'category') {
-            const selectedValue = document.getElementById("dropdown-selected").value.trim();
+            const selectedValue = document.getElementById("category-select").value.trim();
             if (!selectedValue) {
                 alert("Please select a category before starting the quiz.");
                 return false;
             }
         }
         if ('{{quiz_mode|lower}}' === 'classic') {
-            const selectedValue = document.getElementById("question-dropdown-selected").value.trim();
+            const selectedValue = document.getElementById("no-of-question").value.trim();
             console.log(selectedValue)
             if (selectedValue == '' || isNaN(selectedValue)) {
                 alert("Please select a No of question before starting the quiz.");

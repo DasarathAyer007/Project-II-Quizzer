@@ -1,5 +1,5 @@
 from flask import session,redirect,url_for
-from .store_question import store_question
+from .store_question import store_question,fetch_from_database
 from .check_answer import check_answer
 from datetime import datetime, timedelta
 
@@ -13,6 +13,7 @@ def question_for_quiz():
         
     session['quiestion_asked_time']=datetime.utcnow().isoformat()  
     return store_question(category) 
+    # return fetch_from_database()
 
 
 

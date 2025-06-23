@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="53dd68ff-9a96-46d1-8eea-6b45e196c70d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/quizzer/model/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/model/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/model/question.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/model/question.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/routes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/routes/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/routes/question.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/routes/question.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/routes/quiz.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/routes/quiz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/routes/view.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/routes/view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/services/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/services/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/services/check_answer.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/services/check_answer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/services/store_question.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/services/store_question.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/static/script/quiz.js" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/static/script/quiz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/static/script/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/static/script/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/static/script/sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/static/script/sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/static/style/input.css" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/static/style/input.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/static/style/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/static/style/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/templates/about_us.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/templates/about_us.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/templates/add_question.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/templates/add_question.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/templates/components/no_of_question.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/templates/components/no_of_question.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/templates/quiz/quizresult.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/templates/quiz/quizresult.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/templates/quiz_intro/category/categorybase.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/templates/quiz_intro/category/categorybase.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/templates/quiz_intro/category/classic.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/templates/quiz_intro/category/classic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/templates/quiz_intro/category/survival.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/templates/quiz_intro/category/survival.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/templates/quiz_intro/quiz_intro_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/templates/quiz_intro/quiz_intro_base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/templates/quiz_intro/random/classic.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/templates/quiz_intro/random/classic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizzer/templates/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/quizzer/templates/sidebar.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2ynUP2HzjlXgHxySdXboZBA2BQG" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/dasarath/PycharmProjects/new"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-348a24fa61fa-5312c7369657-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.23774.444" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="53dd68ff-9a96-46d1-8eea-6b45e196c70d" name="Changes" comment="" />
+      <created>1750469804881</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1750469804881</updated>
+    </task>
+    <servers />
+  </component>
+</project>

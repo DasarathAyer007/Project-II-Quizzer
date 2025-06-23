@@ -34,6 +34,7 @@ function toogleSideBar() {
   sideBar.classList.toggle("px-3");
 }
 
+
 function toggleSubMenu(button) {
   if (sideBar.classList.contains("w-11")) {
     toogleSideBar();
@@ -42,3 +43,12 @@ function toggleSubMenu(button) {
   button.nextElementSibling.classList.toggle("hidden");
   button.lastElementChild.classList.toggle("rotate-180");
 }
+
+
+// const sidebarBtn = sideBar.querySelectorAll(".sidebar-btn");
+
+// sideBar.forEach((element)=>{
+//   element.addEventListener('click',()=>{
+//     sidebarClose.classList.add("bg-accent");
+//   })
+// })

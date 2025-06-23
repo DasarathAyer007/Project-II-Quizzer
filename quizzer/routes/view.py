@@ -7,7 +7,7 @@ view=Blueprint('view',__name__, static_folder="static",template_folder="template
 
 @view.route('/')
 @view.route('/home')
-def index():
+def home():
   return render_template('home.html')
 
 
@@ -18,10 +18,19 @@ def profile():
     
     return render_template("profile.html")
   
+@view.route("/feedback")
+def feedback():
+  return render_template('feedback.html')
+  
   
 @view.route("/leaderboard")
 def leaderboard():
   return render_template("leaderboard.html") 
+
+
+@view.route("/about_us")
+def about_us():
+  return render_template("about_us.html")
   
 
 

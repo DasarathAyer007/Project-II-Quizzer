@@ -9,7 +9,7 @@ let interval
 
 
 async function getQuestion() {
-    let url = "/question/get_question/";
+    let url = "/api/get_question/";
 
     let response = await fetch(url);
     let question = await response.json();
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function submitAnswer(option) {
 
-    const url = "/question/check_answer";
+    const url = "/api/check_answer";
     if (option ==null){
         choosenAnswer=null
     }else{

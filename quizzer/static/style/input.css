@@ -75,7 +75,7 @@
  
 
 @layer base{
-  svg{
+  #side-bar svg{
     @apply fill-base-t shrink-0 group-hover:fill-accent-t transition-all ease-in-out duration-300;
   }
   

@@ -23,6 +23,11 @@ closeSidenav.addEventListener('click',()=>{
 })
 
 
+function toogelSidenavDropdown(element){
+  element.nextElementSibling.classList.toggle("hidden")
+}
+
+
 
 
 
@@ -42,4 +47,8 @@ document.addEventListener('click', (event) => {
     profileDropdown.classList.add('hidden');
   }
 });
+
+
+
+
 

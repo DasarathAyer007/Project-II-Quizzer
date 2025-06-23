@@ -1,6 +1,14 @@
 {%extends 'base.html'%} {%block title%}{%endblock%} {%block content%}
 <main class="p-5 w-full">
-    <h2 class="text-2xl font-bold text-gray-700 mb-4">Results</h2>
+    <div class="flex justify-between mr-1.5">
+          <h2 class="text-2xl font-bold text-gray-700 mb-4">Result</h2>
+          <div>
+            <span>Score:</span>
+            <span>{{score}}</span>
+          </div>
+
+    </div>
+  
 
     <div class="bg-secondary-b m-auto h-96 overflow-y-scroll p-0 max-w-6xl">
         <table class="w-full border border-gray-300 rounded-lg p-0 m-0">
@@ -21,8 +29,9 @@
                     <td class="p-3 border border-gray-300">{{ question['chosen_option'] }}</td>
                     <td class="p-3 border border-gray-300">{{ question['correct_option'] }}</td>
                     <td class="p-3 border border-gray-300">
-                        <button class="bg-error text-white px-4 py-2 w-full rounded hover:bg-red-600">
-                            Report
+                        <button class="bg-error text-white px-3 py-2 w-full rounded hover:bg-red-600">
+                                <a href="{{url_for('question.report_question')}}">Report</a>
+                            
                         </button>
                     </td>
                 </tr>
