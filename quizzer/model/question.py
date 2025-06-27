@@ -1,7 +1,6 @@
 from quizzer.extensions import db
-from flask_login import UserMixin
 
-class Question(db.Model ,UserMixin):
+class Question(db.Model):
     __tablename__ = 'Question'
     id = db.Column(db.Integer, primary_key=True)
     question_text = db.Column(db.String(200), nullable=False ,unique=True)

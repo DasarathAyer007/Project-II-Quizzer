@@ -1,0 +1,47 @@
+{%extends 'base.html'%}
+
+{%block title%}Leaderboard{%endblock%}
+
+
+
+
+  {%block content%}
+
+
+  <main>
+
+    <h1>Leaderboard</h1>
+
+
+    <table border="1">
+
+      <tr>
+        <th>SN</th>
+        <th>Username</th>
+        <th>Score</th>
+      </tr>
+
+      {%for d in data%}
+
+      <tr>
+     <td>{{d.rank_positon}}</td>
+           <td>{{d.user_id}}</td>
+            <td>{{d.high_score}}</td>
+      </tr>
+  
+      {%endfor%}
+    </table>
+
+  </main>
+
+
+
+
+
+   {%endblock%}
+
+
+
+{% block scripts %}
+  <!-- Child templates can insert their own scripts here -->
+{% endblock %}

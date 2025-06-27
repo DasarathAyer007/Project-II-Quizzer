@@ -1,6 +1,7 @@
 
 from flask import render_template,request,redirect,url_for,jsonify,session,Blueprint
 from flask_login import login_required,current_user
+from quizzer.services import get_leaderboard
 
 
 view=Blueprint('view',__name__, static_folder="static",template_folder="templates")
@@ -25,7 +26,7 @@ def feedback():
   
 @view.route("/leaderboard")
 def leaderboard():
-  return render_template("leaderboard.html") 
+  return render_template("leaderboard/random_leaderboard.html" , data=get_leaderboard(type='Random',mode='Classic')) 
 
 
 @view.route("/about_us")

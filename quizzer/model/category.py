@@ -6,4 +6,3 @@ class Category(db.Model ,UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     category_name = db.Column(db.String(80), nullable=False ,unique=True)
     
-    questions = db.relationship('Question', backref='category')
