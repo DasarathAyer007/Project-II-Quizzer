@@ -1,15 +1,16 @@
 {%extends 'quiz_intro/quiz_intro_base.html'%} {%set quiz_type='Category'%} {%block
-quiz_type%}{{quiz_type}}{%endblock%} {%block catogery_select%}
+quiz_type%}{{quiz_type}}{%endblock%} 
 
-<select name="category-name" id="category-select"
-    class="bg-secondary-b text-secondary-t border border-gray-300 rounded shadow h-8 pl-2 pr-6 w-fit outline-transparent">
-    <option value="" disabled selected>Select a category</option>
-    <option value="Sport">Sport</option>
-    <option value="Film">Film</option>
-    <option value="History">History</option>
-    <option value="Geography">Geography</option>
-    <option value="Computers">Computers</option>
-    <option value="Mythology">Mythology</option>
-</select>
 
-{%endblock%}
+{% block catogery_select %}
+<div class="flex flex-col gap-1">
+    <label for="category-select" class="text-sm font-medium text-gray-700">📚 Category</label>
+    <select name="category-name" id="category-select"
+        class="bg-secondary-b text-secondary-t border border-gray-300 rounded-md shadow-sm h-10 px-3 w-full sm:w-64 focus:ring-2 focus:ring-accent focus:outline-none transition">
+        <option value="" disabled selected>Select a category</option>
+        {% for c in categories %}
+            <option value="{{ c.id }}">{{ c.category_name }}</option>
+        {% endfor %}
+    </select>
+</div>
+{% endblock %}

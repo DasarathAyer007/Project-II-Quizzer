@@ -6,91 +6,109 @@
 
 {%endblock%}
 {%block content%}
+<main class="bg-secondary-b min-h-screen p-4 sm:p-6 lg:p-10 rounded-lg w-full text-gray-800">
+  <!-- Header -->
+  <div class="text-xl sm:text-2xl font-bold mb-6 border-b border-gray-300 pb-3">
+    <span>{{ current_user.username }}'s Profile</span>
+  </div>
 
-<main class="bg-secondary-b h-fit m-7 w-full p-6 rounded-lg">
-
-    <div class="text-lg font-bold mb-6 border-b border-gray-400 pb-2 ">
-        <span>{{ current_user.username }}'s Profile</span>
+  <!-- Profile & Stats -->
+  <div class="flex flex-col lg:flex-row gap-6 lg:gap-10">
+    <!-- Profile Info -->
+    <div class="bg-white rounded-xl p-6 shadow-lg flex flex-col items-center w-full lg:w-1/4">
+      <div class="w-36 h-36 sm:w-44 sm:h-44 mb-4">
+        <img src="{{ current_user.profile_pic }}" alt="Profile Picture" class="w-full h-full rounded-full object-cover border-4 border-gray-300" />
+      </div>
+      <p class="text-sm text-gray-600 text-center">
+        User ID: <span class="font-mono">#{{ "%08d" | format(current_user.id) }}</span>
+      </p>
     </div>
 
-    <div class="flex flex-col lg:flex-row gap-8 justify-between">
-
-        <div class=" rounded-md p-6 shadow-md flex flex-col items-center">
-            <div class="size-44">
-                 <img src="{{ current_user.profile_pic }}" alt="profile pic"
-                class="w-40 h-40 rounded-full object-cover mb-4 border-4 border-gray-300" />
-
-            </div>
-           
-
-            <p class="text-sm text-gray-600">
-                User ID: <span class="font-mono">#{{ "%08d" | format(current_user.id) }}</span>
-            </p>
+    <!-- Statistics Section -->
+    <div class="bg-white rounded-xl p-6 shadow-lg flex-1 space-y-8">
+      <!-- Random Stats -->
+      <div>
+        <h2 class="text-lg font-semibold mb-3">Random</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <!-- Classic -->
+          <div class="p-4 bg-gray-50 rounded-md shadow-sm ">
+            <h3 class="font-bold mb-2">Classic</h3>
+            <p>No of Plays:{{current_user.get_attempt('Random','Classic')}}</p>
+            <p>High Score:{{current_user.get_high_score('Random','Classic')}}</p>
+          </div>
+          <!-- Timed -->
+          <div class="p-4 bg-gray-50 rounded-md shadow-sm ">
+            <h3 class="font-bold mb-2">Timed</h3>
+            <p>No of Plays:{{current_user.get_attempt('Random','Timed')}}</p>
+            <p>High Score:{{current_user.get_high_score('Random','Timed')}}</p>
+          </div>
+          <!-- Survival -->
+          <div class="p-4 bg-gray-50 rounded-md shadow-sm ">
+            <h3 class="font-bold mb-2">Survival</h3>
+            <p>No of Plays:{{current_user.get_attempt('Random','Survival')}}</p>
+            <p>High Score:{{current_user.get_high_score('Random','Survival')}}</p>
+          </div>
         </div>
+      </div>
 
-
-        <div class="rounded-xl p-6 w-full  shadow-md text-NPtex">
-
-            <span>Statistics</span>
-            <hr>
-
-            <div>Random</div>
-            <div class="flex justify-center mb-7">
-
-                <div class="grow">
-                    Classic
-                    <div>No of Play:</div>
-                    <div>High Score:</div>
-
-                </div>
-                <div class="grow">
-                    Timed
-                    <div>No of Play:</div>
-                    <div>High Score:</div>
-
-                </div>
-                <div class="grow">
-                    Survival
-                    <div>No of Play:</div>
-                    <div>High Score:</div>
-
-                </div>
-
-            </div>
-
-            <div>Catogery</div>
-            <div class="flex justify-center">
-
-                <div class="grow">
-                    Classic
-                    <div>No of Play:</div>
-                    <div>High Score:</div>
-
-                </div>
-                <div class="grow">
-                    Timed
-                    <div>No of Play:</div>
-                    <div>High Score:</div>
-
-                </div>
-                <div class="grow">
-                    Survival
-                    <div>No of Play:</div>
-                    <div>High Score:</div>
-
-                </div>
-
-            </div>
-
-
-
-
-
+      <!-- Category Stats -->
+      <div>
+        <h2 class="text-lg font-semibold mb-3">Category</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <!-- Classic -->
+          <div class="p-4 bg-gray-50 rounded-md shadow-sm ">
+            <h3 class="font-bold mb-2">Classic</h3>
+           <p>No of Plays:{{current_user.get_attempt('Category','Classic')}}</p>
+            <p>High Score:{{current_user.get_high_score('Category','Classic')}}</p>
+          </div>
+          <!-- Timed -->
+          <div class="p-4 bg-gray-50 rounded-md shadow-sm ">
+            <h3 class="font-bold mb-2">Timed</h3>
+            <p>No of Plays:{{current_user.get_attempt('Category','Timed')}}</p>
+            <p>High Score:{{current_user.get_high_score('Category','Timed')}}</p>
+          </div>
+          <!-- Survival -->
+          <div class="p-4 bg-gray-50 rounded-md shadow-sm ">
+            <h3 class="font-bold mb-2">Survival</h3>
+             <p>No of Plays:{{current_user.get_attempt('Category','Survival')}}</p>
+            <p>High Score:{{current_user.get_high_score('Category','Survival')}}</p>
+          </div>
         </div>
-
+      </div>
     </div>
+  </div>
+
+  <!-- Contributed Questions -->
+  <div class="mt-12">
+    <h2 class="text-lg sm:text-xl font-bold mb-4">Questions Contributed</h2>
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white shadow-md rounded-md overflow-hidden text-sm">
+        <thead class="bg-gray-100 text-left font-semibold text-gray-700">
+          <tr>
+            <th class="px-4 py-3 whitespace-nowrap">Q ID</th>
+            <th class="px-4 py-3">Question Text</th>
+            <th class="px-4 py-3">Correct Option</th>
+            <th class="px-4 py-3">Category</th>
+            <th class="px-4 py-3">Edit</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          {% for q in added_question %}
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap">{{ q.id }}</td>
+            <td class="px-4 py-3">{{ q.question_text }}</td>
+            <td class="px-4 py-3">{{ q.correct_option }}</td>
+            <td class="px-4 py-3">{{ q.category.category_name }}</td>
+            <td class="px-4 py-3">
+              <a href="{{ url_for('question.edit_question_by_user', question_id=q.id, user_id=current_user.id) }}" class="text-blue-600 hover:underline">Edit</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </main>
-
 
 
 {%endblock%}

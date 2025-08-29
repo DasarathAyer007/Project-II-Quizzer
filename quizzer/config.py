@@ -1,8 +1,9 @@
 from os import urandom
 
 SECRET_KEY=urandom(24) 
-SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@localhost/db_quizzer'
+#SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@localhost/db_quizzer'
 # SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@localhost/db_quizzer'
+SQLALCHEMY_DATABASE_URI ='sqlite:///database.db'
 
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 

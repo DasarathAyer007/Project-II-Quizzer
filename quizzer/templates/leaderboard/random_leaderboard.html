@@ -1,3 +1,4 @@
+
 {%extends 'base.html'%}
 
 {%block title%}Leaderboard{%endblock%}
@@ -5,43 +6,51 @@
 
 
 
-  {%block content%}
+{%block content%}
 
 
-  <main>
-
+<main>
     <h1>Leaderboard</h1>
+    <p>{{mode}}</p>
+    <p>{{type}}</p>
 
 
     <table border="1">
 
-      <tr>
-        <th>SN</th>
-        <th>Username</th>
-        <th>Score</th>
-      </tr>
+        <tr>
+            <th>SN</th>
+            <th>Username</th>
+            <th>Score</th>
+            {%if mode == 'Category'}
+            <th>Category</th>
+            {%endif}
+        </tr>
 
-      {%for d in data%}
+        {%for d in data%}
 
-      <tr>
-     <td>{{d.rank_positon}}</td>
-           <td>{{d.user_id}}</td>
+        <tr>
+            <td>{{d.rank_positon}}</td>
+            <td>{{d.user_id}}</td>
             <td>{{d.high_score}}</td>
-      </tr>
-  
-      {%endfor%}
+            {%if mode == 'Category'}
+            <th>Category</th>
+            {%endif}
+        </tr>
+
+
+        {%endfor%}
     </table>
 
-  </main>
+</main>
 
 
 
 
 
-   {%endblock%}
+{%endblock%}
 
 
 
 {% block scripts %}
-  <!-- Child templates can insert their own scripts here -->
+<!-- Child templates can insert their own scripts here -->
 {% endblock %}

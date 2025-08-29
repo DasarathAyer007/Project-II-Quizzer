@@ -82,7 +82,7 @@ def otp_verify():
                 username=signup_data["username"],
                 email=signup_data["email"],
                 password=generate_password_hash(
-                    signup_data["password"], method="pbkdf2:sha1"
+                    signup_data["password"], method='pbkdf2:sha256'
                 )
             )
 

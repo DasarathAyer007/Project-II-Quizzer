@@ -13,24 +13,17 @@
 In this version of Classic Mode, the user selects a specific category—such as Science, History, or Sports—and receives a fixed number of questions from only that topic. This allows for focused learning and practice in a single domain. A time limit per question may be included, helping users sharpen their understanding of a particular subject. 
 {%endblock%}
 
-<!-- only in classic to select the no of question -->
-{%block no_of_Question%}
-<select name="no-of-question" id="no-of-question"
-  class="bg-secondary-b text-secondary-t border border-gray-300 rounded shadow-md h-8 pl-2 pr-6 w-fit outline-transparent">
-  <option value="" disabled selected>Select Number</option>
-  <option value="5">5</option>
-  <option value="10">10</option>
-  <option value="15">15</option>
-  <option value="20">20</option>
-  <option value="25">25</option>
-  <option value="30">30</option>
-  <option value="35">35</option>
-  <option value="40">40</option>
-  <option value="45">45</option>
-  <option value="50">50</option>
-  <option value="55">55</option>
-  <option value="60">60</option>
-</select>
-{%endblock%}
+{% block no_of_Question %}
+<div class="flex flex-col gap-1">
+    <label for="no-of-question" class="text-sm font-medium text-gray-700">❓ Number of Questions</label>
+    <select name="no-of-question" id="no-of-question"
+        class="bg-secondary-b text-secondary-t border border-gray-300 rounded-md shadow-sm h-10 px-3 w-full sm:w-64 focus:ring-2 focus:ring-accent focus:outline-none transition">
+        <option value="" disabled selected>Select Number</option>
+        {% for n in range(5, 65, 5) %}
+            <option value="{{ n }}">{{ n }}</option>
+        {% endfor %}
+    </select>
+</div>
+{% endblock %}
 
 

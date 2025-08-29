@@ -1,0 +1,27 @@
+| Command                | Description                         |
+| ---------------------- | ----------------------------------- |
+| `.help`                | Show all available commands         |
+| `.open filename.db`    | Open a database file                |
+| `.exit` or `.quit`     | Exit the SQLite shell               |
+| `.tables`              | List all tables in the database     |
+| `.schema`              | Show schema for all tables          |
+| `.schema table_name`   | Show schema for a specific table    |
+| `.headers on`          | Show column headers in query output |
+| `.headers off`         | Hide column headers                 |
+| `.mode column`         | Output format in aligned columns    |
+| `.mode list`           | Output format in CSV-style list     |
+| `.databases`           | List attached databases             |
+| `.read file.sql`       | Execute SQL commands from a file    |
+| `.dump`                | Dump entire database as SQL text    |
+| `.output filename.txt` | Redirect output to a file           |
+| `.nullvalue value`     | Display value for NULL fields       |
+| `.timer on`            | Show how long each command takes    |
+| `.timer off`           | Disable timer                       |
+
+
+
+
+.headers on
+.mode column
+
+sqlite3 instance/database.db

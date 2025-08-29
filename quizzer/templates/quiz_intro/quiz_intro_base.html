@@ -1,29 +1,42 @@
-{%extends 'base.html'%}
-{%block title%}{%endblock%}
-{%block content%}
-<main class=" w-full ">
-    <div id="quiz-info" class="w-full flex text-base-t flex-col mt-4 p-4 md:px-10 lg:px-20 gap-10 items-center">
-        <div class="flex mt-2.5 text-2xl gap-1 font-extrabold">
-            <div>{%block quiz_type%}{%endblock%} :</div>
-            <div>{%block quiz_mode%}{%endblock%}</div>
+{% extends 'base.html' %}
+{% block title %}Start Quiz{% endblock %}
+{% block content %}
+<main class="w-full min-h-screen bg-base-b flex justify-center items-start py-10 px-4">
+    <div id="quiz-info"
+         class="w-full max-w-4xl bg-white shadow-lg rounded-xl p-6 sm:p-10 flex flex-col gap-8 text-base-t">
+
+       
+        <div class="text-center">
+            <h1 class="text-3xl font-extrabold text-gray-800 tracking-wide">
+                {% block quiz_type %}{% endblock %} : {% block quiz_mode %}{% endblock %}
+            </h1>
         </div>
 
-        <div class="text-base-t text-justify">{%block quiz_info%} {%endblock%}</div>
-        <form action="{{ url_for('quiz.quiz_start',type=quiz_type|lower, mode=quiz_mode|lower ) }} "
-            class="flex flex-col" onsubmit="return validateBeforeStart();">
-            <div class="flex gap-2">
-                {%block no_of_Question%}{%endblock%}
-                {%block catogery_select%}{%endblock%}
+    
+        <div class="text-gray-700 leading-relaxed text-justify">
+            {% block quiz_info %}{% endblock %}
+        </div>
+
+    
+        <form action="{{ url_for('quiz.quiz_start', type=quiz_type|lower, mode=quiz_mode|lower) }}"
+              class="space-y-6"
+              onsubmit="return validateBeforeStart();">
+
+            <div class="flex flex-col sm:flex-row justify-around">
+                {% block no_of_Question %}{% endblock %}
+                {% block catogery_select %}{% endblock %}
             </div>
 
-            <button type="submit" id="start-btn"
-                class="bg-accent text-accent-t mt-3.5 mx-auto rounded-md shadow-md px-6 py-3 hover:bg-accent-h cursor-pointer focus:outline focus:outline-gray-900">
-                Start
-            </button>
+            <div class="flex justify-center">
+                <button type="submit"
+                        id="start-btn"
+                        class="px-6 py-3 bg-accent text-accent-t text-lg rounded-md shadow-md hover:bg-accent-h transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent">
+                    🚀 Start Quiz
+                </button>
+            </div>
         </form>
     </div>
 </main>
-
 
 <script>
     function validateBeforeStart() {
@@ -36,14 +49,12 @@
         }
         if ('{{quiz_mode|lower}}' === 'classic') {
             const selectedValue = document.getElementById("no-of-question").value.trim();
-            console.log(selectedValue)
-            if (selectedValue == '' || isNaN(selectedValue)) {
-                alert("Please select a No of question before starting the quiz.");
+            if (selectedValue === '' || isNaN(selectedValue)) {
+                alert("Please select a valid number of questions before starting the quiz.");
                 return false;
             }
         }
         return true;
     }
 </script>
-
-{%endblock%}
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Leaderboard{% endblock %}
+
+{% block content %}
+<main class="px-4 sm:px-6 lg:px-8 py-8 w-full bg-gradient-to-b from-base-b to-white min-h-screen flex flex-col">
+    <!-- Header -->
+    <div class="max-w-7xl w-full mx-auto mb-8">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <!-- Heading -->
+            <div>
+                <h1 class="text-3xl font-extrabold text-gray-800">🏆 Leaderboard</h1>
+                <p class="text-lg text-gray-600">{{ type }}: {{ mode }}</p>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex flex-col sm:flex-row items-center gap-3">
+                <!-- Type Toggle -->
+                <a href="{{ url_for('view.leaderboard', type='Category' if type == 'Random' else 'Random', mode='Classic') }}"
+                   class="px-4 py-2 text-sm sm:text-base text-white bg-purple-600 hover:bg-purple-700 rounded-lg shadow transition">
+                    Switch to {{ 'Category' if type == 'Random' else 'Random' }}
+                </a>
+
+                <!-- Mode Switches -->
+                <div class="flex border border-blue-600 rounded-full overflow-hidden text-sm font-medium shadow-sm">
+                    {% set modes = ['Classic', 'Timed', 'Survival'] %}
+                    {% for m in modes %}
+                        <a href="{{ url_for('view.leaderboard', type=type, mode=m) }}"
+                           class="px-4 py-2 text-center w-full transition-all duration-200 ease-in-out
+                           {% if mode == m %}
+                               bg-accent text-white
+                           {% else %}
+                               hover:bg-blue-50 text-gray-700
+                           {% endif %}">
+                            {{ m }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaderboard Table -->
+    <div class="max-w-7xl w-full mx-auto overflow-x-auto bg-white shadow-xl rounded-lg border border-gray-200">
+        <table class="table-fixed w-full text-sm sm:text-base">
+            <thead class="bg-gray-100 text-gray-700 sticky top-0 z-10">
+                <tr>
+                    <th class="py-3 px-4 w-1/5 text-left">Rank</th>
+                    <th class="py-3 px-4 w-1/4 text-left">Username</th>
+                    <th class="py-3 px-4 w-1/4 text-left">Score</th>
+                    {% if type == 'Category' %}
+                        <th class="py-3 px-4 w-1/4 text-left">Category</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for d in data %}
+                <tr class="hover:bg-indigo-50 transition">
+                    <td class="py-3 px-4 text-gray-600 font-medium">
+                        {% if d.rank_positon == 1 %}
+                            🥇
+                        {% elif d.rank_positon == 2 %}
+                            🥈
+                        {% elif d.rank_positon == 3 %}
+                            🥉
+                        {% else %}
+                            {{ d.rank_positon }}
+                        {% endif %}
+                    </td>
+                    <td class="py-3 px-4 font-semibold text-gray-800 whitespace-nowrap">{{ d.username }}</td>
+                    <td class="py-3 px-4 text-gray-800 font-bold">{{ d.high_score }}</td>
+                    {% if type == 'Category' %}
+                        <td class="py-3 px-4">
+                            <span class="inline-block px-3 py-1 text-xs font-semibold bg-base-b text-accent rounded-full">
+                                {{ d.category_name }}
+                            </span>
+                        </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<!-- Additional scripts here if needed -->
+{% endblock %}

@@ -33,7 +33,6 @@ def email_exists(email: str) -> bool:
 
 
 
-
 username_pattern = r"^[a-zA-Z][a-zA-Z0-9_]{4,14}$"
 email_pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 

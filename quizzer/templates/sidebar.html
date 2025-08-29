@@ -1,5 +1,5 @@
 <aside id="side-bar"
-    class="hidden sm:block h-dvh w-60 shrink-0 text-nowrap bg-secondary-b  shadow-lg text-base-t shadow-black/25 border border-black/20 rounded-md mt-2 pt-2 px-3 text-lg overflow-hidden transition-all ease-in-out duration-300">
+    class="hidden sm:block h-full w-60 shrink-0 text-nowrap bg-secondary-b  shadow-lg text-base-t shadow-black/25 border border-black/20 rounded-md pt-2 px-3 text-lg overflow-hidden transition-all ease-in-out duration-300">
     <ul>
         <li class="flex justify-end mb-4 mx-1">
             <svg id="sidebar-close" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
@@ -75,7 +75,7 @@
             </ul>
         </li>
         <li>
-            <a class="sidebar-btn group" href="{{url_for('view.leaderboard')}}">
+            <a class="sidebar-btn group" href="{{url_for('view.leaderboard',type='Random',mode='Classic')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                     fill="#e3e3e3">
                     <path

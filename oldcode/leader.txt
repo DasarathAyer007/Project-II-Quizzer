@@ -267,3 +267,48 @@
           </ul>
         </li>
       </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // function quizCountDown() {
+
+//     clearInterval(interval)
+
+//     let timer = quizTimerValue
+
+//     interval = setInterval(() => {
+//         if (timer <= 1) {
+//             clearInterval(interval)
+//              if(quizMode.innerText.toLowerCase()=='timed'){
+        
+// //   const quizStopUrl = "{{ url_for('quiz.quiz_stop') | tojson }}";
+//   // or, shorter (safe when URL has no quotes):
+//   // const quizStopUrl = "{{ url_for('quiz.quiz_stop') }}";
+
+//   window.location.href = '/quiz/stop';
+
+
+//         }
+//             countDown.innerText = 15
+//             submitAnswer(null)
+
+//         }
+
+//         timer -= 1
+//         countDown.innerText = timer
+//     }, 1000)
+
+// }

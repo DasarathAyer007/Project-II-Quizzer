@@ -1,0 +1,70 @@
+{%extends 'base.html'%}
+{%block title%}{{mode}}:{{type}}{%endblock%} 
+{%block content%}
+<main id="quiz-feild" class="flex flex-col w-full mt-2 p-1 items-center">
+  
+        <div class="self-start p-1.5 border-l-2 text-xl font-bold">
+            <!-- <span class=""> {%block quiz_type_feild%}{%endblock%} : </span>
+            <span id="quiz-mode">{%block quiz_mode_feild%}{%endblock%}</span> -->
+            <span class=""> {{type}} : </span>
+            <span id="quiz-mode">{{mode}}</span>
+        </div>
+
+        <div class="flex items-center  mr-4 gap-4 self-end">
+            <div class=" p-2 mr-1 rounded-md shadow">
+                <span>Score: </span>
+                <span id="score"> 0000 </span>
+            </div>
+
+            <div  class=" p-2.5 text-3xl  rounded-md shadow">
+
+                <div id="countdown">{{count_down}}</div>
+            
+            </div>
+        </div>   
+
+    <div class="flex flex-col w-full sm:px-16 font-bold">
+        <!-- <div class="h-10 mb-1">{%block quiz_feild_catogery%}{%endblock%}</div> -->
+                 <div class="h-10 mb-1">
+                    {%if type|lower =='category'%}
+                        <div class="w-fit p-2 border border-black  rounded shadow">
+                                {{category.category_name}}
+                        </div>
+                    {%endif%}
+
+                 </div>
+
+        <div class="w-full flex items-center bg-secondary-b rounded  shadow min-h-20 text-lg border border-black/25">
+            <div class=" px-2 ">
+             
+            </div>
+            <div id="show-question"
+                class=" bg-secondary-b text-secondary-t ">
+                Question Here
+            </div>
+        </div>
+        <div id="options" class="w-full p-8 grid grid-cols-1 sm:grid-cols-2 gap-y-7 gap-x-24 self-center">
+            <button id="option-1" class="opt-btn">Option A</button>
+            <button id="option-2" class="opt-btn">Option B</button>
+
+            <button id="option-3" class="opt-btn">Option C</button>
+            <button id="option-4" class="opt-btn">Option D</button>
+        </div>
+    </div>
+    <div id="time-expired-error" class="hidden bg-red-400/40 border border-red-700 text-red-700 p-2.5">
+        Time Expired
+    </div>
+    <button><a href="{{url_for('quiz.quiz_stop')}}"> Stop the quiz</a></button>
+    <div id="show-result">
+
+    </div>
+</main>
+
+<script src="{{url_for('static',filename='script/quiz.js')}}"></script>
+
+{%block quizbase%}
+
+    <!-- Add here  -->
+{%endblock%} 
+
+{%endblock%}

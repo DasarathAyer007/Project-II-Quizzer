@@ -30,3 +30,9 @@ CATEGORIES = [
     "Entertainment: Japanese Anime & Manga",
     "Entertainment: Cartoon & Animations",
 ]
+
+MODE=[
+    "Classic","Timed","Survival"
+]
+
+TYPE=["Catogery","Random"]

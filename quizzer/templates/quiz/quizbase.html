@@ -1,69 +1,85 @@
 {%extends 'base.html'%}
-{%block title%}{{mode}}:{{type}}{%endblock%} 
+{%block title%}{{mode}}:{{type}}{%endblock%}
 {%block content%}
 <main id="quiz-feild" class="flex flex-col w-full mt-2 p-1 items-center">
-  
-        <div class="self-start p-1.5 border-l-2 text-xl font-bold">
-            <!-- <span class=""> {%block quiz_type_feild%}{%endblock%} : </span>
+
+    <div class="self-start p-1.5 border-l-2 text-xl font-bold">
+        <!-- <span class=""> {%block quiz_type_feild%}{%endblock%} : </span>
             <span id="quiz-mode">{%block quiz_mode_feild%}{%endblock%}</span> -->
-            <span class=""> {{type}} : </span>
-            <span id="quiz-mode">{{mode}}</span>
+        <span class=""> {{type}} : </span>
+        <span id="quiz-mode">{{mode}}</span>
+    </div>
+
+    <div class="flex items-center  mr-4 gap-4 self-end">
+        <div class="relative p-2 mr-2 rounded-lg shadow-lg bg-white w-32 text-center select-none">
+            <span class="block text-sm text-gray-500 font-semibold">Score</span>
+            <span id="score" class="block text-2xl font-bold text-indigo-600">0000</span>
+
+            <!-- Animated score change element -->
+            <div id="score-change"
+                class="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-lg font-semibold opacity-0 pointer-events-none transition-opacity duration-700">
+            </div>
         </div>
 
-        <div class="flex items-center  mr-4 gap-4 self-end">
-            <div class=" p-2 mr-1 rounded-md shadow">
-                <span>Score: </span>
-                <span id="score"> 0000 </span>
+     
+
+            <!-- <div id="countdown"></div> -->
+            <div class="relative mx-auto w-20">
+                <svg class="w-full h-full transform -rotate-90 " viewBox="0 0 100 100">
+                    <circle class="text-gray-300" stroke="currentColor" stroke-width="12" fill="transparent" r="45"
+                        cx="50" cy="50" />
+                    <circle id="progress-ring" class="text-green-500 transition-all duration-100" stroke="currentColor"
+                        stroke-width="12" fill="transparent" r="45" cx="50" cy="50" stroke-linecap="round"
+                        stroke-dasharray="283" stroke-dashoffset="0" />
+                </svg>
+                <div id="countdown"
+                    class="absolute inset-0 flex items-center justify-center text-xl font-bold text-gray-800">
+                    {{count_down}}
+                </div>
             </div>
 
-            <div  class=" p-2.5 text-3xl  rounded-md shadow">
 
-                <div id="countdown">{{count_down}}</div>
-            
-            </div>
-        </div>   
+        
+    </div>
 
     <div class="flex flex-col w-full sm:px-16 font-bold">
         <!-- <div class="h-10 mb-1">{%block quiz_feild_catogery%}{%endblock%}</div> -->
-                 <div class="h-10 mb-1">
-                    {%if type|lower =='category'%}
-                        <div class="w-24 p-2 border border-black  rounded shadow">
-                                        {{category}}
-                        </div>
-                    {%endif%}
-
-                 </div>
-
-        <div class="w-full flex items-center bg-secondary-b rounded  shadow min-h-20 text-lg border border-black/25">
-            <div class=" px-2 ">
-             
-            </div>
-            <div id="show-question"
-                class=" bg-secondary-b text-secondary-t ">
-                Question Here
-            </div>
-        </div>
-        <div id="options" class="w-full p-8 grid grid-cols-1 sm:grid-cols-2 gap-y-7 gap-x-24 self-center">
-            <button id="option-1" class="opt-btn">Option A</button>
-            <button id="option-2" class="opt-btn">Option B</button>
-
-            <button id="option-3" class="opt-btn">Option C</button>
-            <button id="option-4" class="opt-btn">Option D</button>
-        </div>
+      <div class="h-10 mb-1">
+    {% if type|lower == 'category' %}
+    <div class="inline-flex items-center px-4 py-1.5 bg-base-b text-accent font-semibold text-sm rounded-lg shadow-sm border border-accent">
+        {{ category.category_name }}
     </div>
-    <button id="next" class="opt-btn hidden">Next</button>
+    {% endif %}
+</div>
 
-    <button><a href="{{url_for('quiz.quiz_stop')}}"> Stop the quiz</a></button>
-    <div id="show-result">
-
+      <div class="w-full flex items-center justify-center bg-white rounded-xl shadow-md min-h-[4rem] text-lg border border-gray-300 px-4 py-3">
+    <div id="show-question" class="text-gray-800 font-medium text-center w-full">
+        Question Here
     </div>
+</div>
+       <div id="options" class="w-full p-6 grid grid-cols-1 sm:grid-cols-2 gap-6 self-center">
+    <button id="option-1" class="opt-btn">Option A</button>
+    <button id="option-2" class="opt-btn">Option B</button>
+    <button id="option-3" class="opt-btn">Option C</button>
+    <button id="option-4" class="opt-btn">Option D</button>
+</div>
+    </div>
+   <div id="time-expired-error"
+    class="hidden bg-red-100 border border-red-600 text-red-700 font-semibold px-4 py-3 rounded shadow mt-4">
+    ⏰ Time Expired
+</div>
+    <a href="{{url_for('quiz.quiz_stop')}}"
+   class="fixed bottom-6 right-6 z-50 px-6 py-3 rounded bg-red-500 text-white font-semibold shadow-lg hover:bg-red-600 transition">
+   ⛔ Stop Quiz
+</a>
+  
 </main>
 
 <script src="{{url_for('static',filename='script/quiz.js')}}"></script>
 
 {%block quizbase%}
 
-    <!-- Add here  -->
-{%endblock%} 
+<!-- Add here  -->
+{%endblock%}
 
 {%endblock%}
