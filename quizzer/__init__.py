@@ -1,6 +1,6 @@
 from flask import Flask
 from .extensions import db, mail, login_manager
-from .routes import register_blueprints
+from .blueprint import register_blueprints
 from .model import User
 
 def create_app():
