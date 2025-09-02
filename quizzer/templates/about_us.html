@@ -1,14 +1,136 @@
-{%extends 'base.html'%} {%block title%}ABout us{%endblock%}
+{% extends 'base.html' %}
+{% block title %}About Us{% endblock %}
 
-{%block sidebar%}
+{% block sidebar %}{% endblock %}
 
-
-
-{%endblock%}
-{%block content%}
+{% block content %}
 <main>
-    About Us
+
+  <!-- Hero / Intro Section -->
+  <section id="intro" class="min-h-[100vh] py-20 flex items-center justify-center bg-accent-t">
+    <div class="text-center px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-accent mb-6">About Quizzer</h2>
+      <p class="max-w-3xl mx-auto text-base sm:text-lg text-secondary-t">
+        Quizzer is an interactive quiz platform designed to make learning fun and engaging. 
+        We provide quizzes on various topics with different difficulty levels, helping students, 
+        teachers, and lifelong learners test and expand their knowledge.
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission & Vision Section -->
+  <section id="mission" class="min-h-[100vh] py-20 flex items-center justify-center bg-secondary-b">
+    <div class="text-center px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-6">Our Mission & Vision</h2>
+      <p class="max-w-3xl mx-auto text-base sm:text-lg text-secondary-t">
+        Our mission is to create a space where learning is not a task but an adventure. 
+        We envision a world where knowledge is accessible to all, empowering students, 
+        educators, and professionals to grow through engaging quizzes and challenges.
+      </p>
+    </div>
+  </section>
+
+  <!-- Why Choose Quizzer Section -->
+  <section id="why" class="min-h-[100vh] py-20 flex items-center justify-center bg-base-b">
+    <div class="text-center px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl font-bold text-accent mb-12">Why Choose Quizzer?</h2>
+      <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div class="bg-secondary-b rounded-2xl shadow-md p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <h3 class="text-xl font-semibold text-base-t mb-3">Interactive Learning</h3>
+          <p class="text-secondary-t">
+            Our quizzes are designed to keep you engaged and motivated while learning.
+          </p>
+        </div>
+        <div class="bg-secondary-b rounded-2xl shadow-md p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <h3 class="text-xl font-semibold text-base-t mb-3">Variety of Topics</h3>
+          <p class="text-secondary-t">
+            From science to history, explore quizzes across multiple categories and difficulty levels.
+          </p>
+        </div>
+        <div class="bg-secondary-b rounded-2xl shadow-md p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <h3 class="text-xl font-semibold text-base-t mb-3">Gamified Experience</h3>
+          <p class="text-secondary-t">
+            Leaderboards, achievements, and challenges make learning exciting and rewarding.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Team Section -->
+  <section id="team" class="min-h-[100vh] py-20 flex items-center justify-center bg-secondary-b">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center text-accent mb-12">Meet Our Team</h2>
+      <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div class="bg-base-b rounded-2xl shadow-md overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <img src="https://via.placeholder.com/400x250" alt="Alex Johnson" class="w-full h-48 sm:h-64 object-cover">
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-semibold text-base-t">Alex Johnson</h3>
+            <p class="text-secondary-t mb-3">Founder & CEO</p>
+            <p class="text-sm text-secondary-t">
+              Passionate about education and technology, Alex started Quizzer to make learning accessible to everyone.
+            </p>
+          </div>
+        </div>
+        <div class="bg-base-b rounded-2xl shadow-md overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <img src="https://via.placeholder.com/400x250" alt="Maria Smith" class="w-full h-48 sm:h-64 object-cover">
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-semibold text-base-t">Maria Smith</h3>
+            <p class="text-secondary-t mb-3">Lead Developer</p>
+            <p class="text-sm text-secondary-t">
+              Maria designs and develops the platform’s features, ensuring smooth user experience and performance.
+            </p>
+          </div>
+        </div>
+        <div class="bg-base-b rounded-2xl shadow-md overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <img src="https://via.placeholder.com/400x250" alt="David Lee" class="w-full h-48 sm:h-64 object-cover">
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-semibold text-base-t">David Lee</h3>
+            <p class="text-secondary-t mb-3">Content Manager</p>
+            <p class="text-sm text-secondary-t">
+              David curates and organizes quiz content, ensuring high quality and relevance for all learners.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-accent text-NPtext py-8 mt-12 text-center text-sm sm:text-base">
+    <div class="container mx-auto">
+      © 2025 Quizzer. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Bottom-left Navigation -->
+  <nav class="fixed bottom-4 left-4 flex flex-col space-y-4 z-50">
+    <!-- Each nav item -->
+    <a href="#intro" class="group flex items-center space-x-2 relative">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-accent group-hover:text-accent-h transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+      </svg>
+      <span class="absolute left-8 bg-nav text-nav-text px-3 py-1 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition">Introduction</span>
+    </a>
+    <a href="#mission" class="group flex items-center space-x-2 relative">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-accent group-hover:text-accent-h transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+      </svg>
+      <span class="absolute left-8 bg-nav text-nav-text px-3 py-1 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition">Mission & Vision</span>
+    </a>
+    <a href="#why" class="group flex items-center space-x-2 relative">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-accent group-hover:text-accent-h transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6"/>
+      </svg>
+      <span class="absolute left-8 bg-nav text-nav-text px-3 py-1 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition">Why Choose Quizzer</span>
+    </a>
+    <a href="#team" class="group flex items-center space-x-2 relative">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-accent group-hover:text-accent-h transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5V4H2v16h5"/>
+      </svg>
+      <span class="absolute left-8 bg-nav text-nav-text px-3 py-1 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition">Our Team</span>
+    </a>
+  </nav>
+
 </main>
-
-
-{%endblock%}
+{% endblock %}

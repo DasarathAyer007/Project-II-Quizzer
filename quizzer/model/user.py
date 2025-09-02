@@ -32,3 +32,5 @@ class User(db.Model ,UserMixin):
     # # def __repr__(self):
     # #     return f"<User {self.user_id} - {self.username}>"
 
+    def __repr__(self):
+            return f"<User {self.username} - Role: {self.role}>"

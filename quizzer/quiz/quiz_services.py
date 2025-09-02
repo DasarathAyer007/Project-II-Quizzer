@@ -1,7 +1,7 @@
 from flask import session
 from quizzer.extensions import db
 from quizzer.model import QuizState,Category,Question
-from .leaderboard import update_leaderboard
+from .update_leaderboard import update_leaderboard
 
 def set_quiz_state(user_id,mode,type,score,category=None):
     print("in set quiz state method")

@@ -6,6 +6,22 @@ db = SQLAlchemy()
 mail = Mail()
 login_manager = LoginManager()
 
+from functools import wraps
+from flask import abort
+from flask_login import current_user
+
+def role_required(*roles):
+    def wrapper(func):
+        @wraps(func)
+        def decorated_view(*args, **kwargs):
+            if current_user.role not in roles:
+                print(roles)
+                print(current_user.role)
+                return abort(403)  # Forbidden access
+            return func(*args, **kwargs)
+        return decorated_view
+    return wrapper
+
 CATEGORIES = [
     "General Knowledge",
     "Science & Nature",

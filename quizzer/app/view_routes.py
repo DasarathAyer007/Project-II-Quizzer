@@ -11,6 +11,8 @@ view=Blueprint('view',__name__, static_folder="static",template_folder="template
 def home():
   #set_category()
   # fetch_questions_for_database()
+  # print(current_user.role)
+  print(current_user)
   
   return render_template('home.html')
 
