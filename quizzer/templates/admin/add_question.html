@@ -1,0 +1,73 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Add Question{% endblock %}
+{% block page_title %}Add New Question{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
+    <form method="POST" action="{{ url_for('admin.add_question') }}">
+        <div class="mb-4">
+            <label for="quiz_id" class="block text-sm font-medium text-gray-700">Select Quiz</label>
+            <select id="quiz_id" name="quiz_id" required
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                <option value="">Select a quiz</option>
+                {% for quiz in quizzes %}
+                <option value="{{ quiz.id }}">{{ quiz.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="question_text" class="block text-sm font-medium text-gray-700">Question</label>
+            <textarea id="question_text" name="question_text" rows="3" required
+                      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+                <label for="option1" class="block text-sm font-medium text-gray-700">Option 1</label>
+                <input type="text" id="option1" name="option1" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+                <label for="option2" class="block text-sm font-medium text-gray-700">Option 2</label>
+                <input type="text" id="option2" name="option2" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+                <label for="option3" class="block text-sm font-medium text-gray-700">Option 3</label>
+                <input type="text" id="option3" name="option3"
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+                <label for="option4" class="block text-sm font-medium text-gray-700">Option 4</label>
+                <input type="text" id="option4" name="option4"
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label for="correct_answer" class="block text-sm font-medium text-gray-700">Correct Answer</label>
+            <select id="correct_answer" name="correct_answer" required
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                <option value="">Select correct answer</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+                <option value="4">Option 4</option>
+            </select>
+        </div>
+
+        <div class="flex justify-end space-x-3">
+            <a href="{{ url_for('admin.view_questions') }}" 
+               class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                Cancel
+            </a>
+            <button type="submit" 
+                    class="px-4 py-2 bg-blue-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Add Question
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

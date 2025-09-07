@@ -1,7 +1,126 @@
-{%extends 'admin/base.html'%} {%block title%}home{%endblock%} {%block content%}
+{% extends 'admin/base.html' %}
 
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
 
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <!-- Stats Cards -->
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                <i class="fas fa-file-alt text-xl"></i>
+            </div>
+            <div class="ml-4">
+                <p class="text-sm font-medium text-gray-600">Total Quizzes</p>
+                <p class="text-2xl font-semibold text-gray-900">12</p>
+            </div>
+        </div>
+    </div>
 
-    This is home page TEmplate
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-3 rounded-full bg-green-100 text-green-600">
+                <i class="fas fa-question-circle text-xl"></i>
+            </div>
+            <div class="ml-4">
+                <p class="text-sm font-medium text-gray-600">Total Questions</p>
+                <p class="text-2xl font-semibold text-gray-900">158</p>
+            </div>
+        </div>
+    </div>
 
-{%endblock%}
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-3 rounded-full bg-purple-100 text-purple-600">
+                <i class="fas fa-users text-xl"></i>
+            </div>
+            <div class="ml-4">
+                <p class="text-sm font-medium text-gray-600">Registered Users</p>
+                <p class="text-2xl font-semibold text-gray-900">42</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+                <i class="fas fa-chart-bar text-xl"></i>
+            </div>
+            <div class="ml-4">
+                <p class="text-sm font-medium text-gray-600">Quiz Attempts</p>
+                <p class="text-2xl font-semibold text-gray-900">216</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Recent Activity -->
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-medium text-gray-900">Recent Activity</h3>
+        </div>
+        <div class="divide-y divide-gray-200">
+            <div class="p-6">
+                <div class="flex items-start">
+                    <div class="p-2 rounded-full bg-blue-100 text-blue-600">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium">New user registered: John Doe</p>
+                        <p class="text-sm text-gray-500">2 hours ago</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="flex items-start">
+                    <div class="p-2 rounded-full bg-green-100 text-green-600">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium">10 new questions added to Python Basics quiz</p>
+                        <p class="text-sm text-gray-500">5 hours ago</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="flex items-start">
+                    <div class="p-2 rounded-full bg-purple-100 text-purple-600">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium">Quiz "Web Development Fundamentals" was completed by 5 users</p>
+                        <p class="text-sm text-gray-500">Yesterday</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-medium text-gray-900">Quick Actions</h3>
+        </div>
+        <div class="p-6 space-y-4">
+            <a href="{{ url_for('admin.add_quiz') }}" class="flex items-center p-3 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 transition">
+                <i class="fas fa-plus-circle mr-3"></i>
+                <span>Create New Quiz</span>
+            </a>
+            <a href="{{ url_for('admin.add_question') }}" class="flex items-center p-3 rounded-lg bg-green-50 text-green-700 hover:bg-green-100 transition">
+                <i class="fas fa-question-circle mr-3"></i>
+                <span>Add Questions</span>
+            </a>
+            <a href="{{ url_for('admin.view_quizzes') }}" class="flex items-center p-3 rounded-lg bg-purple-50 text-purple-700 hover:bg-purple-100 transition">
+                <i class="fas fa-list mr-3"></i>
+                <span>Manage Quizzes</span>
+            </a>
+            <a href="{{ url_for('admin.view_questions') }}" class="flex items-center p-3 rounded-lg bg-yellow-50 text-yellow-700 hover:bg-yellow-100 transition">
+                <i class="fas fa-tasks mr-3"></i>
+                <span>Manage Questions</span>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

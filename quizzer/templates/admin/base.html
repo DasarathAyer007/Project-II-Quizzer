@@ -1,23 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{%block title%} {%endblock%}</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='style/style.css')}}" />
+    <title>{% block title %}Admin Panel{% endblock %} - Quizzer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Alpine.js for interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        .sidebar-transition {
+            transition: all 0.3s ease;
+        }
+        .content-transition {
+            transition: margin-left 0.3s ease;
+        }
+    </style>
 </head>
 
-<body>
-    <header>
+<body class="bg-gray-100" x-data="{ sidebarOpen: window.innerWidth >= 768, sidebarMini: false }">
+    <!-- Mobile sidebar backdrop -->
+    <div x-show="sidebarOpen && window.innerWidth < 768" 
+         x-transition:enter="transition-opacity ease-linear duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition-opacity ease-linear duration-300"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-10 bg-gray-900 bg-opacity-50 lg:hidden" 
+         style="display: none;"
+         @click="sidebarOpen = false">
+    </div>
 
-        <nav>
-            This is navBar of admin
-        </nav>
-    </header>
+    <!-- Sidebar -->
+    <aside class="fixed inset-y-0 left-0 z-20 sidebar-transition"
+           :class="{
+               'translate-x-0': sidebarOpen,
+               '-translate-x-full': !sidebarOpen,
+               'w-20': sidebarMini,
+               'w-64': !sidebarMini
+           }"
+           x-show="sidebarOpen || window.innerWidth >= 768"
+           @keydown.escape="sidebarOpen = false">
+        
+        <div class="flex flex-col h-full bg-gray-800 text-white">
+            <!-- Sidebar header -->
+            <div class="flex items-center justify-between p-4 border-b border-gray-700">
+                <span x-show="!sidebarMini" class="text-xl font-semibold">Quizzer Admin</span>
+                <span x-show="sidebarMini" class="text-xl font-semibold">QA</span>
+                <button @click="sidebarMini = !sidebarMini" class="p-1 rounded hover:bg-gray-700">
+                    <i :class="sidebarMini ? 'fa-expand' : 'fa-compress'" class="fas"></i>
+                </button>
+            </div>
 
-    {%block content%}
+            <!-- Admin profile -->
+            <div class="p-4 border-b border-gray-700">
+                <div class="flex items-center space-x-3">
+                    <div class="relative">
+                        {% if profile_image %}
+                        <img src="{{ url_for('static', filename='uploads/admin/' + profile_image) }}" 
+                             alt="Admin Profile" class="w-12 h-12 rounded-full object-cover">
+                        {% else %}
+                        <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-xl">
+                            {{ admin_initial }}
+                        </div>
+                        {% endif %}
+                        
+                        <!-- Upload Form -->
+                        <form id="profileUploadForm" action="{{ url_for('admin.upload_profile') }}" 
+                              method="post" enctype="multipart/form-data" class="absolute bottom-0 right-0">
+                            <input type="file" id="profileImageInput" name="profile_image" 
+                                   accept="image/*" class="hidden" onchange="this.form.submit()">
+                            <label for="profileImageInput" class="bg-blue-500 text-white p-1 rounded-full text-xs cursor-pointer">
+                                <i class="fas fa-camera"></i>
+                            </label>
+                        </form>
+                    </div>
+                    
+                    <div x-show="!sidebarMini">
+                        <p class="font-medium">{{ current_user.username }}</p>
+                        <p class="text-sm text-gray-300">Administrator</p>
+                    </div>
+                </div>
+            </div>
 
-    {%endblock%}
+            <!-- Navigation -->
+            <nav class="flex-1 overflow-y-auto">
+                <ul class="p-2 space-y-1">
+                    <li>
+                        <a href="{{ url_for('admin.home') }}" 
+                           class="flex items-center p-2 rounded-lg {% if active_page == 'home' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %}">
+                            <i class="fas fa-home w-6 text-center"></i>
+                            <span x-show="!sidebarMini" class="ml-3">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.add_quiz') }}" 
+                           class="flex items-center p-2 rounded-lg {% if active_page == 'add_quiz' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %}">
+                            <i class="fas fa-plus-circle w-6 text-center"></i>
+                            <span x-show="!sidebarMini" class="ml-3">Add Quiz</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.add_question') }}" 
+                           class="flex items-center p-2 rounded-lg {% if active_page == 'add_question' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %}">
+                            <i class="fas fa-question-circle w-6 text-center"></i>
+                            <span x-show="!sidebarMini" class="ml-3">Add Question</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.view_quizzes') }}" 
+                           class="flex items-center p-2 rounded-lg {% if active_page == 'view_quizzes' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %}">
+                            <i class="fas fa-list w-6 text-center"></i>
+                            <span x-show="!sidebarMini" class="ml-3">View Quizzes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.view_questions') }}" 
+                           class="flex items-center p-2 rounded-lg {% if active_page == 'view_questions' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %}">
+                            <i class="fas fa-tasks w-6 text-center"></i>
+                            <span x-show="!sidebarMini" class="ml-3">View Questions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.logout') }}" class="flex items-center p-2 rounded-lg hover:bg-gray-700">
+                            <i class="fas fa-sign-out-alt w-6 text-center"></i>
+                            <span x-show="!sidebarMini" class="ml-3">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
 
+    <!-- Main content -->
+    <main class="content-transition min-h-screen"
+          :class="{
+              'md:ml-64': !sidebarMini && (sidebarOpen || window.innerWidth >= 768),
+              'md:ml-20': sidebarMini && (sidebarOpen || window.innerWidth >= 768)
+          }">
+        
+        <!-- Top header -->
+        <header class="bg-white shadow">
+            <div class="flex items-center justify-between p-4">
+                <button @click="sidebarOpen = !sidebarOpen" class="p-2 rounded-md text-gray-700 md:hidden">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                
+                <div class="flex-1 md:flex-none">
+                    <h1 class="text-xl font-semibold text-gray-900 text-center md:text-left">{% block page_title %}Dashboard{% endblock %}</h1>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-4">
+                    <span class="text-gray-700">Welcome, {{ current_user.username }}</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Flash messages -->
+        <div class="container mx-auto px-4 py-2">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="p-4 mb-4 rounded-lg {% if category == 'error' %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <!-- Content -->
+        <div class="container mx-auto px-4 py-6">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <script>
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) {
+                Alpine.$data.sidebarOpen = true;
+            }
+        });
+        
+        // Initialize based on screen size
+        if (window.innerWidth >= 768) {
+            Alpine.$data.sidebarOpen = true;
+        }
+    </script>
 </body>
+</html>
