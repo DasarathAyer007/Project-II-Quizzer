@@ -13,8 +13,8 @@ class Question(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('Category.id'))
 
     category = relationship("Category", back_populates="questions")
+    user = relationship("User", back_populates="questions")
 
-    
 
     # @property
     # def id(self):

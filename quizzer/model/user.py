@@ -12,6 +12,7 @@ class User(db.Model ,UserMixin):
     role=db.Column(db.String(20)) 
     
     quiz_states = relationship("QuizState", back_populates="user")
+    questions = relationship("Question", back_populates="user")
     
     def get_high_score(self, type, mode):
         for qs in self.quiz_states:

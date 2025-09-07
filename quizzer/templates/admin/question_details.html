@@ -1,0 +1,49 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Edit Quiz{% endblock %}
+{% block page_title %}Quiz Detail{% endblock %}
+
+{% block content %}
+
+Question Detail
+<main class="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md border border-gray-200">
+  <div class="space-y-6">
+
+    <!-- Question ID -->
+    <div class="text-sm text-gray-500">
+      <span class="font-medium text-gray-700">ID:</span> {{ question.id }}
+    </div>
+
+    <!-- Question Text -->
+    <div class="text-lg font-semibold text-gray-800">
+      {{ question.question_text }}
+    </div>
+
+    <!-- Options -->
+    <div class="grid grid-cols-2 gap-4 text-gray-700">
+      <div><span class="font-medium">A:</span> {{ question.option_a }}</div>
+      <div><span class="font-medium">B:</span> {{ question.option_b }}</div>
+      <div><span class="font-medium">C:</span> {{ question.option_c }}</div>
+      <div><span class="font-medium">D:</span> {{ question.option_d }}</div>
+    </div>
+
+    <!-- Correct Option -->
+    <div class="text-green-600 font-medium">
+      Correct Answer: {{ question.correct_option }}
+    </div>
+
+    <!-- User Info -->
+    <div class="text-sm text-gray-600">
+      <span class="font-medium text-gray-700">Created by:</span> {{ question.user.username }}
+    </div>
+
+    <!-- Category Info -->
+    <div class="text-sm text-gray-600">
+      <span class="font-medium text-gray-700">Category:</span> {{ question.category.category_name }}
+    </div>
+
+  </div>
+</main>
+
+
+{%endblock%}

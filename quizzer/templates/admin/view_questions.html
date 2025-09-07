@@ -17,19 +17,41 @@
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Question</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quiz</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <div class="w-full max-w-xs mx-auto mt-6">
+                          <select id="category" name="category"
+        class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700">
+  <option value="" {% if not selected_category_id %}selected{% endif %}>All category</option>
+  {% for category in categories %}
+    <option value="{{ category.id }}"
+            {% if category.id == selected_category_id %}selected{% endif %}>
+      {{ category.category_name }}
+    </option>
+  {% endfor %}
+</select>
+
+                            </div>
+
+                    </th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
                 {% for question in questions %}
                 <tr>
-                    <td class="px-6 py-4">
-                        <div class="text-sm font-medium text-gray-900">{{ question.question_text }}</div>
+                   <td class="px-6 py-4">
+                        <div class="text-sm font-medium text-gray-900">{{ question.id }}</div>
                     </td>
+                    
+                    <td class="px-6 py-4">
+                        <a href="{{url_for('admin.question_detail',id=question.id)}}">
+                        <div class="text-sm font-medium text-gray-900">{{ question.question_text }}</div>
+                        </a>
+                    </td>  
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">{{ question.quiz_title }}</div>
+                        <div class="text-sm text-gray-900">{{ question.category.category_name }}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <a href="#" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
@@ -38,8 +60,75 @@
                     </td>
                 </tr>
                 {% endfor %}
+
             </tbody>
         </table>
+                   
+
     </div>
+
+
+
+<div class="flex justify-center mt-6">
+  <nav class="inline-flex space-x-1 text-sm">
+    {# Prev Button #}
+    {% if questions.has_prev %}
+      <a href="{{ url_for('admin.view_questions', page=questions.prev_num, category_id=selected_category_id) }}"
+         class="px-3 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100">
+        Prev
+      </a>
+    {% else %}
+      <span class="px-3 py-2 rounded-md border border-gray-200 text-gray-400 cursor-not-allowed">
+        Prev
+      </span>
+    {% endif %}
+
+    {# Page Numbers #}
+    {% for page_num in questions.iter_pages(left_edge=2, right_edge=2, left_current=2, right_current=2) %}
+      {% if page_num %}
+
+        {% if page_num == questions.page %}
+          <span class="px-3 py-2 rounded-md border border-blue-500 bg-blue-500 text-white font-semibold">
+            {{ page_num }}
+          </span>
+        {% else %}
+          <a href="{{ url_for('admin.view_questions', page=page_num, category_id=selected_category_id) }}"
+             class="px-3 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100">
+            {{ page_num }}
+          </a>
+        {% endif %}
+      {% else %}
+        <span class="px-3 py-2 rounded-md border border-gray-200 text-gray-400">
+          ...
+        </span>
+      {% endif %}
+    {% endfor %}
+    {# Next Button #}
+    {% if questions.has_next %}
+      <a href="{{ url_for('admin.view_questions', page=questions.next_num, category_id=selected_category_id) }}"
+         class="px-3 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100">
+            Next
+      </a>
+    {% else %}
+      <span class="px-3 py-2 rounded-md border border-gray-200 text-gray-400 cursor-not-allowed">
+        Next
+      </span>
+    {% endif %}
+  </nav>
 </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById('category').addEventListener('change', function () {
+      const categoryId = this.value;
+      const currentPage = parseInt("{{ questions.page }}");
+      const url = new URL(window.location.href);
+      url.searchParams.set('category_id', categoryId);
+      url.searchParams.set('page', currentPage);
+      window.location.href = url.toString();
+    });
+  });
+</script>
+
 {% endblock %}

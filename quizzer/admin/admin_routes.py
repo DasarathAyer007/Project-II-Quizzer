@@ -170,17 +170,33 @@ def add_question():
 
 @admin.route('/view_questions')
 def view_questions():
-    # Get real questions from database with category information
-    questions = Question.query.join(Category).add_columns(
-        Question.id,
-        Question.question_text,
-        Category.category_name,
-        Question.user_id
-    ).all()
+    category_id = request.args.get('category_id', type=int)
+    page=request.args.get("page",1,type=int)
     
+    query = Question.query
+    if category_id:
+        query = query.filter_by(category_id=category_id)
+
+    # Get real questions from database with category information
+    # questions = Question.query.join(Category).add_columns(
+    #     Question.id,
+    #     Question.question_text,
+    #     Category.category_name,
+    #     Question.user_id
+    # ).all()
+    categories=Category.query.all()
+
+    questions = query.paginate(page=page,per_page=10,error_out=False)
     return render_template('admin/view_questions.html', 
                          active_page='view_questions', 
-                         questions=questions)
+                         questions=questions ,categories=categories,selected_category_id=category_id)
+
+@admin.route('/question/<int:id>')
+def question_detail(id):
+    question_id=id
+    question = db.session.query(Question).join(User).filter(Question.id == id).first_or_404()
+    return render_template('admin/question_details.html',question=question)
+
 
 @admin.route('/view_users')
 def view_users():

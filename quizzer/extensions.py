@@ -15,8 +15,6 @@ def role_required(*roles):
         @wraps(func)
         def decorated_view(*args, **kwargs):
             if current_user.role not in roles:
-                print(roles)
-                print(current_user.role)
                 return abort(403)  # Forbidden access
             return func(*args, **kwargs)
         return decorated_view
